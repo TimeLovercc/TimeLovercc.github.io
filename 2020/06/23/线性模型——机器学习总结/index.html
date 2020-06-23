@@ -29,7 +29,7 @@
 <meta property="og:description" content="线性模型——机器学习思考总结（1）​        本篇文章为作者阅读西瓜书和《统计学习方法》中所思所想，我想要抽离出我看到的有价值的，可学习的地方做一个总结。因个人能力有限，所以请各位读者多多赐教。每一个分点为我认为有价值的点。 ​        内容来源：本节内容以周志华《机器学习》的第三章为基础，融合少量网上搜集到的资料。 1. 优点是可解释性？​        书中提到：“由于$w$直观表">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-23T06:33:32.734Z">
-<meta property="article:modified_time" content="2020-06-23T08:20:12.876Z">
+<meta property="article:modified_time" content="2020-06-23T10:33:28.765Z">
 <meta property="article:author" content="Zhimeng Guo(郭志猛)">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="总结">
@@ -134,10 +134,6 @@
         </div>
         
         
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
 </header>
 <header class="content-header post-header">
@@ -168,7 +164,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线性模型——机器学习思考总结（1）"><span class="post-toc-number">1.</span> <span class="post-toc-text">线性模型——机器学习思考总结（1）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-优点是可解释性？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. 优点是可解释性？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-对离散属性的处理？"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. 对离散属性的处理？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-拟合还是回归？"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. 拟合还是回归？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-最小二乘法？"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. 最小二乘法？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-凸函数与闭式解？"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5. 凸函数与闭式解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-矩阵的求导？"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6. 矩阵的求导？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-引入正则化？"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">7. 引入正则化？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-正态分布，线性回归，最小二乘的关系？"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">8. 正态分布，线性回归，最小二乘的关系？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-广义线性模型？"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">9. 广义线性模型？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-对数几率回归？分类？"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">10. 对数几率回归？分类？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-对数几率分布如何确定参数？"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">11. 对数几率分布如何确定参数？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-LDA的思路？"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">12. LDA的思路？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-拉格朗日乘子法的直观理解？"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">13. 拉格朗日乘子法的直观理解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14-常用的矩阵微分运算"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">14. 常用的矩阵微分运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15-广义瑞利商优化问题的求解？"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">15. 广义瑞利商优化问题的求解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#16-奇异值分解？"><span class="post-toc-number">1.16.</span> <span class="post-toc-text">16. 奇异值分解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#17-LDA与贝叶斯决策理论关系？"><span class="post-toc-number">1.17.</span> <span class="post-toc-text">17. LDA与贝叶斯决策理论关系？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#18-多分类LDA？"><span class="post-toc-number">1.18.</span> <span class="post-toc-text">18. 多分类LDA？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#19-多分类学习？"><span class="post-toc-number">1.19.</span> <span class="post-toc-text">19. 多分类学习？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#20-类别不平衡问题"><span class="post-toc-number">1.20.</span> <span class="post-toc-text">20. 类别不平衡问题</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线性模型——机器学习思考总结（1）"><span class="post-toc-text">线性模型——机器学习思考总结（1）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-优点是可解释性？"><span class="post-toc-text">1. 优点是可解释性？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-对离散属性的处理？"><span class="post-toc-text">2. 对离散属性的处理？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-拟合还是回归？"><span class="post-toc-text">3. 拟合还是回归？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-最小二乘法？"><span class="post-toc-text">4. 最小二乘法？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-凸函数与闭式解？"><span class="post-toc-text">5. 凸函数与闭式解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-矩阵的求导？"><span class="post-toc-text">6. 矩阵的求导？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-引入正则化？"><span class="post-toc-text">7. 引入正则化？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-正态分布，线性回归，最小二乘的关系？"><span class="post-toc-text">8. 正态分布，线性回归，最小二乘的关系？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-广义线性模型？"><span class="post-toc-text">9. 广义线性模型？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-对数几率回归？分类？"><span class="post-toc-text">10. 对数几率回归？分类？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-对数几率分布如何确定参数？"><span class="post-toc-text">11. 对数几率分布如何确定参数？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-LDA的思路？"><span class="post-toc-text">12. LDA的思路？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-拉格朗日乘子法的直观理解？"><span class="post-toc-text">13. 拉格朗日乘子法的直观理解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14-常用的矩阵微分运算"><span class="post-toc-text">14. 常用的矩阵微分运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15-广义瑞利商优化问题的求解？"><span class="post-toc-text">15. 广义瑞利商优化问题的求解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#16-奇异值分解？"><span class="post-toc-text">16. 奇异值分解？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#17-LDA与贝叶斯决策理论关系？"><span class="post-toc-text">17. LDA与贝叶斯决策理论关系？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#18-多分类LDA？"><span class="post-toc-text">18. 多分类LDA？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#19-多分类学习？"><span class="post-toc-text">19. 多分类学习？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#20-类别不平衡问题"><span class="post-toc-text">20. 类别不平衡问题</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -249,8 +245,8 @@ J = \frac{ { {w^T} {S_b}w} } { { {w^T} {S_w}w} }</script><p>其中的${S_w} = {\
 \begin{array}{l}
 \max f(x)\quad s.t\quad {g_k}(x) = 0,\quad k = 1,2,...,K\\
 其中x = ({x_1},{x_2},...,{x_N}) \in {R^N}
-\end{array}</script><p>​        拉格朗日乘子法可以表述为：如果条件极值点$x^<em>$存在，那么再该点处，目标函数的改进方向$\nabla f({x^</em>})$必然落在$K$个约束函数再该点处法向量$\nabla {g_1}({x^<em>}),\nabla {g_2}({x^</em>}),…,\nabla {g_K}({x^*})$张成的线性子空间内。</p>
-<p>​        如何理解？要求的这个极值点首先在一个约束条件构成的曲面上，局部线性近似后，用在该处的切平面代替，所以$x^{<em>}$运动方向肯定与$\nabla {g_k}({x^</em>})$垂直，$k$个切平面皆是如此。同样，$x^<em>$在$f(x)$的曲面族上运动，运动方向也与$\nabla f(x^</em>)$垂直啦。$x^<em>$的运动方向的两种表述相等，就可以得到$\nabla f({x^</em>}) = \sum\limits_{k = 1}^K { {\lambda _k}\nabla {g_k}({x^*})} $，也就是第二段的文字表述啦。</p>
+\end{array}</script><p>​        拉格朗日乘子法可以表述为：如果条件极值点$x’ $存在，那么再该点处，目标函数的改进方向$\nabla f(x’)$必然落在$K$个约束函数再该点处法向量$\nabla {g_1}(x’),\nabla {g_2}(x’),…,\nabla {g_K}(x’)$张成的线性子空间内。</p>
+<p>​        如何理解？要求的这个极值点首先在一个约束条件构成的曲面上，局部线性近似后，用在该处的切平面代替，所以$x’$运动方向肯定与$\nabla {g_k}(x’)$垂直，$k$个切平面皆是如此。同样，$x’$在$f(x)$的曲面族上运动，运动方向也与$\nabla f(x’)$垂直啦。$x’$的运动方向的两种表述相等，就可以得到$\nabla f(x’) = \sum\limits_{k = 1}^K { {\lambda _k}\nabla {g_k}(x’)} $，也就是第二段的文字表述啦。</p>
 <h3 id="14-常用的矩阵微分运算"><a href="#14-常用的矩阵微分运算" class="headerlink" title="14. 常用的矩阵微分运算"></a>14. 常用的矩阵微分运算</h3><p>​        矩阵的操作：</p>
 <script type="math/tex; mode=display">
 \begin{array}{l}
@@ -292,7 +288,7 @@ s.t.\quad {w^T} {S_w}w = 1
 \begin{array}{l}
 {S_t} = {S_b} + {S_w}\\
 {S_t} = \sum\limits_{i = 1}^m {({x_i} - \mu ){ {({x_i} - \mu )}^T} } \\
-{S_w} = \sum\limits_{i = 1}^n { {S_} = \sum\limits_{i = 1}^n {\sum\limits_{x \in {X_i} }^{ } {(x - {\mu _i}){ {(x - {\mu _i})}^T} } } } 
+{S_w} = \sum\limits_{i = 1}^n { {S_} = \sum\limits_{i = 1}^n {\sum\limits_{x \in {X_i} } {(x - {\mu _i}){ {(x - {\mu _i})}^T} } } } 
 \end{array}</script><p>​        三个矩阵有两个变量，知道两个就可以了。这里注意括号中的$\mu ,{\mu _i}$。这个式子我是通过与物理学中坐标系类比的。$S_t$是相对于惯性系的运动，$S_w$是相对于非惯性系的运动，$S_b$是非惯性系相对于惯性系的运动。</p>
 <p>​        其余计算跟二分类很类似，只不过多了个维度。</p>
 <h3 id="19-多分类学习？"><a href="#19-多分类学习？" class="headerlink" title="19. 多分类学习？"></a>19. 多分类学习？</h3><p>​        多分类学习我们通常将它转化为若干个二分类问题进行解决，一般情况下是$MvM$，特例有$OvO,OvR$。常用的$MvM$技术是纠错输出码（ECOC）。基本原理就是增加位数，增大信息量，使得一个信息的错误的影响减少到最小。</p>
@@ -305,12 +301,10 @@ s.t.\quad {w^T} {S_w}w = 1
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2020-06-23T08:20:12.876Z" itemprop="dateUpdated">2020-06-23 16:20:12</time>
+    Last updated: <time datetime="2020-06-23T10:33:28.765Z" itemprop="dateUpdated">2020-06-23 18:33:28</time>
 </span><br>
 
 
-        
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" target="_blank" rel="external">http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</a>
         
     </div>
     
@@ -331,51 +325,6 @@ s.t.\quad {w^T} {S_w}w = 1
 
 
             
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&title=《线性模型——机器学习总结1》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&title=《线性模型——机器学习总结1》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线性模型——机器学习总结1》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&via=http://timelovercc.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
 
 
         </div>
@@ -436,10 +385,10 @@ s.t.\quad {w^T} {S_w}w = 1
         
 <p>
     <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
     </span>
     <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
     </span>
 </p>
 
@@ -466,55 +415,9 @@ s.t.\quad {w^T} {S_w}w = 1
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&title=《线性模型——机器学习总结1》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&title=《线性模型——机器学习总结1》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《线性模型——机器学习总结1》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/&via=http://timelovercc.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/06/23/%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
-</div>
-
-
-
-
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
 
 
 </script>
