@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://timelovercc.github.io/"/>
-  <updated>2020-06-23T14:01:25.163Z</updated>
+  <updated>2020-07-10T02:08:47.792Z</updated>
   <id>http://timelovercc.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从PicGo-Core的配置学node知识</title>
+    <link href="http://timelovercc.github.io/2020/07/10/%E4%BB%8EPicGo-Core%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AD%A6node%E7%9F%A5%E8%AF%86/"/>
+    <id>http://timelovercc.github.io/2020/07/10/%E4%BB%8EPicGo-Core%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AD%A6node%E7%9F%A5%E8%AF%86/</id>
+    <published>2020-07-10T02:05:03.121Z</published>
+    <updated>2020-07-10T02:08:47.792Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="从PicGo-Core的配置学node知识"><a href="#从PicGo-Core的配置学node知识" class="headerlink" title="从PicGo-Core的配置学node知识"></a>从PicGo-Core的配置学node知识</h2><h4 id="1-Javascript了解"><a href="#1-Javascript了解" class="headerlink" title="1. Javascript了解"></a>1. Javascript了解</h4><p>​        伴随着Netscape开发出第一个浏览器，公司发现浏览器需要一种嵌入网页的脚本语言。</p><blockquote><p>比如，如果用户忘记填写“用户名”，就点了“发送”按钮，到服务器再发现这一点就有点太晚了，最好能在用户发出数据之前，就告诉用户“请填写用户名”。这就需要在网页中嵌入小程序，让浏览器检查每一栏是否都填写了。</p></blockquote><p>​        当时正值Java问世大获成功的时机，Netscape决定与Sun合作，但是Java的语法太重了，又想要接近Java且可以支持Java，于是要新编写语言。Netscape雇佣程序员Brendan Eich开发了这种网页脚本语言，Eich有很强的函数式编程背景，希望以Scheme语言为蓝本，实现这种新语言。最终花了10天，他完成了这种语言的第一版。有以下特点：</p><ul><li>基本语法：借鉴C语言和Java语言。</li><li>数据结构：借鉴Java语言，包括将值分成原始值和对象两大类。</li><li>函数的用法：借鉴Scheme语言和Awk语言，将函数当作第一等公民，并引入闭包。</li><li>原型继承模型：借鉴Self语言（Smalltalk的一种变种）。</li><li>正则表达式：借鉴Perl语言。</li><li>字符串和数组处理：借鉴Python语言。</li></ul><p>这个语言为了保持简单，缺少很多关键功能，如块级作用域、模板、子类型，但是可以利用现有功能解决。这导致了JavaScript显著特点：对于其他语言，你需要学习语言的各种功能，而对于JavaScript，你常常需要学习各种解决问题的模式。</p><blockquote><p>​        而且由于来源多样，从一开始就注定，JavaScript的编程风格是函数式编程和面向对象编程的一种混合体。</p></blockquote><h5 id="JavaScript和ECMAScript的关系"><a href="#JavaScript和ECMAScript的关系" class="headerlink" title="JavaScript和ECMAScript的关系"></a>JavaScript和ECMAScript的关系</h5><blockquote><p>1996年8月，微软模仿JavaScript开发了一种相近的语言，取名为JScript（JavaScript是Netscape的注册商标，微软不能用），首先内置于IE 3.0。Netscape公司面临丧失浏览器脚本语言的主导权的局面。</p><p>1996年11月，Netscape公司决定将JavaScript提交给国际标准化组织ECMA（European Computer Manufacturers Association），希望JavaScript能够成为国际标准，以此抵抗微软。ECMA的39号技术委员会（Technical Committee 39）负责制定和审核这个标准，成员由业内的大公司派出的工程师组成，目前共25个人。该委员会定期开会，所有的邮件讨论和会议记录，都是公开的。</p><p>1997年7月，ECMA组织发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为ECMAScript。这个版本就是ECMAScript 1.0版。之所以不叫JavaScript，一方面是由于商标的关系，Java是Sun公司的商标，根据一份授权协议，只有Netscape公司可以合法地使用JavaScript这个名字，且JavaScript已经被Netscape公司注册为商标，另一方面也是想体现这门语言的制定者是ECMA，不是Netscape，这样有利于保证这门语言的开放性和中立性。因此，ECMAScript和JavaScript的关系是，前者是后者的规格，后者是前者的一种实现。在日常场合，这两个词是可以互换的。</p><p>ECMAScript只用来标准化JavaScript这种语言的基本语法结构，与部署环境相关的标准都由其他标准规定，比如DOM的标准就是由W3C组织（World Wide Web Consortium）制定的。</p><p>ECMA-262标准后来也被另一个国际标准化组织ISO（International Organization for Standardization）批准，标准号是ISO-16262。</p></blockquote><h5 id="JavaScript与Java的关系"><a href="#JavaScript与Java的关系" class="headerlink" title="JavaScript与Java的关系"></a>JavaScript与Java的关系</h5><blockquote><p>JavaScript和Java是两种不一样的语言，但是它们之间存在联系。</p><p>JavaScript的基本语法和对象体系，是模仿Java而设计的。但是，JavaScript没有采用Java的静态类型。正是因为JavaScript与Java有很大的相似性，所以这门语言才从一开始的LiveScript改名为JavaScript。基本上，JavaScript这个名字的原意是“很像Java的脚本语言”。</p><p>在JavaScript语言中，函数是一种独立的数据类型，以及采用基于原型对象（prototype）的继承链。这是它与Java语法最大的两点区别。JavaScript语法要比Java自由得多。</p><p>另外，Java语言需要编译，而JavaScript语言则是运行时由解释器直接执行。</p><p>总之，JavaScript的原始设计目标是一种小型的、简单的动态语言，与Java有足够的相似性，使得使用者（尤其是Java程序员）可以快速上手。</p><p>参考阮一峰的 <a href="https://javascript.ruanyifeng.com/introduction/history.html" target="_blank" rel="noopener">JavaScript介绍</a></p></blockquote><h4 id="2-node-js"><a href="#2-node-js" class="headerlink" title="2. node.js"></a>2. node.js</h4><p>​        JavaScript是一种前端语言，而node.js就是为了让javascript脚本在服务器端运行的运行环境。它提供了两方面支持：1.有点像JavaScript虚拟机；2. 提供大量工具库。</p><p>​        而npm，是node.js的一种包管理工具。</p><h4 id="3-json格式"><a href="#3-json格式" class="headerlink" title="3. json格式"></a>3. json格式</h4><p>​        json是一种格式。</p><p>​        从结构上行看，所有的数据最终都可以分解成三种类型：</p><blockquote><p>​        第一种类型是<strong>标量</strong>（scalar），也就是一个单独的字符串（string）或数字（numbers），比如”北京”这个单独的词。</p><p>​        第二种类型是<strong>序列</strong>（sequence），也就是若干个相关的数据按照一定顺序并列在一起，又叫做数组（array）或列表（List），比如”北京，上海”。</p><p>​        第三种类型是<strong>映射</strong>（mapping），也就是一个名/值对（Name/value），即数据有一个名称，还有一个与之相对应的值，这又称作散列（hash）或字典（dictionary），比如”首都：北京”。</p></blockquote><p>​        21世纪初，Douglas Crockford想找一种简便的能够在服务器之间交换数据的数据交换格式。当时通用的是XML，但是他觉得太麻烦，提出了简化格式Json：</p><p>1） 并列的数据之间用逗号（”, “）分隔。</p><p>2） 映射用冒号（”: “）表示。</p><p>3） 并列数据的集合（数组）用方括号(“[]”)表示。</p><p>4） 映射的集合（对象）用大括号（”{}”）表示。</p><p>​        数组和对象的区别，可以用有序和无序来表示，有序即数组。javascript中有关联数组，关联数组就是对象，对象就是关联数组。</p><h4 id="4-PicGo配置错误原因"><a href="#4-PicGo配置错误原因" class="headerlink" title="4. PicGo配置错误原因"></a>4. PicGo配置错误原因</h4><p>​        我用之前生成的github gist token当成了repo token！！</p><h4 id="5-验证图床"><a href="#5-验证图床" class="headerlink" title="5. 验证图床"></a>5. 验证图床</h4><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200710100039403.png" alt="image-20200710100039403" title="">                </div>                <div class="image-caption">image-20200710100039403</div>            </figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;从PicGo-Core的配置学node知识&quot;&gt;&lt;a href=&quot;#从PicGo-Core的配置学node知识&quot; class=&quot;headerlink&quot; title=&quot;从PicGo-Core的配置学node知识&quot;&gt;&lt;/a&gt;从PicGo-Core的配置学node知识&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="文档编辑" scheme="http://timelovercc.github.io/categories/%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/"/>
+    
+    
+      <category term="bug" scheme="http://timelovercc.github.io/tags/bug/"/>
+    
+      <category term="图床" scheme="http://timelovercc.github.io/tags/%E5%9B%BE%E5%BA%8A/"/>
+    
+      <category term="JavaScript" scheme="http://timelovercc.github.io/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>Hierarchical Graph Representation Learning with Differentiable Pooling论文阅读</title>
