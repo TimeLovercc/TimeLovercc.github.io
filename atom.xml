@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://timelovercc.github.io/"/>
-  <updated>2020-07-11T02:52:14.514Z</updated>
+  <updated>2020-07-11T02:48:25.039Z</updated>
   <id>http://timelovercc.github.io/</id>
   
   <author>
@@ -15,29 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>ab</title>
-    <link href="http://timelovercc.github.io/2020/07/11/ab/"/>
-    <id>http://timelovercc.github.io/2020/07/11/ab/</id>
-    <published>2020-07-11T02:49:54.915Z</published>
-    <updated>2020-07-11T02:52:14.514Z</updated>
-    
-    <content type="html"><![CDATA[<p>adf</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;adf&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Python的一些特殊用法</title>
