@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python的一些特殊用法 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,私有变量,类">
+    <meta name="description" content="Python的一些特殊用法1. 私有变量的定义​        Python中，有以下几种方式定义变量：  xx: 共有变量。 _xx: 单前置下划线，私有化属性或方法，类对象和子类可以访问，from somemodule import *禁止导入。 __xx: 双前置下划线，私有化属性或方法，无法在外部直接访问，名字重整所以无法访问。（见下文） __xx__: 双前后下划线，系统定义名字。（不要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python的一些特殊用法">
+<meta property="og:url" content="http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="Python的一些特殊用法1. 私有变量的定义​        Python中，有以下几种方式定义变量：  xx: 共有变量。 _xx: 单前置下划线，私有化属性或方法，类对象和子类可以访问，from somemodule import *禁止导入。 __xx: 双前置下划线，私有化属性或方法，无法在外部直接访问，名字重整所以无法访问。（见下文） __xx__: 双前后下划线，系统定义名字。（不要">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200711093123996.png">
+<meta property="article:published_time" content="2020-07-11T02:34:37.242Z">
+<meta property="article:modified_time" content="2020-07-11T02:48:25.039Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="私有变量">
+<meta property="article:tag" content="类">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200711093123996.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python的一些特殊用法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python的一些特殊用法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-07-11T02:34:37.242Z" itemprop="datePublished" class="page-time">
+  2020/07/11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python的一些特殊用法"><span class="post-toc-text">Python的一些特殊用法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-私有变量的定义"><span class="post-toc-text">1. 私有变量的定义</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-名字重整"><span class="post-toc-text">2. 名字重整</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-命名空间和作用域"><span class="post-toc-text">3. 命名空间和作用域</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-介绍"><span class="post-toc-text">1. 介绍</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-查找顺序："><span class="post-toc-text">2. 查找顺序：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-作用域"><span class="post-toc-text">3. 作用域</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-global和nonlocal关键字"><span class="post-toc-text">4. global和nonlocal关键字</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-例子"><span class="post-toc-text">5. 例子</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-包-模块"><span class="post-toc-text">3. 包, 模块</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-模块"><span class="post-toc-text">1. 模块</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-包"><span class="post-toc-text">2. 包</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-使用不同方法导入模块，模块中私有变量的使用区别"><span class="post-toc-text">4. 使用不同方法导入模块，模块中私有变量的使用区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-对类中的私有属性进行操作的三种方法"><span class="post-toc-text">5. 对类中的私有属性进行操作的三种方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-getter和setter"><span class="post-toc-text">1. getter和setter</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-property方法"><span class="post-toc-text">2. property方法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-property"><span class="post-toc-text">3. @property</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-gt-怎么用？"><span class="post-toc-text">6. -&gt;怎么用？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-参考资料"><span class="post-toc-text">7. 参考资料</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python的一些特殊用法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python的一些特殊用法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/07/11 10:34:37" datetime="2020-07-11T02:34:37.242Z"  itemprop="datePublished">2020/07/11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Python的一些特殊用法"><a href="#Python的一些特殊用法" class="headerlink" title="Python的一些特殊用法"></a>Python的一些特殊用法</h2><h4 id="1-私有变量的定义"><a href="#1-私有变量的定义" class="headerlink" title="1. 私有变量的定义"></a>1. 私有变量的定义</h4><p>​        Python中，有以下几种方式定义变量：</p>
+<ul>
+<li>xx: 共有变量。</li>
+<li>_xx: 单前置下划线，私有化属性或方法，类对象和子类可以访问，<code>from somemodule import *</code>禁止导入。</li>
+<li>__xx: 双前置下划线，私有化属性或方法，无法在外部直接访问，名字重整所以无法访问。（见下文）</li>
+<li>__xx__: 双前后下划线，系统定义名字。（不要自己定义）</li>
+<li>xx_: 单后置下划线，用于避免与Python关键词的冲突。</li>
+</ul>
+<h4 id="2-名字重整"><a href="#2-名字重整" class="headerlink" title="2. 名字重整"></a>2. 名字重整</h4><p>​        实质是用一个名称对不同数据类型的处理的技术。例如在C++中，会将重载函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="keyword">int</span> i)</span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">char</span> c)</span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">float</span> f)</span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">char</span>* s)</span><br></pre></td></tr></table></figure>
+<p>分别编译为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_print_int</span><br><span class="line">_print_char</span><br><span class="line">_print_float</span><br><span class="line">_print_string</span><br></pre></td></tr></table></figure>
+<p>​        Python中与之类似，对于私有变量，如<code>__name</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hehe</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__name = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">a = hehe()</span><br><span class="line">print(a.__dict__) <span class="comment">#报错</span></span><br><span class="line">print(a._hehe__name) <span class="comment">#正常打印</span></span><br></pre></td></tr></table></figure>
+<p>​        里面的<code>__name</code>作为私有变量，不能直接在外部访问，就是因为名称被重组为了<code>_hehe_name</code>。</p>
+<p>​        不过虽然可以这样进行访问，但强烈不建议使用。</p>
+<h4 id="3-命名空间和作用域"><a href="#3-命名空间和作用域" class="headerlink" title="3. 命名空间和作用域"></a>3. 命名空间和作用域</h4><h5 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h5><blockquote>
+<p>​        A namespace is a mapping from names to objects. Most namespaces are currently implemented as Python dictionaries.</p>
+</blockquote>
+<p>​        命名空间是一个存放变量的字典。键就是变量名，值就是变量的值。命名空间的目的是提供了在项目钟避免名字冲突的方法。各个命名空间是独立的，一个命名空间中不可以重名，但是不同的命名空间中就可以重名了。</p>
+<p>​        在一个Python程序的任何一个地方，都有几个可用的命名空间：</p>
+<ol>
+<li>全局命名空间：每个模块拥有自己的命名空间，叫全局命名空间，记录了模块的变量，包括函数、类、其它导入的模块、模块级的变量和常量。</li>
+<li>局部命名空间：每个函数都有自己的命名空间，叫做局部命名空间，它记录了函数的变量，包括函数的参数和局部定义的变量。</li>
+<li>内置命名空间：任何模块均可访问它，它存放着内置的函数和异常。</li>
+</ol>
+<h5 id="2-查找顺序："><a href="#2-查找顺序：" class="headerlink" title="2. 查找顺序："></a>2. 查找顺序：</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200711093123996.png" alt="image-20200711093123996" title="">
+                </div>
+                <div class="image-caption">image-20200711093123996</div>
+            </figure>
+<p>​        Python会按照由小到大的顺序查找：局部的命名空间-&gt;全局命名空间-&gt;内置命名空间。如果找不到，放弃查找并给出一个NameError异常。</p>
+<h5 id="3-作用域"><a href="#3-作用域" class="headerlink" title="3. 作用域"></a>3. 作用域</h5><p>​        Python的作用域一共有4种，分别是：</p>
+<ul>
+<li><strong>L（Local）</strong>：最内层，包含局部变量，比如一个函数/方法内部。</li>
+<li><strong>E（Enclosing）</strong>：包含了非局部(non-local)也非全局(non-global)的变量。比如两个嵌套函数，一个函数（或类） A 里面又包含了一个函数 B ，那么对于 B 中的名称来说 A 中的作用域就为 nonlocal。</li>
+<li><strong>G（Global）</strong>：当前脚本的最外层，比如当前模块的全局变量。</li>
+<li><strong>B（Built-in）</strong>： 包含了内建的变量/关键字等，最后被搜索。</li>
+</ul>
+<p>规则顺序： <strong>L –&gt; E –&gt; G –&gt;B</strong>。</p>
+<p>​        内置作用域通过名为builtin的标准模块实现，但这个变量名自身没有放入内置作用域，使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> builtins</span><br><span class="line">dir(builtins)</span><br></pre></td></tr></table></figure>
+<p>​        Python 中只有模块（module），类（class）以及函数（def、lambda）才会引入新的作用域，其它的代码块（如 if/elif/else/、try/except、for/while等）是不会引入新的作用域的，也就是说这些语句内定义的变量，外部也可以访问。</p>
+<h5 id="4-global和nonlocal关键字"><a href="#4-global和nonlocal关键字" class="headerlink" title="4. global和nonlocal关键字"></a>4. global和nonlocal关键字</h5><p>​        当内部作用域想修改外部作用域的变量时，就要用到global和nonlocal关键字了。</p>
+<h5 id="5-例子"><a href="#5-例子" class="headerlink" title="5. 例子"></a>5. 例子</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命名空间（namespace）</span></span><br><span class="line"><span class="comment"># 命名空间指的是变量存储的位置，每一个变量都需要存储到指定的命名空间当中</span></span><br><span class="line"><span class="comment"># 每一个作用域都会有一个它对应的命名空间</span></span><br><span class="line"><span class="comment"># 全局命名空间，用来保存全局变量。函数命名空间用来保存函数中的变量</span></span><br><span class="line"><span class="comment"># 命名空间实际上就是一个字典，是一个专门用来存储变量的字典</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># locals()用来获取当前作用域的命名空间</span></span><br><span class="line"><span class="comment"># 如果在全局作用域中调用locals()则获取全局命名空间，如果在函数作用域中调用locals()则获取函数命名空间</span></span><br><span class="line"><span class="comment"># 返回的是一个字典</span></span><br><span class="line">scope = locals() <span class="comment"># 当前命名空间</span></span><br><span class="line">print(type(scope))</span><br><span class="line"><span class="comment"># print(a)</span></span><br><span class="line"><span class="comment"># print(scope['a'])</span></span><br><span class="line"><span class="comment"># 向scope中添加一个key-value</span></span><br><span class="line">scope[<span class="string">'c'</span>] = <span class="number">1000</span> <span class="comment"># 向字典中添加key-value就相当于在全局中创建了一个变量（一般不建议这么做）</span></span><br><span class="line"><span class="comment"># print(c)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn4</span><span class="params">()</span>:</span></span><br><span class="line">    a = <span class="number">10</span></span><br><span class="line">    <span class="comment"># scope = locals() # 在函数内部调用locals()会获取到函数的命名空间</span></span><br><span class="line">    <span class="comment"># scope['b'] = 20 # 可以通过scope来操作函数的命名空间，但是也是不建议这么做</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># globals() 函数可以用来在任意位置获取全局命名空间</span></span><br><span class="line">    global_scope = globals()</span><br><span class="line">    <span class="comment"># print(global_scope['a'])</span></span><br><span class="line">    global_scope[<span class="string">'a'</span>] = <span class="number">30</span></span><br><span class="line">    <span class="comment"># print(scope)</span></span><br><span class="line"></span><br><span class="line">fn4()</span><br></pre></td></tr></table></figure>
+<h4 id="3-包-模块"><a href="#3-包-模块" class="headerlink" title="3. 包, 模块"></a>3. 包, 模块</h4><h5 id="1-模块"><a href="#1-模块" class="headerlink" title="1. 模块"></a>1. 模块</h5><p>​        简单说一个<code>.py</code>文件就是一个模块(Module)。逻辑上来说模块就是一组功能的组合；实质上一个模块就是一个包含了python定义和声明的文件，文件名就是模块名字加上<code>.py</code>的后缀。</p>
+<p>​        想要使用模块，必须先加载进来，可以通过关键字import或from进行加载；需要注意的是模块和当前文件在不同的命名空间中。</p>
+<p>​        import可以在任意位置使用，且不会重复导入，因为第二次、三次等导入只是增加了一次引用，不会重新执行模块内语句。</p>
+<p>​        导入的模块会重新开辟独立的名称空间。且可以为模块起别名。</p>
+<h5 id="2-包"><a href="#2-包" class="headerlink" title="2. 包"></a>2. 包</h5><p>​        包就是一个目录，里面存放了.py文件，外加一个__init__.py。包就是用来管理和分类模块的。</p>
+<h4 id="4-使用不同方法导入模块，模块中私有变量的使用区别"><a href="#4-使用不同方法导入模块，模块中私有变量的使用区别" class="headerlink" title="4. 使用不同方法导入模块，模块中私有变量的使用区别"></a>4. 使用不同方法导入模块，模块中私有变量的使用区别</h4><p>​    使用<code>from somemodule import *</code>导入模块，不能导入或使用私有属性和方法。</p>
+<h4 id="5-对类中的私有属性进行操作的三种方法"><a href="#5-对类中的私有属性进行操作的三种方法" class="headerlink" title="5. 对类中的私有属性进行操作的三种方法"></a>5. 对类中的私有属性进行操作的三种方法</h4><h5 id="1-getter和setter"><a href="#1-getter和setter" class="headerlink" title="1. getter和setter"></a>1. getter和setter</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__num = <span class="number">10</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNum</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__num</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setNum</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.__num = value</span><br><span class="line"></span><br><span class="line">t = test()</span><br><span class="line">print(t.getNum())   <span class="comment"># 10</span></span><br><span class="line">t.setNum(<span class="number">20</span>)</span><br><span class="line">print(t.getNum())   <span class="comment"># 20</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-property方法"><a href="#2-property方法" class="headerlink" title="2. property方法"></a>2. property方法</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__num = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNum</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__num</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setNum</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.__num = value</span><br><span class="line"></span><br><span class="line">    num = property(getNum,setNum)</span><br><span class="line"></span><br><span class="line">t = test()</span><br><span class="line">print(t.num)   <span class="comment"># 10</span></span><br><span class="line">t.num = <span class="number">20</span></span><br><span class="line">print(t.num)   <span class="comment"># 20</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>property方法包含四个参数，分别为fget，fset，fdel，doc，分别对应getter方法，setter方法，deleter方法和方法说明</li>
+<li>property()方法返回一个property属性，如果c是C的实例，那么c.x会调用getter方法，c.x = value会调用setter方法，而del c.x会调用deleter方法。</li>
+</ul>
+<h5 id="3-property"><a href="#3-property" class="headerlink" title="3. @property"></a>3. @property</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.__num = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">num</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.__num</span><br><span class="line"></span><br><span class="line"><span class="meta">    @num.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">num</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.__num = value</span><br><span class="line"></span><br><span class="line">t = test()</span><br><span class="line">print(t.num)   <span class="comment"># 10</span></span><br><span class="line">t.num = <span class="number">20</span></span><br><span class="line">print(t.num)   <span class="comment"># 20</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>我们可以把property()方法当成一个装饰器来使用，使用@property对方法进行装饰</li>
+<li>装饰器@property把方法x()转换成了与方法名同名的getter方法，”I’m the ‘x’ property.”是property的doc参数</li>
+<li>调用方法和property()方法一样</li>
+</ul>
+<h4 id="6-gt-怎么用？"><a href="#6-gt-怎么用？" class="headerlink" title="6. -&gt;怎么用？"></a>6. -&gt;怎么用？</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">attrs</span><span class="params">(self)</span> -&gt; _Attrs:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>​        只是一种标注返回值的方式，无实际意义。</p>
+<h4 id="7-参考资料"><a href="#7-参考资料" class="headerlink" title="7. 参考资料"></a>7. 参考资料</h4><ol>
+<li><a href="https://www.cnblogs.com/windlaughing/archive/2013/05/26/3100362.html" target="_blank" rel="noopener">Python命名空间的本质</a></li>
+<li><a href="https://www.runoob.com/python3/python3-namespace-scope.html" target="_blank" rel="noopener">Python3 命名空间和作用域</a></li>
+<li><a href="https://www.cnblogs.com/FlyingLiao/p/11279798.html" target="_blank" rel="noopener">python命名空间(namespace)</a></li>
+<li><a href="https://www.cnblogs.com/semon-code/p/8242062.html" target="_blank" rel="noopener">我的Python学习笔记（三）：私有变量</a></li>
+<li><a href="https://segmentfault.com/q/1010000014834657" target="_blank" rel="noopener">在def定义函数的时候, @和-&gt; 代表什么?</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-07-11T02:48:25.039Z" itemprop="dateUpdated">2020/07/11 10:48:25</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F/" rel="tag">私有变量</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B1%BB/" rel="tag">类</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/&title=《Python的一些特殊用法》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/&title=《Python的一些特殊用法》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python的一些特殊用法》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/07/11/ab/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">ab</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/07/10/%E4%BB%8EPicGo-Core%E7%9A%84%E9%85%8D%E7%BD%AE%E5%AD%A6node%E7%9F%A5%E8%AF%86/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">从PicGo-Core的配置学node知识</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'false'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/&title=《Python的一些特殊用法》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/&title=《Python的一些特殊用法》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python的一些特殊用法》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/07/11/Python%E7%9A%84%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
