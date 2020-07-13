@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://timelovercc.github.io/"/>
-  <updated>2020-07-12T13:12:12.264Z</updated>
+  <updated>2020-07-12T13:38:30.815Z</updated>
   <id>http://timelovercc.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>感知机——机器学习总结2</title>
+    <link href="http://timelovercc.github.io/2020/07/12/%E6%84%9F%E7%9F%A5%E6%9C%BA%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E6%80%BB%E7%BB%93%EF%BC%882%EF%BC%89/"/>
+    <id>http://timelovercc.github.io/2020/07/12/%E6%84%9F%E7%9F%A5%E6%9C%BA%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E6%80%BB%E7%BB%93%EF%BC%882%EF%BC%89/</id>
+    <published>2020-07-12T13:38:30.814Z</published>
+    <updated>2020-07-12T13:38:30.815Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="感知机——机器学习思考总结（2）"><a href="#感知机——机器学习思考总结（2）" class="headerlink" title="感知机——机器学习思考总结（2）"></a>感知机——机器学习思考总结（2）</h2><p>​        本篇文章为作者阅读西瓜书和《统计学习方法》中所思所想，我想要抽离出我看到的有价值的，可学习的地方做一个总结。因个人能力有限，所以请各位读者多多赐教。每一个分点为我认为有价值的点。</p><p>​        <strong>内容来源：</strong>本节内容以周志华《机器学习》的第五章感知机部分和李航得《统计学习方法》第二章为基础，融合少量网上搜集到的资料。</p><h3 id="1-感知机是什么？"><a href="#1-感知机是什么？" class="headerlink" title="1. 感知机是什么？"></a>1. 感知机是什么？</h3><p>​        感知机是一类最简单的线性分类模型。线性就意味着它的模型里面有输入的线性组合$wx+b$，做到分类要离散化，它是怎么离散化的？最简单，就是用$sign(x)$函数，即：</p><script type="math/tex; mode=display">sign(x) = \left\{ s\begin{array} {l}   + 1,\quad x > 0\\   - 1,\quad x < 0\end{array} \right.</script><p>两者的组合$f(x)=sign(wx+b)$就是感知机啦。感知机是线性模型，那么自然的想法就是感知机在空间中划分边界是一个超平面，$wx+b=0$显然如此。</p><h3 id="2-感知机仅适用于线性可分的数据集？"><a href="#2-感知机仅适用于线性可分的数据集？" class="headerlink" title="2. 感知机仅适用于线性可分的数据集？"></a>2. 感知机仅适用于线性可分的数据集？</h3><blockquote><p>​        数据集线性可分的定义是存在某个超平面$S$能够将数据集的正实例点和负实例点完全正确地划分到超平面的两侧。</p></blockquote><p>​        然后我在思考是否线性不可分的数据集就不能用感知机了呢？网上的答案多是肯定的，其实这个不一定。它们考虑的多是中间一个圆，外面是圆环这样的分类问题，这样情况必然不可以。但是还是有很多情况是介于两者中间的。即原本线性可分的数据集如果有两三个点在另一侧是没有什么影响的。</p><h3 id="3-感知机和线性几率回归的损失函数的区别？"><a href="#3-感知机和线性几率回归的损失函数的区别？" class="headerlink" title="3. 感知机和线性几率回归的损失函数的区别？"></a>3. 感知机和线性几率回归的损失函数的区别？</h3><p>​        感知机的损失函数：</p><script type="math/tex; mode=display">L(w,b) =  - \frac{1}{ {\|w\|} }\sum\limits_{ {x_i} \in M} { {y_i}(w \cdot {x_i} + b)}</script><p>​        线性几率回归的损失函数：</p><script type="math/tex; mode=display">L(w,b) = \sum\limits_{i = 1}^m {\ln p({y_i}|{x_i};w,b)}</script><p>​        这里没有将线性几率回归的损失函数化到最简，因为更想比较的是两者的思想。这两者的区别比较，我们要自顶而下进行。损失函数是为了干什么？定义一个模型和真实的差距，所以我们就可以去缩小差距了。感知机的损失函数理解很直观，分错了的点离分类面的距离，我们想做的就是缩小这个距离，到最后期望就是没有点分错或者分错了的点都在分类面旁边。</p><p>​        而线性几率回归的就不直观了，因为它是基于概率的。我们用的非线性的$sigmoid(x)$函数输出了一种很符合概率的形象，而概率用来度量和真实差距的，就是似然函数，那么我们就用似然函数就好了。这就是它的思想。</p><h3 id="4-随机梯度下降？"><a href="#4-随机梯度下降？" class="headerlink" title="4. 随机梯度下降？"></a>4. 随机梯度下降？</h3><p>​        梯度下降的原理就不介绍了。梯度下降法在机器学习中有三种具体的实现，BGD，SGD和MBGD。我在查找资料的过程中发现有两种说法，一种是从样本量的角度分析，一种是从随机性的角度性分析。样本量的就是说每次只选一个样本，这个选取的过程很随机，这样能考虑每个样本的信息；随机性的角度是与GD比较，说SGD的下降有一定随机性，避免陷入局部极值点、鞍点。这两种说法其实是一致的，但“随机”表达的意思不一样，随机梯度下降在样本选择，梯度下降都表现出了随机性。</p><h3 id="5-感知机的收敛性？"><a href="#5-感知机的收敛性？" class="headerlink" title="5. 感知机的收敛性？"></a>5. 感知机的收敛性？</h3><p>​        由Novikoff定理，可以证明感知机的解是存在的，且误分类次数是有限的。即：</p><script type="math/tex; mode=display">\begin{array}{l}{y_i}({w_{opt}} \cdot {x_i}) \ge \gamma \\\\误分类次数k \le {(\frac{R}{\gamma })^2}\end{array}</script><p>​        第一个公式可以利用样例的有限性证明，很简单；第二个公式可以先写出$w_k$的表达形式，然后放缩到$w_1$来讨论，另一边放缩到最优，两边比较即可。</p><h3 id="6-感知机的对偶形式是什么？"><a href="#6-感知机的对偶形式是什么？" class="headerlink" title="6. 感知机的对偶形式是什么？"></a>6. 感知机的对偶形式是什么？</h3><p>​        在查找资料之初，我参照最优化相关书籍上的对偶问题对感知机的对偶形式进行分析，但是发现似乎不是一回事。实际上，对偶问题是对问题的转化，感知机的对偶形式是感知机求解方法的转化。</p><p>​        实际上，对偶可以看成是一种转化。对偶问题的理解就是原始问题比较难求解求解另外一个问题，希望得到原始问题都最优解或者下界(对于最小化问题)。主要的方式为增加变量，讲约束写入目标来实现。</p><p>​        那么这里讨论感知机的对偶形式。我们知道，原始形式的感知机是通过错误的$(x_i,y_i)$实现对$w,b$的优化，即：</p><script type="math/tex; mode=display">\begin{array} {l}w \leftarrow w + \eta {y_i} {x_i}\\\\b \leftarrow b + \eta {y_i}\end{array}</script><p>​        其实有更好的做法，就是把$(x_i,y_i)$也放进去，把$w,b$再拆解开，这样可能会有更一致的部件，就可以减少计算量，得到：</p><script type="math/tex; mode=display">\begin{array} {l}w = \sum\limits _ {i = 1} ^ N { {\alpha _i} {y_i} {x_i} } \\\\b = \sum\limits _ {i = 1} ^ N { {\alpha _i} {y_i} } \end{array}</script><p>​        然后我们将实例间的内积计算出来并以矩阵形式存储为Gram矩阵，就减少了计算量。（找到了重复利用的组件）</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;感知机——机器学习思考总结（2）&quot;&gt;&lt;a href=&quot;#感知机——机器学习思考总结（2）&quot; class=&quot;headerlink&quot; title=&quot;感知机——机器学习思考总结（2）&quot;&gt;&lt;/a&gt;感知机——机器学习思考总结（2）&lt;/h2&gt;&lt;p&gt;​        本篇文章为
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://timelovercc.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://timelovercc.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="总结" scheme="http://timelovercc.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>关于DiffPool和MAML的结合</title>
