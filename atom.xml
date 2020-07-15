@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://timelovercc.github.io/"/>
-  <updated>2020-07-14T04:09:26.671Z</updated>
+  <updated>2020-07-15T04:40:16.900Z</updated>
   <id>http://timelovercc.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hate Speech Detection问题论文阅读</title>
+    <link href="http://timelovercc.github.io/2020/07/15/202007151238/"/>
+    <id>http://timelovercc.github.io/2020/07/15/202007151238/</id>
+    <published>2020-07-15T04:38:24.164Z</published>
+    <updated>2020-07-15T04:40:16.900Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Hate-Speech-Detection问题论文阅读"><a href="#Hate-Speech-Detection问题论文阅读" class="headerlink" title="Hate Speech Detection问题论文阅读"></a>Hate Speech Detection问题论文阅读</h2><h3 id="《On-Analyzing-Annotation-Consistency-in-Online-Abusive-Behavior-Datasets》论文阅读"><a href="#《On-Analyzing-Annotation-Consistency-in-Online-Abusive-Behavior-Datasets》论文阅读" class="headerlink" title="《On Analyzing Annotation Consistency in Online Abusive Behavior Datasets》论文阅读"></a>《On Analyzing Annotation Consistency in Online Abusive Behavior Datasets》论文阅读</h3><h4 id="1-摘要说了什么？"><a href="#1-摘要说了什么？" class="headerlink" title="1. 摘要说了什么？"></a>1. 摘要说了什么？</h4><p>网上辱骂言论很能引起社会关注。研究人员提出、收集并标注网上的辱骂言论数据集。然而，标注数据集很困难，很多文本因为语义不同在标签上存在争议。我们提出一个研究网络暴力和语言歧视的分析框架去评估三个广泛使用的数据集上的标注一致性的问题。我们发现现有数据集上存在大量的标注不一致问题，尤其在语义相似的情况下。</p><h4 id="2-方法？"><a href="#2-方法？" class="headerlink" title="2. 方法？"></a>2. 方法？</h4><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200715113401614.png" alt="image-20200715113401614" title="">                </div>                <div class="image-caption">image-20200715113401614</div>            </figure><h3 id="《DeepHate-Hate-Speech-Detection-via-Multi-Faceted-Text-Representations》论文阅读"><a href="#《DeepHate-Hate-Speech-Detection-via-Multi-Faceted-Text-Representations》论文阅读" class="headerlink" title="《DeepHate: Hate Speech Detection via Multi-Faceted Text Representations》论文阅读"></a>《DeepHate: Hate Speech Detection via Multi-Faceted Text Representations》论文阅读</h3><h4 id="1-摘要说了什么？-1"><a href="#1-摘要说了什么？-1" class="headerlink" title="1. 摘要说了什么？"></a>1. 摘要说了什么？</h4><p>网络暴力和歧视言论引起广泛关注。研究者开发许多传统机器学习和深度学习的方法自动检测网络暴力和歧视言论。然而，大多数方法只考虑到了单一文本的特征，如词频、或者词嵌入。这些方法忽略了其它可以被用来提高检测精度的文本信息。这篇论文中，我们提出了DeepHate，一个新的结合了多方面的文本表征，如词嵌入、语义和主题信息的深度学习模型，在社交平台检测负面言论。我们在三个大的公开可得的现实世界数据集上做了测试。我们的实验结果显示DeepHate效果达到了SOTA。我们还对突出特征进行了细致的分析。</p><h4 id="2-相关工作有什么？"><a href="#2-相关工作有什么？" class="headerlink" title="2. 相关工作有什么？"></a>2. 相关工作有什么？</h4><p>可以归类为两个方面：</p><ol><li>传统机器学习策略；</li><li>深度学习。</li></ol><h5 id="传统机器学习策略："><a href="#传统机器学习策略：" class="headerlink" title="传统机器学习策略："></a>传统机器学习策略：</h5><ol><li>初始特征提取：TF-IDF分数、词袋向量和其它语言属性。</li><li>分类器：LR、SVM、随机森林。</li></ol><h5 id="深度学习策略："><a href="#深度学习策略：" class="headerlink" title="深度学习策略："></a>深度学习策略：</h5><p>各种CNN、RNN、LSTM、梯度提升决策树。</p><h4 id="3-本文方法？"><a href="#3-本文方法？" class="headerlink" title="3. 本文方法？"></a>3. 本文方法？</h4><h5 id="DeepHate-模型："><a href="#DeepHate-模型：" class="headerlink" title="DeepHate 模型："></a>DeepHate 模型：</h5><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200715111524380.png" alt="image-20200715111524380" title="">                </div>                <div class="image-caption">image-20200715111524380</div>            </figure><h3 id="《Graph-Convolutional-Networks-for-Text-Classification》论文阅读"><a href="#《Graph-Convolutional-Networks-for-Text-Classification》论文阅读" class="headerlink" title="《Graph Convolutional Networks for Text Classification》论文阅读"></a>《Graph Convolutional Networks for Text Classification》论文阅读</h3><h4 id="1-摘要？"><a href="#1-摘要？" class="headerlink" title="1. 摘要？"></a>1. 摘要？</h4><p>文本识别是NLP中一个重要问题，很多研究应用CNN去完成分类。然而，很少有人探究图神经网络。本项工作中，我们提出用图神经网络用到文本识别。<strong>我们通过词语同现和文本词语联系的语料库构建了一个单一文本图。</strong>然后学得了一个Text GCN。我们的Text GCN用单词和文件的one-hot表示初始化，它连带地学得词语和文本的初始化，通过文本的已知类别标签。我们的实验结果说明纯粹的Text GCN没有任何词嵌入就胜过SOTA方法。另一方面，Text GCN还学会了预测单词和文档嵌入。并且，实验结果显示在数据量减少时候优势更大，说明鲁棒性很强。</p><h4 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作?"></a>2. 相关工作?</h4><h5 id="传统的文本识别"><a href="#传统的文本识别" class="headerlink" title="传统的文本识别"></a>传统的文本识别</h5><ol><li>特征工程：词袋属性，n-grams, entity in ontologies。</li><li>分类算法。</li></ol><h5 id="文本分类深度学习"><a href="#文本分类深度学习" class="headerlink" title="文本分类深度学习"></a>文本分类深度学习</h5><p>分为两类：</p><ol><li>词嵌入：词的表示很关键。</li><li>深度神经网络：CNN、RNN等。</li></ol><h4 id="3-怎么构建图的？"><a href="#3-怎么构建图的？" class="headerlink" title="3. 怎么构建图的？"></a>3. 怎么构建图的？</h4><p>异质图，包含单词节点、文档节点。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200715123015565.png" alt="image-20200715123015565" title="">                </div>                <div class="image-caption">image-20200715123015565</div>            </figure><h3 id="我的看法"><a href="#我的看法" class="headerlink" title="我的看法"></a>我的看法</h3><p>DeepHate: 优点就是多方面特征的提取，融合。有没有自动化地提取信息的方式？</p><p>Text GCN: 主要就是提出了怎么将数据表述成图，然后利用GCN做。</p><p>我感觉，这些论文都是应用，可以说就是将deep learning的最新技术引进到这个问题的处理上。比较适合我现在的阶段：了解了新方法，但还没有实际使用过。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Hate-Speech-Detection问题论文阅读&quot;&gt;&lt;a href=&quot;#Hate-Speech-Detection问题论文阅读&quot; class=&quot;headerlink&quot; title=&quot;Hate Speech Detection问题论文阅读&quot;&gt;&lt;/a&gt;Hate 
+      
+    
+    </summary>
+    
+    
+      <category term="论文阅读" scheme="http://timelovercc.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="Hate Speech Detection" scheme="http://timelovercc.github.io/tags/Hate-Speech-Detection/"/>
+    
+      <category term="Deep Learning" scheme="http://timelovercc.github.io/tags/Deep-Learning/"/>
+    
+      <category term="GNN" scheme="http://timelovercc.github.io/tags/GNN/"/>
+    
+  </entry>
   
   <entry>
     <title>GitHub速查记录</title>
