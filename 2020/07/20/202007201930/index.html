@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>GNNExplainer论文阅读 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="论文笔记,GNN">
+    <meta name="description" content="GNNExplainer1. 本文结构 基本信息 读摘要 读图、表分析思路和效果 通读全文 读后思考  2. 基本信息 标题：GNNExplainer: Generating Explanations for Graph Neural Networks 作者：Rex Ying, Dylan Bourgeois, Jiaxuan You, Marinka Zitnik, Jure Leskovec.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GNNExplainer论文阅读">
+<meta property="og:url" content="http://timelovercc.github.io/2020/07/20/202007201930/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="GNNExplainer1. 本文结构 基本信息 读摘要 读图、表分析思路和效果 通读全文 读后思考  2. 基本信息 标题：GNNExplainer: Generating Explanations for Graph Neural Networks 作者：Rex Ying, Dylan Bourgeois, Jiaxuan You, Marinka Zitnik, Jure Leskovec.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719174521006.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719174945773.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719175329187.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719175616389.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719175916858.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719180058664.png">
+<meta property="article:published_time" content="2020-07-20T11:30:46.105Z">
+<meta property="article:modified_time" content="2020-07-20T11:31:51.245Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="论文笔记">
+<meta property="article:tag" content="GNN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719174521006.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">GNNExplainer论文阅读</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">GNNExplainer论文阅读</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-07-20T11:30:46.105Z" itemprop="datePublished" class="page-time">
+  2020/07/20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GNNExplainer"><span class="post-toc-text">GNNExplainer</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-本文结构"><span class="post-toc-text">1. 本文结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-基本信息"><span class="post-toc-text">2. 基本信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-摘要部分"><span class="post-toc-text">3. 摘要部分</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-图、表分析"><span class="post-toc-text">4. 图、表分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-通读全文"><span class="post-toc-text">5. 通读全文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-Introduction"><span class="post-toc-text">1. Introduction</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-Related-work"><span class="post-toc-text">2. Related work</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-Formulating-explannations"><span class="post-toc-text">3. Formulating explannations</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-GNNExplainer"><span class="post-toc-text">4. GNNExplainer</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#图结构和节点属性的联合学习"><span class="post-toc-text">图结构和节点属性的联合学习</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-Experiments"><span class="post-toc-text">5. Experiments</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-Conclusion"><span class="post-toc-text">6. Conclusion</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-读后思考"><span class="post-toc-text">6. 读后思考</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202007201930"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">GNNExplainer论文阅读</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/07/20 19:30:46" datetime="2020-07-20T11:30:46.105Z"  itemprop="datePublished">2020/07/20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="GNNExplainer"><a href="#GNNExplainer" class="headerlink" title="GNNExplainer"></a>GNNExplainer</h2><h4 id="1-本文结构"><a href="#1-本文结构" class="headerlink" title="1. 本文结构"></a>1. 本文结构</h4><ol>
+<li>基本信息</li>
+<li>读摘要</li>
+<li>读图、表分析思路和效果</li>
+<li>通读全文</li>
+<li>读后思考</li>
+</ol>
+<h4 id="2-基本信息"><a href="#2-基本信息" class="headerlink" title="2. 基本信息"></a>2. 基本信息</h4><ul>
+<li>标题：GNNExplainer: Generating Explanations for Graph Neural Networks</li>
+<li>作者：Rex Ying, Dylan Bourgeois, Jiaxuan You, Marinka Zitnik, Jure Leskovec.</li>
+<li>会议：NeurIPS 2019</li>
+<li>代码链接：<a href="https://github.com/RexYing/gnn-model-explainer" target="_blank" rel="noopener">https://github.com/RexYing/gnn-model-explainer</a></li>
+</ul>
+<h4 id="3-摘要部分"><a href="#3-摘要部分" class="headerlink" title="3. 摘要部分"></a>3. 摘要部分</h4><p>图神经网络是在图上进行机器学习的强大的工具。GNNs通过在输入的图的边上递归地传递神经信息结合了节点属性信息和图的结构两方面内容。然而，合并图结构和属性信息模型复杂，GNNs的解释预测始终无法解决。这里，我们提出GNNExplainer，第一个对任何基于GNN的对任何基于图的机器学习任务的模型各异的通用解决方法。考虑一个实例，GNNExplainer确定一个紧凑的子图结构和一个小的在GNN的预测中有关键作用的节点属性的集合。然后，GNNExplainer能够对整个实例类生成一致的准确的解释。我们把GNNExplainer公式化成一个最大化GNN预测和可能子图结构分布的互信息优化任务。在综合的和真实图上的实验说明我们的方法能够识别重要的图结构和节点属性，并且表现得比其它baseline方法在解释准确度上好43%。GNNExplainer有很多好处，从可视化语义相关的结构到可解释性，再到深入了解GNNs的错误。</p>
+<h4 id="4-图、表分析"><a href="#4-图、表分析" class="headerlink" title="4. 图、表分析"></a>4. 图、表分析</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719174521006.png" alt="image-20200719174521006" title="">
+                </div>
+                <div class="image-caption">image-20200719174521006</div>
+            </figure>
+<p>Figure 1：通过识别一个小的子图部分和一个小的节点属性集合，GNNExplainer完成预测。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719174945773.png" alt="image-20200719174945773" title="">
+                </div>
+                <div class="image-caption">image-20200719174945773</div>
+            </figure>
+<p>Figure 2：GNNExplainer识别一个小的有影响力的属性集合和对预测关键的路径，排除无效信息。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719175329187.png" alt="image-20200719175329187" title="">
+                </div>
+                <div class="image-caption">image-20200719175329187</div>
+            </figure>
+<p>Table 1：综合数据集下，GNNExplainer和其它baseline方法的比较。可以看到，效果提高了很多。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719175616389.png" alt="image-20200719175616389" title="">
+                </div>
+                <div class="image-caption">image-20200719175616389</div>
+            </figure>
+<p>Figure 3: 单一实例解释性的评估。在四个综合数据集上对于节点分类任务的模范解释子图。发现找到了很好的对节点有影响的子图。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719175916858.png" alt="image-20200719175916858" title="">
+                </div>
+                <div class="image-caption">image-20200719175916858</div>
+            </figure>
+<p>Figure 4：单实例的解释。展示了在两个数据集上的模范解释子图。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200719180058664.png" alt="image-20200719180058664" title="">
+                </div>
+                <div class="image-caption">image-20200719180058664</div>
+            </figure>
+<p>Figure 5：找出重要属性。GNNExplainer成功找出了重要的属性。</p>
+<h4 id="5-通读全文"><a href="#5-通读全文" class="headerlink" title="5. 通读全文"></a>5. 通读全文</h4><h5 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h5><p>GNNs在解决现实问题上很有价值。但是，不好让人理解，但理解起来又很有价值，既能提高对GNN的信任，又能提高在很多问题上的模型透明度，还能帮助从业者在部署之前更好理解网络特性。没有方法解释GNNs。解释神经网络有两条路线，一种解释简单化的模型，一种从属性上解释。这些方法都没有用到图上的联系信息。GNNExplainer先找小结构和属性，再预测。</p>
+<h5 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2. Related work"></a>2. Related work</h5><p>非图的神经网络可解释性方法分为两类。第一类使用简易模型代表整个神经网络，通常只是学得一个近似。第二类方法识别出计算时重要的层。但是，都不适合图神经网络。</p>
+<p>图上的可解释很复杂，不容易做。最近通过注意力机制提高了可解释性。但是也有很多缺陷。</p>
+<h5 id="3-Formulating-explannations"><a href="#3-Formulating-explannations" class="headerlink" title="3. Formulating explannations"></a>3. Formulating explannations</h5><p>将神经网络模型公式化，利用$G, E, V, X, f, C, \Phi$等表示一定含义。</p>
+<p>三个重要公式概括一般的GNN：</p>
+<script type="math/tex; mode=display">
+m_{ij}^l=Msg(h^{l-1}_i,h^{l-1}_j,r_{ij})</script><script type="math/tex; mode=display">
+M_i^l=Agg({m_{ij}^l|v_j\in N_{v_i} })</script><script type="math/tex; mode=display">
+h_i^l=Update\left( M_i^l,h_i^{l-1} \right)</script><p>我们关键的insight在于节点的计算图：</p>
+<ul>
+<li><p>计算图$G_c(v)$</p>
+</li>
+<li><p>关联邻接矩阵$A_c(v)\in \{0,1\}^{n\times n}$</p>
+</li>
+<li><p>关联属性集$X_c(v)=\{x_j|v_j\in G_c(v)\}$</p>
+</li>
+<li><p>GNN学得一个条件分布$P_\Phi(Y|G_c,X_c)$</p>
+</li>
+<li><p>GNN的预测$  \hat{y}=\phi \left( G_{c\left( v \right)},X_c\left( v \right) \right) $</p>
+</li>
+<li><p>为$ \hat{y}$生成的解释$\left( G_S,X^F_S \right) $</p>
+</li>
+</ul>
+<h5 id="4-GNNExplainer"><a href="#4-GNNExplainer" class="headerlink" title="4. GNNExplainer"></a>4. GNNExplainer</h5><p>优化框架：</p>
+<script type="math/tex; mode=display">
+\mathop {\max} \limits_{G_S} MI\left( Y,\left( G_S,X_S \right) \right) =H( Y ) -H( Y|G=G_S,X=X_S )</script><p>其中$H(Y)$是常数，而右式可以变换：</p>
+<script type="math/tex; mode=display">
+H\left( Y|G=G_S,X=X_S \right) =-E_{Y|G_S,X_S}\left[ \log P_{\varPhi}\left( Y|G=G_S,X=X_S \right) \right]</script><p>然后变分近似，再近似，可以变成<font color=red>?</font></p>
+<script type="math/tex; mode=display">
+\underset{G}{\min}E_{G_S~G}H\left( Y|G=G_S,X=X_S \right)</script><p>由Jensen不等式可以得到上界：</p>
+<script type="math/tex; mode=display">
+\underset{G}{\min}H\left( Y|G=E_G\left[ G_S \right] ,X=X_S \right)</script><p>用平均场近似，条件熵可以被取代<font color=red>?</font>,得到:</p>
+<script type="math/tex; mode=display">
+\underset{M}{\min}-\sum_{c=1}^C{1\left[ y=c \right]}\log P_{\varPhi}\left( Y=y|G=A_c\odot \sigma \left( M \right) ,X=X_c \right)</script><h6 id="图结构和节点属性的联合学习"><a href="#图结构和节点属性的联合学习" class="headerlink" title="图结构和节点属性的联合学习"></a>图结构和节点属性的联合学习</h6><script type="math/tex; mode=display">
+\underset{G_S,F}{\max}MI\left( Y,\left( G_S,F \right) \right) =H\left( Y \right) -H\left( Y|G=G_S,X=X_S^F \right)</script><font color=red>后面看不懂了，这里以后有时间就看，先跳过不耽误进度。</font>
+
+<h5 id="5-Experiments"><a href="#5-Experiments" class="headerlink" title="5. Experiments"></a>5. Experiments</h5><p>四个人造数据集用于节点分类，两个真实世界数据集用于图分类。用了几个GNN的方法来作为baseline：GRAD是一个基于梯度的方法，类似于a saliency map approach. ATT是一个图注意GNN（GAT），它考虑图结构，但不解释节点属性。</p>
+<p>实验结果可以直接看图，效果很好。</p>
+<h5 id="6-Conclusion"><a href="#6-Conclusion" class="headerlink" title="6. Conclusion"></a>6. Conclusion</h5><p>文中方法提供了一个用GNN预测，调试GNN模型和识别系统错误模式的直接接口。</p>
+<h4 id="6-读后思考"><a href="#6-读后思考" class="headerlink" title="6. 读后思考"></a>6. 读后思考</h4><p>这篇文章应该是图神经网络的开门之作，作者都是大佬。亮点在于将可解释量化了，用优化模型的优化过程寻找可解释。但是我感觉还是将模型当作黑箱，改变输出然后看箱子里面哪里变化了，找出变化的部分而已。</p>
+<p>有时间继续看，深入理解。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-07-20T11:31:51.245Z" itemprop="dateUpdated">2020/07/20 19:31:51</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GNN/" rel="tag">GNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" rel="tag">论文笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/07/20/202007201930/&title=《GNNExplainer论文阅读》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/07/20/202007201930/&title=《GNNExplainer论文阅读》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/07/20/202007201930/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《GNNExplainer论文阅读》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/07/20/202007201930/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/07/20/202007201930/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/07/20/202007201611/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">熵、相对熵与互信息——初探信息论</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/07/20/202007201930/&title=《GNNExplainer论文阅读》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/07/20/202007201930/&title=《GNNExplainer论文阅读》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/07/20/202007201930/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《GNNExplainer论文阅读》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/07/20/202007201930/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/07/20/202007201930/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/07/20/202007201930/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
