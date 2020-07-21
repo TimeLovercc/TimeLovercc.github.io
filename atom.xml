@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://timelovercc.github.io/"/>
-  <updated>2020-07-20T11:31:51.245Z</updated>
+  <updated>2020-07-21T06:42:43.399Z</updated>
   <id>http://timelovercc.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>简单的批处理任务</title>
+    <link href="http://timelovercc.github.io/2020/07/21/202007211441/"/>
+    <id>http://timelovercc.github.io/2020/07/21/202007211441/</id>
+    <published>2020-07-21T06:41:53.726Z</published>
+    <updated>2020-07-21T06:42:43.399Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简单的批处理任务"><a href="#简单的批处理任务" class="headerlink" title="简单的批处理任务"></a>简单的批处理任务</h2><h4 id="1-shell简介"><a href="#1-shell简介" class="headerlink" title="1. shell简介"></a>1. shell简介</h4><blockquote><p>操作系统对外提供的接口是“系统调用”，也就是一堆编程用的接口。这些接口一般以C函数的形式暴露给使用者。通过这些接口，开发者可以命令操作系统“启动一个进程”，“查找某个目录下的所有文件”，“将某个文件的权限配置为744”等等。</p><p>问题是我们平时使用电脑，不能每次都编写程序，再编译，再运行得到结果吧。比如你想知道一个目录下的所有文件，你肯定不会去写一段C代码，调用系统调用“readdir” （见<a href="https://link.zhihu.com/?target=http%3A//www.man7.org/linux/man-pages/man3/readdir.3.html">http://www.man7.org/linux/man-pages/man3/readdir.3.html</a>），然后gcc编译，然后运行。真这么干，一个最简单的工作也要耗费很长时间。况且，一个函数的返回是“数据结构”，或者输出到stdout或文件之类的地方。你总得以某种形式把结果“画”到界面上（不管是画字符还是画图片），才能查看那个结果。这个格式化输出的工作量也很大。</p></blockquote><p>那么问题就来了，我们平时操作电脑，比如用网易云听音乐，用QQ发讯息，似乎没有调用这些接口？其实是网易云、QQ这些应用程序帮我们做了这些事情。但是这些应用软件功能都是很有限的，自由度很低，将用户与系统隔绝了。而Shell就可以看作一个自由度很高的应用程序。他有两个功能，解释器和调用系统功能。</p><blockquote><p>正常人的思路是先写好程序，然后弄个交互的界面方便使用这个程序。只要使用者敲一组字符串，就可以调用之前写好的程序完成工作。比如我们会在命令行里输入“ls -Rl”这种字符串。这个字符串被翻译成“ls”，“-R”，“-l”。“ls”帮我们找到那个之前写好的程序，并启动它；“-R”和“-l”被作为参数传给这个程序，告诉程序走“递归所有子目录”+“输出长格式”这部分代码。</p><p>这个负责把用户输入的字符串转换到需要执行的程序，并把结果以某个形式画出来的东西，就叫做“Shell”，即帮你更方便使用操作系统接口的“壳”。这个词与操作系统内核（Kernel）对应。</p><p>在Linux中，bash负责按照某种格式把用户的输出的字符串翻译，比如对于普通非空字符翻译为程序和参数，并尝试去PATH里找对应的程序；对“空格”翻译成分隔符；对“$XXX”尝试进行环境变量的替换；对“｜”翻译为管道；对 “&gt;”翻译为输出重定向；对一个指令末尾的“&amp;”翻译为将程序转到后台执行……</p><p>另一方面终端将stdout、stderr输出的东西画成我们可以看的一坨坨字符，包括字符、字体、颜色、换行、甚至响铃。</p><p>【bash】 + 【终端】大概可以理解为一个以字符为交互方式的“Shell”。</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/v2-32ba904a3c6311d39ff134e17e5b6c72_720w.jpg" alt="img" title="">                </div>                <div class="image-caption">img</div>            </figure><p>Shell的思想很普遍，并不一定限制在操作系统上。比如你自己写一个程序，有大量复杂的参数和配置。为了使用方便可以写个命令行工具将一个命令翻译成对这段程序的调用。你写的命令行工具就是你自己程序的“Shell”。比如写Java的同学肯定很熟悉mvn。一句mvn install可以产生出成百上千个下载、压缩、编译、清理、测试、上传等api的调用；使用数据库的同学也会用SQL来表达自己的查询，让数据库的“Shell”解释成对存储引擎各种api的调用。</p></blockquote><p>简单来说，一个解释器加一个终端就构成了shell。解释器是如bash、zsh等东西，注意后面sh代表shell。</p><h4 id="2-终端和控制台"><a href="#2-终端和控制台" class="headerlink" title="2. 终端和控制台"></a>2. 终端和控制台</h4><p>计算机早期阶段，一台主机只有一个控制台Consolo，用电传打印机(Teletypewritter简称tty)通过串口连接到主机。后来，在电传打印机基础上改进，用屏幕显示，叫做终端(Terimal)。</p><p>在Linux系统这个阶段，控制台和终端都是虚拟化的了，区别不大，基本可以看作是一样的。</p><ul><li>tty，源自teletypewriter，电传打字机。现在被键盘与显示器取代，现在叫做终端比较合适，是一种字符型设备；</li><li>pty，伪终端，虚拟终端，pseudo-tty。</li></ul><h4 id="3-bat文件和sh文件"><a href="#3-bat文件和sh文件" class="headerlink" title="3. bat文件和sh文件"></a>3. bat文件和sh文件</h4><p>bat文件时dos下的批处理文件。批处理文件是无格式的文本文件，包含一条或多条命令。扩展名为<code>.bat</code>或者<code>.cmd</code>。利用批处理文件就可以简化日常或重复性任务。</p><p>sh文件是为shell编写的脚本程序。</p><p>这两种文件都是含有多条命令行指令，连续执行以实现一定功能。两种脚本语言不同，而这两种语言的系统也通常不同（win和linux）。</p><p>一般认为bat是在windows系统执行的文件，sh是在linux执行的批处理文件。</p><h4 id="4-sh文件的不同执行方式"><a href="#4-sh文件的不同执行方式" class="headerlink" title="4. sh文件的不同执行方式"></a>4. sh文件的不同执行方式</h4><p>运行<code>sh a.sh</code>，表示我是用sh解释这个脚本，不要执行权限。</p><p>运行<code>./a.sh</code>，会查找脚本第一行是否指定了解释器，如果没制定，就用当前系统默认的shell。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line">print(<span class="string">"This is Python script"</span>)</span><br></pre></td></tr></table></figure><p>比如上面就指定了python作为解释器。</p><h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol><li><a href="https://www.zhihu.com/question/35382632/answer/803711006" target="_blank" rel="noopener">Shell是用来解决什么问题的？</a></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;简单的批处理任务&quot;&gt;&lt;a href=&quot;#简单的批处理任务&quot; class=&quot;headerlink&quot; title=&quot;简单的批处理任务&quot;&gt;&lt;/a&gt;简单的批处理任务&lt;/h2&gt;&lt;h4 id=&quot;1-shell简介&quot;&gt;&lt;a href=&quot;#1-shell简介&quot; class=&quot;he
+      
+    
+    </summary>
+    
+    
+      <category term="操作系统" scheme="http://timelovercc.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="批处理" scheme="http://timelovercc.github.io/tags/%E6%89%B9%E5%A4%84%E7%90%86/"/>
+    
+      <category term="shell" scheme="http://timelovercc.github.io/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>GNNExplainer论文阅读</title>
