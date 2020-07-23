@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>DGCNN论文阅读 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="GNN,SortPooling">
+    <meta name="description" content="DGCNN1. 本文结构 基本信息 摘要阅读 图表阅读 全文通读 重点分析 思考总结  2. 基本信息 论文名称： An End-to-End Deep Learning Architecture for Graph Classification 作者：Muhan Zhang, Zhicheng Cui, Marion Neumann, Yixin Chen 会议：AAAI 2018 代码：htt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DGCNN论文阅读">
+<meta property="og:url" content="http://timelovercc.github.io/2020/07/23/202007231501/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="DGCNN1. 本文结构 基本信息 摘要阅读 图表阅读 全文通读 重点分析 思考总结  2. 基本信息 论文名称： An End-to-End Deep Learning Architecture for Graph Classification 作者：Muhan Zhang, Zhicheng Cui, Marion Neumann, Yixin Chen 会议：AAAI 2018 代码：htt">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172129858.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172243831.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172533722.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172630877.png">
+<meta property="article:published_time" content="2020-07-23T07:01:48.269Z">
+<meta property="article:modified_time" content="2020-07-23T07:02:24.279Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="GNN">
+<meta property="article:tag" content="SortPooling">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172129858.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">DGCNN论文阅读</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">DGCNN论文阅读</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-07-23T07:01:48.269Z" itemprop="datePublished" class="page-time">
+  2020/07/23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DGCNN"><span class="post-toc-text">DGCNN</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-本文结构"><span class="post-toc-text">1. 本文结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-基本信息"><span class="post-toc-text">2. 基本信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-摘要阅读"><span class="post-toc-text">3. 摘要阅读</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-图表分析"><span class="post-toc-text">4. 图表分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-全文通读"><span class="post-toc-text">5.全文通读</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-重点分析"><span class="post-toc-text">6. 重点分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-思考总结"><span class="post-toc-text">7. 思考总结</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202007231501"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">DGCNN论文阅读</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/07/23 15:01:48" datetime="2020-07-23T07:01:48.269Z"  itemprop="datePublished">2020/07/23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="DGCNN"><a href="#DGCNN" class="headerlink" title="DGCNN"></a>DGCNN</h2><h4 id="1-本文结构"><a href="#1-本文结构" class="headerlink" title="1. 本文结构"></a>1. 本文结构</h4><ol>
+<li>基本信息</li>
+<li>摘要阅读</li>
+<li>图表阅读</li>
+<li>全文通读</li>
+<li>重点分析</li>
+<li>思考总结</li>
+</ol>
+<h4 id="2-基本信息"><a href="#2-基本信息" class="headerlink" title="2. 基本信息"></a>2. 基本信息</h4><ul>
+<li>论文名称： An End-to-End Deep Learning Architecture for Graph Classification</li>
+<li>作者：Muhan Zhang, Zhicheng Cui, Marion Neumann, Yixin Chen</li>
+<li>会议：AAAI 2018</li>
+<li>代码：<a href="https://github.com/muhanzhang/pytorch_DGCNN" target="_blank" rel="noopener">https://github.com/muhanzhang/pytorch_DGCNN</a></li>
+</ul>
+<h4 id="3-摘要阅读"><a href="#3-摘要阅读" class="headerlink" title="3. 摘要阅读"></a>3. 摘要阅读</h4><p>神经网络通常处理张量形式的数据。在本文中，我们提出了一种接收任意结构的图数据的新神经网络。考虑到一个数据集包含图和它的类别，我们目的就是要用神经网络完成分类任务。有两个主要的挑战：一个是怎么提取特征；一个是怎么序列化一致地读取图。为了解决第一个挑战，我们设计了一个局部地图卷积模型并且说明它和两个图核的联系。为了解决第二个挑战，我们设计了一个新的SortPooling层能够以一个一致的顺序分类图的节点所以传统神经网络能够在图上训练。在benchmark图分类数据集上的实验说明提出的结构达到了很高的表现。并且，这个结构允许端到端的基于梯度的训练，不需要转换图到向量。</p>
+<h4 id="4-图表分析"><a href="#4-图表分析" class="headerlink" title="4. 图表分析"></a>4. 图表分析</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172129858.png" alt="image-20200721172129858" title="">
+                </div>
+                <div class="image-caption">image-20200721172129858</div>
+            </figure>
+<p>Figure 1：CNNs需要一致的输入顺序。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172243831.png" alt="image-20200721172243831" title="">
+                </div>
+                <div class="image-caption">image-20200721172243831</div>
+            </figure>
+<p>Figure 2：DGCNN的整体结构。图卷积，然后SortPooling，再像传统CNN一样学得一个预测性的模型。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172533722.png" alt="image-20200721172533722" title="">
+                </div>
+                <div class="image-caption">image-20200721172533722</div>
+            </figure>
+<p>Table 1：和graph核的比较。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200721172630877.png" alt="image-20200721172630877" title="">
+                </div>
+                <div class="image-caption">image-20200721172630877</div>
+            </figure>
+<p>Table 2: 和其它深度学习方法的比较</p>
+<h4 id="5-全文通读"><a href="#5-全文通读" class="headerlink" title="5.全文通读"></a>5.全文通读</h4><p>SortPooling和WL方法有很紧密的关系，在DGCNN，我们也可以是用节点颜色帮助完成图的分类任务。</p>
+<p>尽可能把图卷积的层数变多，这样才能让SortPooling层把节点分出来。</p>
+<p>SortPooling有一个显著优点是能够传递梯度给之前的层。</p>
+<h4 id="6-重点分析"><a href="#6-重点分析" class="headerlink" title="6. 重点分析"></a>6. 重点分析</h4><p>这部分重点查看它的代码实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">''' graph convolution layers '''</span></span><br><span class="line">        lv = <span class="number">0</span></span><br><span class="line">        cur_message_layer = node_feat</span><br><span class="line">        cat_message_layers = []</span><br><span class="line">        <span class="keyword">while</span> lv &lt; len(self.latent_dim):</span><br><span class="line">            n2npool = gnn_spmm(n2n_sp, cur_message_layer) + cur_message_layer  <span class="comment"># Y = (A + I) * X</span></span><br><span class="line">            node_linear = self.conv_params[lv](n2npool)  <span class="comment"># Y = Y * W</span></span><br><span class="line">            normalized_linear = node_linear.div(node_degs)  <span class="comment"># Y = D^-1 * Y</span></span><br><span class="line">            cur_message_layer = torch.tanh(normalized_linear)</span><br><span class="line">            cat_message_layers.append(cur_message_layer)</span><br><span class="line">            lv += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        cur_message_layer = torch.cat(cat_message_layers, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="string">''' sortpooling layer '''</span></span><br><span class="line">        sort_channel = cur_message_layer[:, <span class="number">-1</span>]</span><br><span class="line">        batch_sortpooling_graphs = torch.zeros(len(graph_sizes), self.k, self.total_latent_dim)</span><br><span class="line">        <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">and</span> isinstance(node_feat.data, torch.cuda.FloatTensor):</span><br><span class="line">            batch_sortpooling_graphs = batch_sortpooling_graphs.cuda()</span><br><span class="line"></span><br><span class="line">        batch_sortpooling_graphs = Variable(batch_sortpooling_graphs)</span><br><span class="line">        accum_count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(subg_sp.size()[<span class="number">0</span>]):</span><br><span class="line">            to_sort = sort_channel[accum_count: accum_count + graph_sizes[i]]</span><br><span class="line">            k = self.k <span class="keyword">if</span> self.k &lt;= graph_sizes[i] <span class="keyword">else</span> graph_sizes[i]</span><br><span class="line">            _, topk_indices = to_sort.topk(k)</span><br><span class="line">            topk_indices += accum_count</span><br><span class="line">            sortpooling_graph = cur_message_layer.index_select(<span class="number">0</span>, topk_indices)</span><br><span class="line">            <span class="keyword">if</span> k &lt; self.k:</span><br><span class="line">                to_pad = torch.zeros(self.k-k, self.total_latent_dim)</span><br><span class="line">                <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">and</span> isinstance(node_feat.data, torch.cuda.FloatTensor):</span><br><span class="line">                    to_pad = to_pad.cuda()</span><br><span class="line"></span><br><span class="line">                to_pad = Variable(to_pad)</span><br><span class="line">                sortpooling_graph = torch.cat((sortpooling_graph, to_pad), <span class="number">0</span>)</span><br><span class="line">            batch_sortpooling_graphs[i] = sortpooling_graph</span><br><span class="line">            accum_count += graph_sizes[i]</span><br><span class="line"></span><br><span class="line">        <span class="string">''' traditional 1d convlution and dense layers '''</span></span><br><span class="line">        to_conv1d = batch_sortpooling_graphs.view((<span class="number">-1</span>, <span class="number">1</span>, self.k * self.total_latent_dim))</span><br><span class="line">        conv1d_res = self.conv1d_params1(to_conv1d)</span><br><span class="line">        conv1d_res = self.conv1d_activation(conv1d_res)</span><br><span class="line">        conv1d_res = self.maxpool1d(conv1d_res)</span><br><span class="line">        conv1d_res = self.conv1d_params2(conv1d_res)</span><br><span class="line">        conv1d_res = self.conv1d_activation(conv1d_res)</span><br><span class="line"></span><br><span class="line">        to_dense = conv1d_res.view(len(graph_sizes), <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.output_dim &gt; <span class="number">0</span>:</span><br><span class="line">            out_linear = self.out_params(to_dense)</span><br><span class="line">            reluact_fp = self.conv1d_activation(out_linear)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            reluact_fp = to_dense</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.conv1d_activation(reluact_fp)</span><br></pre></td></tr></table></figure>
+<h4 id="7-思考总结"><a href="#7-思考总结" class="headerlink" title="7. 思考总结"></a>7. 思考总结</h4><p>这篇文章读下来，印象不是很深。感觉能被接收有两方面原因，一方面是sortpooling方法简单、有效、新颖，另一方面是文章中方法与其它方法关系的理论推导。这篇文章可以借鉴的方法就是SortPooling, 公式推导有时间看一下。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-07-23T07:02:24.279Z" itemprop="dateUpdated">2020/07/23 15:02:24</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GNN/" rel="tag">GNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SortPooling/" rel="tag">SortPooling</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/07/23/202007231501/&title=《DGCNN论文阅读》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/07/23/202007231501/&title=《DGCNN论文阅读》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/07/23/202007231501/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DGCNN论文阅读》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/07/23/202007231501/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/07/23/202007231501/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/07/22/202007221426/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux Shell速查记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/07/23/202007231501/&title=《DGCNN论文阅读》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/07/23/202007231501/&title=《DGCNN论文阅读》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/07/23/202007231501/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《DGCNN论文阅读》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/07/23/202007231501/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/07/23/202007231501/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/07/23/202007231501/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
