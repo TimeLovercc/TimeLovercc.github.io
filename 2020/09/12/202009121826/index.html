@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Few-shot learning on graphs via super-classes based on graph spectral measures阅读 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="GNN,few-shot">
+    <meta name="description" content="Super-class1. 本文结构 本文结构 基本信息 读摘要 读图、表分析思路和效果 通读全文 代码分析 读后思考  2. 基本信息 标题：Few-shot learning on graphs via super-classes based on graph spectral measures 作者：Jatin Chauhan, Deepak Nathani, Manohar Kaul 会议">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Few-shot learning on graphs via super-classes based on graph spectral measures阅读">
+<meta property="og:url" content="http://timelovercc.github.io/2020/09/12/202009121826/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="Super-class1. 本文结构 本文结构 基本信息 读摘要 读图、表分析思路和效果 通读全文 代码分析 读后思考  2. 基本信息 标题：Few-shot learning on graphs via super-classes based on graph spectral measures 作者：Jatin Chauhan, Deepak Nathani, Manohar Kaul 会议">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911151752036.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911152017304.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911154705458.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911155006289.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911152131426.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911155142988.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911161808210.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200912170443752.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200912170321351.png">
+<meta property="article:published_time" content="2020-09-12T10:26:19.007Z">
+<meta property="article:modified_time" content="2020-09-17T07:56:42.453Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="GNN">
+<meta property="article:tag" content="few-shot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911151752036.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Few-shot learning on graphs via super-classes based on graph spectral measures阅读</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Few-shot learning on graphs via super-classes based on graph spectral measures阅读</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-12T10:26:19.007Z" itemprop="datePublished" class="page-time">
+  2020/09/12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Super-class"><span class="post-toc-text">Super-class</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-本文结构"><span class="post-toc-text">1. 本文结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-基本信息"><span class="post-toc-text">2. 基本信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-摘要部分"><span class="post-toc-text">3. 摘要部分</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-图、表分析"><span class="post-toc-text">4. 图、表分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-通读全文"><span class="post-toc-text">5. 通读全文</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-Introduction"><span class="post-toc-text">1. Introduction</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-Related-work"><span class="post-toc-text">2. Related work</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-Preliminaries"><span class="post-toc-text">3. Preliminaries</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-Our-method"><span class="post-toc-text">4. Our method</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-Experimental-results"><span class="post-toc-text">5. Experimental results</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-Conclussion"><span class="post-toc-text">6. Conclussion</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-代码分析"><span class="post-toc-text">6. 代码分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-读后思考"><span class="post-toc-text">7. 读后思考</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202009121826"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Few-shot learning on graphs via super-classes based on graph spectral measures阅读</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/09/12 18:26:19" datetime="2020-09-12T10:26:19.007Z"  itemprop="datePublished">2020/09/12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Super-class"><a href="#Super-class" class="headerlink" title="Super-class"></a>Super-class</h2><h4 id="1-本文结构"><a href="#1-本文结构" class="headerlink" title="1. 本文结构"></a>1. 本文结构</h4><ol>
+<li>本文结构</li>
+<li>基本信息</li>
+<li>读摘要</li>
+<li>读图、表分析思路和效果</li>
+<li>通读全文</li>
+<li>代码分析</li>
+<li>读后思考</li>
+</ol>
+<h4 id="2-基本信息"><a href="#2-基本信息" class="headerlink" title="2. 基本信息"></a>2. 基本信息</h4><ul>
+<li>标题：Few-shot learning on graphs via super-classes based on graph spectral measures</li>
+<li>作者：Jatin Chauhan, Deepak Nathani, Manohar Kaul</li>
+<li>会议：ICLR 2020</li>
+<li>代码链接：<a href="https://github.com/chauhanjatin10/GraphsFewShot/" target="_blank" rel="noopener">https://github.com/chauhanjatin10/GraphsFewShot/</a></li>
+</ul>
+<h4 id="3-摘要部分"><a href="#3-摘要部分" class="headerlink" title="3. 摘要部分"></a>3. 摘要部分</h4><p>我们要利用GNN去识别few-shot图识别问题种没有见过的类别的问题，在图数目给定的情形下。尽管很多GNN的变种能解决图分类或者节点分类的任务，但是当遇到变迁数据稀少的情形下，这些GNN的表现都不是很好。这里我们提出一种新的方法，给每一个图依据它的图正则Laplacian分配一个概率测度。这让我们能够有依据地将图地基本标签聚类成超类，这样就能让$L^P$Wasserstein距离作为我们的内在距离量度。然后，一个基于这个超类的超图送进GNN框架处理去发现隐含的内在类别关系以达到更好地类别标签分类效果。我们做了很多测试并且展示出它比SOTA模型在few-shot场景下的效果好。并且，我们还将模型应用在了半监督和其它场景。</p>
+<h4 id="4-图、表分析"><a href="#4-图、表分析" class="headerlink" title="4. 图、表分析"></a>4. 图、表分析</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911151752036.png" alt="image-20200911151752036" title="">
+                </div>
+                <div class="image-caption">image-20200911151752036</div>
+            </figure>
+<p>Figure 1: 这个图展示了GNN模型在训练和Fine-tuning阶段的不同。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911152017304.png" alt="image-20200911152017304" title="">
+                </div>
+                <div class="image-caption">image-20200911152017304</div>
+            </figure>
+<p>Figure 2: Wasserstein超类聚类算法。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911154705458.png" alt="image-20200911154705458" title="">
+                </div>
+                <div class="image-caption">image-20200911154705458</div>
+            </figure>
+<p>Table 1:  Letter-High 和 TRIANGLES数据集下不同few-shot时候结果。可以看到效果提高了很多个百分点。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911155006289.png" alt="image-20200911155006289" title="">
+                </div>
+                <div class="image-caption">image-20200911155006289</div>
+            </figure>
+<p>Table 2: 在Reddit-12K和ENZYMES数据集上的变现。没有之前的好。可能这两个数据集有点大？</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911152131426.png" alt="image-20200911152131426" title="">
+                </div>
+                <div class="image-caption">image-20200911152131426</div>
+            </figure>
+<p>Figure 3: 可视化的embedding效果展示。可以看到embedding效果是最好的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911155142988.png" alt="image-20200911155142988" title="">
+                </div>
+                <div class="image-caption">image-20200911155142988</div>
+            </figure>
+<p>Table 3: 作者提出的模型，调节一个超参数，效果对比。可以看出有SC的情况下效果会好一些。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200911161808210.png" alt="image-20200911161808210" title="">
+                </div>
+                <div class="image-caption">image-20200911161808210</div>
+            </figure>
+<p>Table 4 &amp; 5: 模型在20shot情形下对不同超类的分析。调节超参数k。</p>
+<p>从上面看出，这似乎是将GNN与聚类结合了一些，构建超类。</p>
+<h4 id="5-通读全文"><a href="#5-通读全文" class="headerlink" title="5. 通读全文"></a>5. 通读全文</h4><h5 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h5><p>GNN需要更多轮聚集去影响大的邻居，但是实验说明层数增加之后效果没有显著变化。</p>
+<p>作者模型首先用GIN，然后分别用MLP层和GAT处理，计算loss。</p>
+<h5 id="2-Related-work"><a href="#2-Related-work" class="headerlink" title="2. Related work"></a>2. Related work</h5><p>Few-shot learning首先在2006年被李飞飞引进，很火，GNN也很火。比较了few-shot在图上和图像上的不同之处。</p>
+<h5 id="3-Preliminaries"><a href="#3-Preliminaries" class="headerlink" title="3. Preliminaries"></a>3. Preliminaries</h5><p>Base class和Novel class是不相交的。</p>
+<p>Wasserstein Distance的定义。</p>
+<h5 id="4-Our-method"><a href="#4-Our-method" class="headerlink" title="4. Our method"></a>4. Our method</h5><p>把所有图按标签分成几类，然后利用W距离计算最中间的图。</p>
+<p>然后对prototype graph进行k-means聚类。</p>
+<p>GIN进行特征提取。</p>
+<p>然后一边GAT预测超类概率（associated class probabilities），一边走MLP学得超类标签。</p>
+<p>fine-tune阶段就不一样了。都走，但是只用GAT进行预测。</p>
+<h5 id="5-Experimental-results"><a href="#5-Experimental-results" class="headerlink" title="5. Experimental results"></a>5. Experimental results</h5><p>模型里面GAT换用GCN，整个模型换成GIN，结果提高了很多。</p>
+<p>并且通过带不带super-class classifier的实验，说明带上之后提高了很多效果。</p>
+<p>然后对超参数数据集和k进行了测试。</p>
+<h5 id="6-Conclussion"><a href="#6-Conclussion" class="headerlink" title="6. Conclussion"></a>6. Conclussion</h5><p>感觉模型就是在后面加了个$C^{sup}$判断超类帮助进行分类。</p>
+<h4 id="6-代码分析"><a href="#6-代码分析" class="headerlink" title="6. 代码分析"></a>6. 代码分析</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200912170443752.png" alt="image-20200912170443752" title="">
+                </div>
+                <div class="image-caption">image-20200912170443752</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200912170321351.png" alt="image-20200912170321351" title="">
+                </div>
+                <div class="image-caption">image-20200912170321351</div>
+            </figure>
+<p>理解起来很容易，就是GIN之后用两种方式处理，然后loss加在一起算。</p>
+<h4 id="7-读后思考"><a href="#7-读后思考" class="headerlink" title="7. 读后思考"></a>7. 读后思考</h4><p>这篇论文其实思路很简单，就是一个普通的GNN模型最后阶段换成了两种方法，训练方法用两种loss相加。fine-tune阶段两者不是。</p>
+<p>注意里面巧妙地利用了聚类的思想。以后也可以思考在模型的某个环节叠加一个无监督或者非神经网络的方法，或许有点帮助。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-17T07:56:42.453Z" itemprop="dateUpdated">2020/09/17 15:56:42</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GNN/" rel="tag">GNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/few-shot/" rel="tag">few-shot</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/09/12/202009121826/&title=《Few-shot learning on graphs via super-classes based on graph spectral measures阅读》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/09/12/202009121826/&title=《Few-shot learning on graphs via super-classes based on graph spectral measures阅读》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/09/12/202009121826/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Few-shot learning on graphs via super-classes based on graph spectral measures阅读》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/09/12/202009121826/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/09/12/202009121826/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/09/16/202009161004/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">conda速查记录</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/08/30/202008302316/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai 第五部分</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/09/12/202009121826/&title=《Few-shot learning on graphs via super-classes based on graph spectral measures阅读》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/09/12/202009121826/&title=《Few-shot learning on graphs via super-classes based on graph spectral measures阅读》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/09/12/202009121826/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Few-shot learning on graphs via super-classes based on graph spectral measures阅读》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/09/12/202009121826/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/09/12/202009121826/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/09/12/202009121826/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

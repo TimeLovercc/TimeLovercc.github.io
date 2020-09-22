@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Ubuntu无root权限安装多版本cuda | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="环境配置,cuda,ubuntu">
+    <meta name="description" content="Ubuntu无root权限安装多版本cuda1. cuda介绍CUDA（Compute Unified Device Architecture, CUDA）是由NVIDIA推出的通用并行计算架构。解决的是用更加廉洁的设备资源，实现更高效的并行计算。GPU是显卡的核心芯片，而cuda正是暴露了英伟达开发的GPU的编程接口。  几乎所有的编程语言，不使用特定框架，都只能实现CPU编程——std::th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu无root权限安装多版本cuda">
+<meta property="og:url" content="http://timelovercc.github.io/2020/09/20/202009201656/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="Ubuntu无root权限安装多版本cuda1. cuda介绍CUDA（Compute Unified Device Architecture, CUDA）是由NVIDIA推出的通用并行计算架构。解决的是用更加廉洁的设备资源，实现更高效的并行计算。GPU是显卡的核心芯片，而cuda正是暴露了英伟达开发的GPU的编程接口。  几乎所有的编程语言，不使用特定框架，都只能实现CPU编程——std::th">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-94bdce535bd358c9b43ace96cef8c9bd_b.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200920154502174.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200920154923644.png">
+<meta property="article:published_time" content="2020-09-20T08:56:07.927Z">
+<meta property="article:modified_time" content="2020-09-21T05:29:44.398Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="cuda">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/v2-94bdce535bd358c9b43ace96cef8c9bd_b.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Ubuntu无root权限安装多版本cuda</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Ubuntu无root权限安装多版本cuda</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-20T08:56:07.927Z" itemprop="datePublished" class="page-time">
+  2020/09/20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cuda/">cuda</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Ubuntu无root权限安装多版本cuda"><span class="post-toc-text">Ubuntu无root权限安装多版本cuda</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-cuda介绍"><span class="post-toc-text">1. cuda介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#显卡的简化结构"><span class="post-toc-text">显卡的简化结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-cuda-两种API对比"><span class="post-toc-text">2. cuda 两种API对比</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-一些基本概念"><span class="post-toc-text">3. 一些基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NVCC是什么"><span class="post-toc-text">NVCC是什么</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#cudnn"><span class="post-toc-text">cudnn</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#cuda-tookit"><span class="post-toc-text">cuda tookit</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#nvidia-smi"><span class="post-toc-text">nvidia-smi</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#cat-usr-local-cuda-version-txt"><span class="post-toc-text">cat  &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;version.txt</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#LIBRARY-PATH和LD-LIBRARY-PATH"><span class="post-toc-text">LIBRARY_PATH和LD_LIBRARY_PATH</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-两种API的匹配"><span class="post-toc-text">4. 两种API的匹配</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#查询两个API的版本"><span class="post-toc-text">查询两个API的版本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#两个API版本不同的解释"><span class="post-toc-text">两个API版本不同的解释</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#判断两个API是否兼容"><span class="post-toc-text">判断两个API是否兼容</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#重新安装Runtime-API（tookit）"><span class="post-toc-text">重新安装Runtime API（tookit）</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-较好的安装实践"><span class="post-toc-text">5. 较好的安装实践</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#为什么用conda"><span class="post-toc-text">为什么用conda</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-Ubuntu无root权限安装多版本cuda"><span class="post-toc-text">6. Ubuntu无root权限安装多版本cuda</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-conda安装cuda"><span class="post-toc-text">7. conda安装cuda</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202009201656"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Ubuntu无root权限安装多版本cuda</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/09/20 16:56:07" datetime="2020-09-20T08:56:07.927Z"  itemprop="datePublished">2020/09/20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cuda/">cuda</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Ubuntu无root权限安装多版本cuda"><a href="#Ubuntu无root权限安装多版本cuda" class="headerlink" title="Ubuntu无root权限安装多版本cuda"></a>Ubuntu无root权限安装多版本cuda</h2><h4 id="1-cuda介绍"><a href="#1-cuda介绍" class="headerlink" title="1. cuda介绍"></a>1. cuda介绍</h4><p>CUDA（Compute Unified Device Architecture, CUDA）是由NVIDIA推出的通用并行计算架构。解决的是用更加廉洁的设备资源，实现更高效的并行计算。GPU是显卡的核心芯片，而cuda正是暴露了英伟达开发的GPU的编程接口。</p>
+<blockquote>
+<p>几乎所有的编程语言，不使用特定框架，都只能实现CPU编程——std::thread也是将线程开在CPU中。而不同于每一位程序员都接触过的CPU编程，GPU编程可以使用<strong>更多的流处理器</strong>、<strong>更多的线程数</strong>。</p>
+</blockquote>
+<h5 id="显卡的简化结构"><a href="#显卡的简化结构" class="headerlink" title="显卡的简化结构"></a>显卡的简化结构</h5><p>显卡内部，有三级结构：网格(grid), 块(block), 线程(thread)。</p>
+<p>每个显卡只有很少的网格，一个核函数目前只能运行在一个网格中，而一个网格里有多个块，每个块包含了若干线程。具体包含了多少，可以使用的<strong>deviceQuery</strong>来查询，通常是256、1024这样的值。</p>
+<p>如何将计算部署在这些块和线程之上呢？这就是<strong>核函数</strong>（<strong>kernel function</strong>）及其<strong>运行时参数</strong>（<strong>runtime parameter</strong>）的工作。</p>
+<h4 id="2-cuda-两种API对比"><a href="#2-cuda-两种API对比" class="headerlink" title="2. cuda 两种API对比"></a>2. cuda 两种API对比</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://pic4.zhimg.com/v2-94bdce535bd358c9b43ace96cef8c9bd_b.jpg" alt="img" title="">
+                </div>
+                <div class="image-caption">img</div>
+            </figure>
+<p>cuda有两种API，Driver API和Runtime API。</p>
+<blockquote>
+<p>从上图可以简单的看出，Runtime是Driver的“更高级”的Layer。既然如此，自然可以得出很多显而易见的结论：Driver API有着更灵活的控制，也存在更高的性能的<strong>可能性</strong>，当然也伴随着更复杂的编程。</p>
+<p>其实两种API的存在，更多也是历史原因。CUDA首次出现的时候，所提供的就是现在被称为“CUDA driver API”，但很快大家发现这套API过于复杂，很多人只是想launch一个kernel，就要写出很多看起来无关的host代，这也直接导致了CUDA runtime API的开发。在CUDA最初的几个版本中（CUDA 3.0之前），的确存在着一些功能只有driver API可以实现，而runtime无法做到的。但现在嘛，，，CUBLAS、CUFFT等这些CUDA库都已经是基于CUDA Runtime开发的了，对于普通用户来说，CUDA runtime基本可以满足你的所有需求。</p>
+</blockquote>
+<p>CUDA driver相比runtime需要做显式的device初始化，以及context、module的管理，这些概念在runtime中是不存在，也是不希望用户关心的。同时CUDA driver API也是“语言无关的”，因为它只需要处理cubin对象。而且其实runtime和driver API之间并<strong>没有显著的性能差异</strong>。</p>
+<p>总结一下，只有CUDA driver API可以做的事：</p>
+<ul>
+<li>CUDA 显式的初始化（拜托，没人想做这种事好吧</li>
+<li>获取一些device的信息，比如blcok中最大线程数量，甚至还有video memory的频率等等，具体的可以查看enum CUdevice_attribute，目前有超过100个attribute。还可以获取GPU的内存大小，compute-capable等。</li>
+<li>获取目前driver支持的最新CUDA版本</li>
+<li>管理Context，包括创建，销毁等一系列操作</li>
+<li>管理module</li>
+</ul>
+<p>编译方面等还有一些区别。</p>
+<h4 id="3-一些基本概念"><a href="#3-一些基本概念" class="headerlink" title="3. 一些基本概念"></a>3. 一些基本概念</h4><h5 id="NVCC是什么"><a href="#NVCC是什么" class="headerlink" title="NVCC是什么"></a>NVCC是什么</h5><p>NVIDIA Cuda compiler driver</p>
+<p>就是CUDA开发环境下的C语言编译器。查询nvcc版本我们就知道了tookit的版本。</p>
+<h5 id="cudnn"><a href="#cudnn" class="headerlink" title="cudnn"></a>cudnn</h5><p>专门为深度学习计算设计的软件库，里面设计了很多专门的计算函数，如卷积等。只是面向一种应用设计的软件库而已。</p>
+<h5 id="cuda-tookit"><a href="#cuda-tookit" class="headerlink" title="cuda tookit"></a>cuda tookit</h5><p>由以下组件形成：</p>
+<ul>
+<li>Compiler: NVCC等</li>
+<li>tools</li>
+<li>libraries</li>
+<li>cuda sample</li>
+<li>cuda driver</li>
+</ul>
+<h5 id="nvidia-smi"><a href="#nvidia-smi" class="headerlink" title="nvidia-smi"></a>nvidia-smi</h5><p>全称NVIDIA System Management Interface。是一个基于前面介绍的NVML构建的命令行实用工具，旨在帮助管理和监控NVIDIA GPU设备。</p>
+<h5 id="cat-usr-local-cuda-version-txt"><a href="#cat-usr-local-cuda-version-txt" class="headerlink" title="cat  /usr/local/cuda/version.txt"></a>cat  /usr/local/cuda/version.txt</h5><p>这个功能和nvcc -V其实一样。</p>
+<h5 id="LIBRARY-PATH和LD-LIBRARY-PATH"><a href="#LIBRARY-PATH和LD-LIBRARY-PATH" class="headerlink" title="LIBRARY_PATH和LD_LIBRARY_PATH"></a>LIBRARY_PATH和LD_LIBRARY_PATH</h5><p>这两个路径可以放在一起讨论，</p>
+<ul>
+<li><code>LIBRARY_PATH</code>是<strong>程序编译期间</strong>查找动态链接库时指定查找共享库的路径</li>
+<li><code>LD_LIBRARY_PATH</code>是<strong>程序加载运行期间</strong>查找动态链接库时指定除了系统默认路径之外的其他路径</li>
+</ul>
+<p>两者的共同点是库，库是这两个路径和PATH路径的区别，PATH是可执行文件。</p>
+<p>两者的差异点是使用时间不一样。一个是编译期，对应的是开发阶段，如gcc编译；一个是加载运行期，对应的是程序已交付的使用阶段。</p>
+<p>配置方法也是类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export  LD_LIBRARY_PATH&#x3D;LD_LIBRARY_PATH:XXXX</span><br></pre></td></tr></table></figure>
+<h4 id="4-两种API的匹配"><a href="#4-两种API的匹配" class="headerlink" title="4. 两种API的匹配"></a>4. 两种API的匹配</h4><p>使用cuda时很多人遇到两者不匹配的问题，报错提示<code>CUDA driver version is insufficient for CUDA runtime version</code>.</p>
+<h5 id="查询两个API的版本"><a href="#查询两个API的版本" class="headerlink" title="查询两个API的版本"></a>查询两个API的版本</h5><p>命令<code>nvidia-smi</code>，可以看到GPU的驱动程序版本，也即对应driver API，后面的版本也是Driver API的版本。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200920154502174.png" alt="image-20200920154502174" title="">
+                </div>
+                <div class="image-caption">image-20200920154502174</div>
+            </figure>
+<p>命令<code>nvcc -V</code>，查询的结果对应CUDA Runtime API。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200920154923644.png" alt="image-20200920154923644" title="">
+                </div>
+                <div class="image-caption">image-20200920154923644</div>
+            </figure>
+<h5 id="两个API版本不同的解释"><a href="#两个API版本不同的解释" class="headerlink" title="两个API版本不同的解释"></a>两个API版本不同的解释</h5><p>CUDA有两个主要的API：<strong>runtime(运行时) API</strong>和<strong>driver API</strong>。这两个API都有对应的CUDA版本（如9.2和10.0等）。</p>
+<ul>
+<li>用于支持<strong>driver API</strong>的必要文件(如<code>libcuda.so</code>)是由<strong>GPU driver installer</strong>安装的。<code>nvidia-smi</code>就属于这一类API。</li>
+<li>用于支持<strong>runtime API</strong>的必要文件(如<code>libcudart.so</code>以及<code>nvcc</code>)是由<strong>CUDA Toolkit installer</strong>安装的。（CUDA Toolkit Installer有时可能会集成了GPU driver Installer）。<code>nvcc</code>是与CUDA Toolkit一起安装的CUDA compiler-driver tool，它只知道它自身构建时的CUDA runtime版本。它不知道安装了什么版本的GPU driver，甚至不知道是否安装了GPU driver。</li>
+</ul>
+<p>综上，如果driver API和runtime API的CUDA版本不一致可能是因为你使用的是单独的GPU driver installer，而不是CUDA Toolkit installer里的GPU driver installer。</p>
+<h5 id="判断两个API是否兼容"><a href="#判断两个API是否兼容" class="headerlink" title="判断两个API是否兼容"></a>判断两个API是否兼容</h5><p>进入英伟达的网址，判断两个版本是否兼容。</p>
+<p><a href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html" target="_blank" rel="noopener">https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a></p>
+<h5 id="重新安装Runtime-API（tookit）"><a href="#重新安装Runtime-API（tookit）" class="headerlink" title="重新安装Runtime API（tookit）"></a>重新安装Runtime API（tookit）</h5><p>如果两者不兼容，解决方案时更改Runtime API，即从上面链接给出的表格中找到与Driver API兼容的Runtime版本。</p>
+<h4 id="5-较好的安装实践"><a href="#5-较好的安装实践" class="headerlink" title="5. 较好的安装实践"></a>5. 较好的安装实践</h4><p><del>先用nvidia-smi看驱动版本，然后下载对应的cuda版本，然后下载对应的cudnn版本。然后利用conda安装pytorch等软件。</del></p>
+<p>先用nvidia-smi看驱动版本，然后利用conda安装cuda，cudnn和pytorch。</p>
+<h5 id="为什么用conda"><a href="#为什么用conda" class="headerlink" title="为什么用conda"></a>为什么用conda</h5><p>因为conda不涉及高级权限，而且会安装依赖。</p>
+<h4 id="6-Ubuntu无root权限安装多版本cuda"><a href="#6-Ubuntu无root权限安装多版本cuda" class="headerlink" title="6. Ubuntu无root权限安装多版本cuda"></a>6. Ubuntu无root权限安装多版本cuda</h4><ol>
+<li>确定版本信息</li>
+<li>下载<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">cuda tookit</a>的runfile版本（利用wget）</li>
+<li>下载cudnn</li>
+<li><code>sh XXX</code>安装cuda, 按照提示走</li>
+<li>配置用户bash下的环境变量<code>./bashrc</code>，加入</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/zb/cuda/cuda-8.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/home/zb/cuda/cuda-8.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>source .bashrc</code>让环境变量生效。</li>
+</ol>
+<h4 id="7-conda安装cuda"><a href="#7-conda安装cuda" class="headerlink" title="7. conda安装cuda"></a>7. conda安装cuda</h4><p>conda所安装的cudatoolkit是cudatoolkit的子集，很方便我们使用，且节省安装的工作量。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/146431357" target="_blank" rel="noopener">【<em>CUDA</em>教程】一、认识<em>cuda</em></a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/111602648" target="_blank" rel="noopener">浅谈<em>Cuda</em> driver <em>API</em></a></li>
+<li><a href="https://www.cnblogs.com/marsggbo/p/11838823.html" target="_blank" rel="noopener">显卡，显卡驱动,nvcc, cuda driver,cudatoolkit,cudnn到底是什么？</a></li>
+<li><a href="https://blog.csdn.net/hizengbiao/article/details/88625044" target="_blank" rel="noopener">安装cuda</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-09-21T05:29:44.398Z" itemprop="dateUpdated">2020/09/21 13:29:44</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cuda/" rel="tag">cuda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/09/20/202009201656/&title=《Ubuntu无root权限安装多版本cuda》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/09/20/202009201656/&title=《Ubuntu无root权限安装多版本cuda》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/09/20/202009201656/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu无root权限安装多版本cuda》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/09/20/202009201656/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/09/20/202009201656/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/09/21/202007301434/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">深入调试diffpool</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/18/202009181510/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">conda环境下的包管理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/09/20/202009201656/&title=《Ubuntu无root权限安装多版本cuda》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/09/20/202009201656/&title=《Ubuntu无root权限安装多版本cuda》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/09/20/202009201656/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Ubuntu无root权限安装多版本cuda》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/09/20/202009201656/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/09/20/202009201656/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/09/20/202009201656/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

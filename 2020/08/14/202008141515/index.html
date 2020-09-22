@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai第三部分 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="深度学习">
+    <meta name="description" content="deeplearning.ai第三部分Week 11. 什么是ML策略？ 收集更多数据。 收集更多样数据。 迭代更多次。 用不同的梯度下降算法。 用更大的网络  …… 2. 正交化                                                                                             image-20200808170">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai第三部分">
+<meta property="og:url" content="http://timelovercc.github.io/2020/08/14/202008141515/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="deeplearning.ai第三部分Week 11. 什么是ML策略？ 收集更多数据。 收集更多样数据。 迭代更多次。 用不同的梯度下降算法。 用更大的网络  …… 2. 正交化                                                                                             image-20200808170">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808170956757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808191741259.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808210924428.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808210940127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808211556144.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808212438250.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808221001162.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200809153733896.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200809153744761.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814120112163.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814130807022.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814131855341.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814133915687.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814143152652.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814150420682.png">
+<meta property="article:published_time" content="2020-08-14T07:15:32.010Z">
+<meta property="article:modified_time" content="2020-08-14T07:16:20.389Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808170956757.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai第三部分</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai第三部分</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-08-14T07:15:32.010Z" itemprop="datePublished" class="page-time">
+  2020/08/14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/deeplearning-ai/">deeplearning.ai</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#deeplearning-ai第三部分"><span class="post-toc-text">deeplearning.ai第三部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week-1"><span class="post-toc-text">Week 1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-什么是ML策略？"><span class="post-toc-text">1. 什么是ML策略？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-正交化"><span class="post-toc-text">2. 正交化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-单一数字评估指标"><span class="post-toc-text">3. 单一数字评估指标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-训练-开发-测试数据集"><span class="post-toc-text">4. 训练&#x2F;开发&#x2F;测试数据集</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#开发集、测试集的大小"><span class="post-toc-text">开发集、测试集的大小</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#什么时候改变数据集和指标"><span class="post-toc-text">什么时候改变数据集和指标</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-为什么是人的表现？"><span class="post-toc-text">5. 为什么是人的表现？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-可避免误差？"><span class="post-toc-text">6. 可避免误差？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#理解人的表现"><span class="post-toc-text">理解人的表现</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-超过人的表现"><span class="post-toc-text">7. 超过人的表现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-改善模型表现"><span class="post-toc-text">8. 改善模型表现</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week-2"><span class="post-toc-text">Week 2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-误差分析qelvljzujqfbtsdj"><span class="post-toc-text">1. 误差分析qelvljzujqfbtsdj</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-清楚标注错误的数据"><span class="post-toc-text">2. 清楚标注错误的数据</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-快速搭建一个新的系统，并迅速迭代。"><span class="post-toc-text">3. 快速搭建一个新的系统，并迅速迭代。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-在不同的划分上进行训练并测试"><span class="post-toc-text">4. 在不同的划分上进行训练并测试</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-不匹配数据集划分的偏差和方差"><span class="post-toc-text">5. 不匹配数据集划分的偏差和方差</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#数据集意外表现得好"><span class="post-toc-text">数据集意外表现得好</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#更通用的方式"><span class="post-toc-text">更通用的方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-数据不匹配问题"><span class="post-toc-text">6. 数据不匹配问题</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-迁移学习"><span class="post-toc-text">7. 迁移学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#迁移学习什么时候有用？"><span class="post-toc-text">迁移学习什么时候有用？</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-多任务学习"><span class="post-toc-text">8. 多任务学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#什么时候有意义"><span class="post-toc-text">什么时候有意义</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-什么是端到端的深度学习"><span class="post-toc-text">9. 什么是端到端的深度学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#是否使用端到端深度学习"><span class="post-toc-text">是否使用端到端深度学习</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#关键问题"><span class="post-toc-text">关键问题</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#怎么自动驾驶"><span class="post-toc-text">怎么自动驾驶</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202008141515"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai第三部分</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/08/14 15:15:32" datetime="2020-08-14T07:15:32.010Z"  itemprop="datePublished">2020/08/14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/deeplearning-ai/">deeplearning.ai</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="deeplearning-ai第三部分"><a href="#deeplearning-ai第三部分" class="headerlink" title="deeplearning.ai第三部分"></a>deeplearning.ai第三部分</h2><h3 id="Week-1"><a href="#Week-1" class="headerlink" title="Week 1"></a>Week 1</h3><h4 id="1-什么是ML策略？"><a href="#1-什么是ML策略？" class="headerlink" title="1. 什么是ML策略？"></a>1. 什么是ML策略？</h4><ul>
+<li>收集更多数据。</li>
+<li>收集更多样数据。</li>
+<li>迭代更多次。</li>
+<li>用不同的梯度下降算法。</li>
+<li>用更大的网络</li>
+</ul>
+<p>……</p>
+<h4 id="2-正交化"><a href="#2-正交化" class="headerlink" title="2. 正交化"></a>2. 正交化</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808170956757.png" alt="image-20200808170956757" title="">
+                </div>
+                <div class="image-caption">image-20200808170956757</div>
+            </figure>
+<p>一个老式电视机上有很多按钮，每个按钮有明确的功能。每个按钮只有一种功能，这样控制就很明确了。汽车控制也是如此，尽量一个按钮一个功能。</p>
+<p>在训练集上先训练好，然后测试集上测试，这时调整各个按钮，使其在测试集上表现得合适。</p>
+<p>很少用早停法，这个旋钮同时影响两件事，所以不太好。</p>
+<p>正交化是指控制，尽量一个参数只影响一方面效果。</p>
+<h4 id="3-单一数字评估指标"><a href="#3-单一数字评估指标" class="headerlink" title="3. 单一数字评估指标"></a>3. 单一数字评估指标</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808191741259.png" alt="image-20200808191741259" title="">
+                </div>
+                <div class="image-caption">image-20200808191741259</div>
+            </figure>
+<p>单一数字评估指标很好，能清晰反应操作是否合适。</p>
+<p>查准率和召回率。查准率是所有判定为真猫的项中，95%为真猫。召回率是实际为猫的图片中，有多少被识别出来。</p>
+<p>两个不合适，我们要将两者结合，F1分数。</p>
+<p>还要考虑运行时间，运行时间达到一定程度，或许就不用管了。</p>
+<h4 id="4-训练-开发-测试数据集"><a href="#4-训练-开发-测试数据集" class="headerlink" title="4. 训练/开发/测试数据集"></a>4. 训练/开发/测试数据集</h4><p>如何设立开发集和测试集？尽量让开发集和测试集在同一个分布。</p>
+<h5 id="开发集、测试集的大小"><a href="#开发集、测试集的大小" class="headerlink" title="开发集、测试集的大小"></a>开发集、测试集的大小</h5><p>以前几万数据，所以开发集、测试集30%、20%等等。现在数据量百万等，很大，可能只要1%开发、测试。</p>
+<h5 id="什么时候改变数据集和指标"><a href="#什么时候改变数据集和指标" class="headerlink" title="什么时候改变数据集和指标"></a>什么时候改变数据集和指标</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808210924428.png" alt="image-20200808210924428" title="">
+                </div>
+                <div class="image-caption">image-20200808210924428</div>
+            </figure>
+<p>评价指标不是全部，还要考虑其它因素。比如不推送不良图片。给不良推送一个更大的权重，这样修正评价指标。</p>
+<p>先定义指标，然后不断去提高这个指标。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808210940127.png" alt="image-20200808210940127" title="">
+                </div>
+                <div class="image-caption">image-20200808210940127</div>
+            </figure>
+<p>并且要考虑到你的数据和用户数据很可能不是同一个分布。这时你开发、测试集的好算法在用户数据不合适，要考虑更换指标或者数据集。</p>
+<h4 id="5-为什么是人的表现？"><a href="#5-为什么是人的表现？" class="headerlink" title="5. 为什么是人的表现？"></a>5. 为什么是人的表现？</h4><p>机器是为了取代人做某项工作的，所以要与人比较。</p>
+<p>在追赶人的表现的时候很快，但是后面就慢了，但是总不能完美。这叫做贝叶斯最优误差。就是从x到y映射的最优函数。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808211556144.png" alt="image-20200808211556144" title="">
+                </div>
+                <div class="image-caption">image-20200808211556144</div>
+            </figure>
+<p>人的表现接近最优偏差，所以后面慢；并且超越人之前有很多工具，超越之后就不能了。比如标注数据，人可以对错误表现分析。</p>
+<p>从这个角度来说，图的进步空间不大？</p>
+<h4 id="6-可避免误差？"><a href="#6-可避免误差？" class="headerlink" title="6. 可避免误差？"></a>6. 可避免误差？</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808212438250.png" alt="image-20200808212438250" title="">
+                </div>
+                <div class="image-caption">image-20200808212438250</div>
+            </figure>
+<p>跟人的准确率比较。跟人差别大，很大进步空间。跟人差别小，减小方差。</p>
+<p>可避免误差就是和人、和贝叶斯误差的差距。</p>
+<h5 id="理解人的表现"><a href="#理解人的表现" class="headerlink" title="理解人的表现"></a>理解人的表现</h5><p>如何界定人的表现？人类误差水平是用来替代和估计贝叶斯误差的，所以是人类最好的标新啊。最优误差在最好之上。</p>
+<p>假定人类表现是0.5%，训练无处是5%，然后开发误差是6%。那么应该改进模型，减少训练误差。</p>
+<p>假定分别0.5%，1%，5%，改进方差的收益更大。</p>
+<p>可以用人类水平误差估计贝叶斯误差，贝叶斯误差和训练误差差距是可避免误差，训练误差和开发误差是方差。</p>
+<h4 id="7-超过人的表现"><a href="#7-超过人的表现" class="headerlink" title="7. 超过人的表现"></a>7. 超过人的表现</h4><p>假设人的训练误差超过了人的最好表现，这时人想改进就很难了。（GAN？）</p>
+<p>网络广告，推荐系统，物流预测，快递车预测，预测会不会还贷款，今天的机器学习远远超过了人类。机器看到的数据量多，更敏锐识别统计信息。</p>
+<p>人类在自然感知任务表现得更好。但语言、视觉的一些任务人类已经被超越了。放射图等等及其超过了人。</p>
+<p>即便自然感知，计算机也可以有超过人的水平了。</p>
+<h4 id="8-改善模型表现"><a href="#8-改善模型表现" class="headerlink" title="8. 改善模型表现"></a>8. 改善模型表现</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200808221001162.png" alt="image-20200808221001162" title="">
+                </div>
+                <div class="image-caption">image-20200808221001162</div>
+            </figure>
+<ul>
+<li>基本假设：算法对训练集拟合很好；方差也不是很大。</li>
+<li>看看训练误差和贝叶斯误差之间距离；再看看开发误差和训练误差之间的差距。</li>
+<li>可避免误差，训练大模型，训练更长、更好地优化算法，换一个结构。</li>
+<li>方差：更多数据，正则化等。</li>
+</ul>
+<h3 id="Week-2"><a href="#Week-2" class="headerlink" title="Week 2"></a>Week 2</h3><h4 id="1-误差分析qelvljzujqfbtsdj"><a href="#1-误差分析qelvljzujqfbtsdj" class="headerlink" title="1. 误差分析qelvljzujqfbtsdj"></a>1. 误差分析qelvljzujqfbtsdj</h4><p>猫分类器，在狗图片上表现得更好。</p>
+<p>找到100个错误的例子，人工逐一查看，如果100个错误标记里有5个狗。说明即便解决了购得问题，也只能提高5%。天花板。</p>
+<p>假设100个里面有50个，那解决狗的问题很重要。这里人为参与挺重要的，可以帮助我们更好地做决定。</p>
+<p>在做误差分析时，可以并行实现很多个想法。比如狗识别、大猫识别、模糊图片。可以列一个表格。每个错误的，标注一下错哪里了。统计百分比。</p>
+<h4 id="2-清楚标注错误的数据"><a href="#2-清楚标注错误的数据" class="headerlink" title="2. 清楚标注错误的数据"></a>2. 清楚标注错误的数据</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200809153733896.png" alt="image-20200809153733896" title="">
+                </div>
+                <div class="image-caption">image-20200809153733896</div>
+            </figure>
+<p>深度学习算法对于训练集的随机错误很鲁棒，如果误差足够随机，那么不管也没事。修正也行，不管也行，只要总训练集很大。</p>
+<p>对系统性的错误就不行了，如果做标记的人一直把白狗标记为猫，那就不行了。</p>
+<p>误差分析时候可以在加一列统计。</p>
+<p>人为要更多参与误差分析。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200809153744761.png" alt="image-20200809153744761" title="">
+                </div>
+                <div class="image-caption">image-20200809153744761</div>
+            </figure>
+<h4 id="3-快速搭建一个新的系统，并迅速迭代。"><a href="#3-快速搭建一个新的系统，并迅速迭代。" class="headerlink" title="3. 快速搭建一个新的系统，并迅速迭代。"></a>3. 快速搭建一个新的系统，并迅速迭代。</h4><p>科研是增量学习，项目是全局学习。</p>
+<p>如果想新设计一个机器学习系统，那么可以先建立，后迭代。</p>
+<p>集中精力是很重要的一件事情，不要想一下子就把所有方向，所有事情都做好。</p>
+<h4 id="4-在不同的划分上进行训练并测试"><a href="#4-在不同的划分上进行训练并测试" class="headerlink" title="4. 在不同的划分上进行训练并测试"></a>4. 在不同的划分上进行训练并测试</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814120112163.png" alt="image-20200814120112163" title="">
+                </div>
+                <div class="image-caption">image-20200814120112163</div>
+            </figure>
+<p>语音激活汽车后视镜项目数据集的划分。对于训练集，可以把你所有的数据放进去，开发集和测试集是从实际的语音激活后视镜得到的。或者将后视镜的数据分训练集一半。</p>
+<h4 id="5-不匹配数据集划分的偏差和方差"><a href="#5-不匹配数据集划分的偏差和方差" class="headerlink" title="5. 不匹配数据集划分的偏差和方差"></a>5. 不匹配数据集划分的偏差和方差</h4><p>也许算法在训练数据集上表现得很好，但是因为数据的不同，测试数据集上效果表现得更不好。</p>
+<p>这里有两个变量，数据集和新数据。</p>
+<p>我们有必要打乱数据集，分出一个训练-开发集，全部来自于训练集数据。在训练集上优化，然后发现无处1%，在训练开发集上误差9%，在开发集误差10% 。这是方差问题。</p>
+<p>如果训练-开发集表现1.5%，那这是数据不匹配问题。</p>
+<p>如果都很差，并且差的差不多，那可能是偏差问题。</p>
+<p>所以我们需要看训练集、训练开发集、开发集。</p>
+<h5 id="数据集意外表现得好"><a href="#数据集意外表现得好" class="headerlink" title="数据集意外表现得好"></a>数据集意外表现得好</h5><p>如果开发集和测试集表现得更好，那可能是数据集的问题，那个数据集更好。</p>
+<h5 id="更通用的方式"><a href="#更通用的方式" class="headerlink" title="更通用的方式"></a>更通用的方式</h5><p>列一个表格，一边是数据集，一边是有没有训练过。数据集表明数据不匹配的差距，另一个方向表明方差的差距。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814130807022.png" alt="image-20200814130807022" title="">
+                </div>
+                <div class="image-caption">image-20200814130807022</div>
+            </figure>
+<h4 id="6-数据不匹配问题"><a href="#6-数据不匹配问题" class="headerlink" title="6. 数据不匹配问题"></a>6. 数据不匹配问题</h4><p>数据不匹配问题，那怎么处理呢？亲自进行误差分析，比较数据的区别。</p>
+<p>可以合成数据加上噪音，得到更多的数据。人工合成数据有一定问题，比如一个噪音放10000次，可能就过拟合了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814131855341.png" alt="image-20200814131855341" title="">
+                </div>
+                <div class="image-caption">image-20200814131855341</div>
+            </figure>
+<p>有人想在游戏里把汽车都标注出来用来训练，这样是不行的。因为这只是所有汽车的一个子集，很可能过拟合。</p>
+<h4 id="7-迁移学习"><a href="#7-迁移学习" class="headerlink" title="7. 迁移学习"></a>7. 迁移学习</h4><p>一个训练好的神经网络，把习得的知识用来识别X射线图。把最后的层处理更换掉，其它的不变。</p>
+<p>预训练，微调。之所以有用，是因为数据集中邪恶到了结构信息，图像形状的信息，其中一定的知识可能会有用。学到点、线、对象的一部分什么的。</p>
+<p>迁移学习问题适用于一些任务数据量比较大，另一些任务数据量比较小。</p>
+<h5 id="迁移学习什么时候有用？"><a href="#迁移学习什么时候有用？" class="headerlink" title="迁移学习什么时候有用？"></a>迁移学习什么时候有用？</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814133915687.png" alt="image-20200814133915687" title="">
+                </div>
+                <div class="image-caption">image-20200814133915687</div>
+            </figure>
+<p>当两者输入相同时，且A任务比B任务数据多很多时，那迁移学习会有意义。</p>
+<h4 id="8-多任务学习"><a href="#8-多任务学习" class="headerlink" title="8. 多任务学习"></a>8. 多任务学习</h4><p>如果你做简单的自动驾驶，要识别路上遇到的东西，比如车、行人、交通灯什么的。</p>
+<p>这个和softmax有区别，最后的输出不是多选1，而是每个选项二分类。这其实是四个任务，我们可以训练多个神经网络，但是训练一个神经网络做四个任务。</p>
+<h5 id="什么时候有意义"><a href="#什么时候有意义" class="headerlink" title="什么时候有意义"></a>什么时候有意义</h5><ul>
+<li>多个任务可以共用低层次特征，如自动驾驶。</li>
+<li>每个任务的数据量很接近。</li>
+<li>每个任务都可以训练一个单独的神经网络。</li>
+</ul>
+<p>多任务学习的使用场景没迁移学习多，比较少见。计算机视觉算一个。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814143152652.png" alt="image-20200814143152652" title="">
+                </div>
+                <div class="image-caption">image-20200814143152652</div>
+            </figure>
+<h4 id="9-什么是端到端的深度学习"><a href="#9-什么是端到端的深度学习" class="headerlink" title="9. 什么是端到端的深度学习"></a>9. 什么是端到端的深度学习</h4><p>语音识别为例，传统的方法需要很多个阶段。AI做得就是直接从数据直接到最后识别结果。</p>
+<p>人脸识别门禁系统，比较好的方法是先检测出人脸，然后放大图像的那个部分，裁剪图像使人脸居中。然后投喂到网络，再进行识别，比较数据库中的其它数据。</p>
+<p>机器翻译，传统上机器翻译也是很复杂的，有很多步骤。深度学习也很好用，直接端到端了。</p>
+<p>观察手部X光照片，判断孩子年龄。用来看孩子发育是否正常。这里我们不需要深度学习也可以，直接拍照，然后判断长度。因为我们数据不多。</p>
+<h5 id="是否使用端到端深度学习"><a href="#是否使用端到端深度学习" class="headerlink" title="是否使用端到端深度学习"></a>是否使用端到端深度学习</h5><p>如果你有x-&gt;y的数据，不管过程中的原理，不加入人类的偏见，直接训练，端到端。比如语言中音位的分解，这可能只是人为想的。</p>
+<p>但这样是有缺点的，可能会需要大量的标注好的数据。排除了人类之前经验的帮助。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814150420682.png" alt="image-20200814150420682" title="">
+                </div>
+                <div class="image-caption">image-20200814150420682</div>
+            </figure>
+<h5 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h5><p>是否有充足的数据，能够把你想表达的映射表达清楚。</p>
+<h5 id="怎么自动驾驶"><a href="#怎么自动驾驶" class="headerlink" title="怎么自动驾驶"></a>怎么自动驾驶</h5><p>首先识别出来，还要做出走哪条路线的决定，方向盘角度、加速和制动指令。前面识别是深度学习，后面则是运动规划。</p>
+<p>如果想要深度学习作为单独的组件，要仔细选择要学习的x到y的映射类型。这取决于哪些任务你可以学习到数据。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-08-14T07:16:20.389Z" itemprop="dateUpdated">2020/08/14 15:16:20</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/08/14/202008141515/&title=《deeplearning.ai第三部分》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/08/14/202008141515/&title=《deeplearning.ai第三部分》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/08/14/202008141515/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai第三部分》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/08/14/202008141515/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/08/14/202008141515/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/08/15/202008152119/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">deeplearning.ai第四部分</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/08/14/202008141128/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Cookie基础知识</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/08/14/202008141515/&title=《deeplearning.ai第三部分》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/08/14/202008141515/&title=《deeplearning.ai第三部分》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/08/14/202008141515/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai第三部分》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/08/14/202008141515/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/08/14/202008141515/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/08/14/202008141515/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

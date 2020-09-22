@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>深入调试diffpool | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="diffpool">
+    <meta name="description" content="深入调试diffpool1. 整体思路 利用原来的GCN，重写diffpool 测试效果（收敛状态下70左右）  2. 现有diffpool的参数调整因为diffpool的临界简化模型是GCN，所以通过调整参数设置达到基础GCN的效果。下面是需要调整的参数：  max_num_nodes: 针对每个图计算。 embedding_dim: 选择恰当的值。 num_layers:  寻找恰当的值。 a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入调试diffpool">
+<meta property="og:url" content="http://timelovercc.github.io/2020/09/21/202007301434/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="深入调试diffpool1. 整体思路 利用原来的GCN，重写diffpool 测试效果（收敛状态下70左右）  2. 现有diffpool的参数调整因为diffpool的临界简化模型是GCN，所以通过调整参数设置达到基础GCN的效果。下面是需要调整的参数：  max_num_nodes: 针对每个图计算。 embedding_dim: 选择恰当的值。 num_layers:  寻找恰当的值。 a">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200710182038074.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200725183312050.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200725183419107.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200725195431728.png">
+<meta property="article:published_time" content="2020-09-21T07:05:01.696Z">
+<meta property="article:modified_time" content="2020-08-05T00:32:07.282Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="diffpool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200710182038074.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">深入调试diffpool</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">深入调试diffpool</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-09-21T07:05:01.696Z" itemprop="datePublished" class="page-time">
+  2020/09/21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深入调试diffpool"><span class="post-toc-text">深入调试diffpool</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-整体思路"><span class="post-toc-text">1. 整体思路</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-现有diffpool的参数调整"><span class="post-toc-text">2. 现有diffpool的参数调整</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-现有diffpool的函数调整"><span class="post-toc-text">3. 现有diffpool的函数调整</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-目的"><span class="post-toc-text">1. 目的</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-pytorch存储各层权重参数的命名规则"><span class="post-toc-text">2. pytorch存储各层权重参数的命名规则</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#1-对于-init-中使用self定义的变量会使用这个变量名作为存储时的名字"><span class="post-toc-text">1. 对于__init__中使用self定义的变量会使用这个变量名作为存储时的名字.</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#2-当使用nn-Sequential时会根据传入的list的顺序对其进行编号，从0开始。"><span class="post-toc-text">2. 当使用nn.Sequential时会根据传入的list的顺序对其进行编号，从0开始。</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#3-当一个module被from-torch-nn-import-DataParallel或者from-torch-nn-paralledl-import-DistributedDataParalledl包围住后，会在这个变量名后加上module。"><span class="post-toc-text">3. 当一个module被from torch.nn import DataParallel或者from torch.nn.paralledl import DistributedDataParalledl包围住后，会在这个变量名后加上module。</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-操作目标"><span class="post-toc-text">3. 操作目标</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-对标号的修改"><span class="post-toc-text">4. 对标号的修改</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-重写diffpool准备"><span class="post-toc-text">4. 重写diffpool准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-查看原本diffpool需要什么东西"><span class="post-toc-text">1. 查看原本diffpool需要什么东西</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-GCN类里带的参数"><span class="post-toc-text">2. GCN类里带的参数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-分析有无必要保留"><span class="post-toc-text">3. 分析有无必要保留</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-pred-hidden-dims存在的价值是什么？为什么assign矩阵要pred一次"><span class="post-toc-text">4. pred_hidden_dims存在的价值是什么？为什么assign矩阵要pred一次?</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#5-其实GCN并不是调用的forward，而是调用的GCN-forward，分析其作用。"><span class="post-toc-text">5. 其实GCN并不是调用的forward，而是调用的GCN_forward，分析其作用。</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-重写pool部分代码"><span class="post-toc-text">5. 重写pool部分代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-process-sparse的作用和意义"><span class="post-toc-text">1. process_sparse的作用和意义</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-了解预测层的作用"><span class="post-toc-text">2. 了解预测层的作用</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-抉择"><span class="post-toc-text">3. 抉择</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-写GraphPooling"><span class="post-toc-text">6. 写GraphPooling</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#输入："><span class="post-toc-text">输入：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#输出："><span class="post-toc-text">输出：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#论文"><span class="post-toc-text">论文</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#代码"><span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#考虑实现"><span class="post-toc-text">考虑实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#实际输入："><span class="post-toc-text">实际输入：</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#总体实现："><span class="post-toc-text">总体实现：</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#具体实现："><span class="post-toc-text">具体实现：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-遇到的问题"><span class="post-toc-text">7. 遇到的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#大邻接矩阵的pool可能会导致某一个图的节点全消失："><span class="post-toc-text">大邻接矩阵的pool可能会导致某一个图的节点全消失：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-反向传播被阻断的机制？"><span class="post-toc-text">8. 反向传播被阻断的机制？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202007301434"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">深入调试diffpool</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/09/21 15:05:01" datetime="2020-09-21T07:05:01.696Z"  itemprop="datePublished">2020/09/21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%97%A5%E5%BF%97/">日志</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="深入调试diffpool"><a href="#深入调试diffpool" class="headerlink" title="深入调试diffpool"></a>深入调试diffpool</h2><h4 id="1-整体思路"><a href="#1-整体思路" class="headerlink" title="1. 整体思路"></a>1. 整体思路</h4><ol>
+<li>利用原来的GCN，重写diffpool</li>
+<li>测试效果（收敛状态下70左右）</li>
+</ol>
+<h4 id="2-现有diffpool的参数调整"><a href="#2-现有diffpool的参数调整" class="headerlink" title="2. 现有diffpool的参数调整"></a>2. 现有diffpool的参数调整</h4><p>因为diffpool的临界简化模型是GCN，所以通过调整参数设置达到基础GCN的效果。下面是需要调整的参数：</p>
+<ul>
+<li>max_num_nodes: 针对每个图计算。</li>
+<li>embedding_dim: 选择恰当的值。</li>
+<li>num_layers:  寻找恰当的值。</li>
+<li>assign_hidden_dim: 寻找恰当的值。</li>
+<li>assign_ratio:  需要优化。</li>
+<li>assign_num_layers: 需要优化。</li>
+<li>num_pooling：需要优化。</li>
+<li>pred_hidden_dims: 需要优化。</li>
+<li>concat: 改成False。</li>
+<li>bn: 改成False。</li>
+<li>dropout: 即dropout。保留。</li>
+<li>linkpred: 只在loss里出现，忽略。</li>
+<li>assign_input_dim: 就是input_dim，忽略。</li>
+</ul>
+<h4 id="3-现有diffpool的函数调整"><a href="#3-现有diffpool的函数调整" class="headerlink" title="3. 现有diffpool的函数调整"></a>3. 现有diffpool的函数调整</h4><h5 id="1-目的"><a href="#1-目的" class="headerlink" title="1. 目的"></a>1. 目的</h5><p>随意调整参数设置而网络结构自动变化。（之前functional_forward写得不好）</p>
+<h5 id="2-pytorch存储各层权重参数的命名规则"><a href="#2-pytorch存储各层权重参数的命名规则" class="headerlink" title="2. pytorch存储各层权重参数的命名规则"></a>2. pytorch存储各层权重参数的命名规则</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200710182038074.png" alt="image-20200710182038074" title="">
+                </div>
+                <div class="image-caption">image-20200710182038074</div>
+            </figure>
+<h6 id="1-对于-init-中使用self定义的变量会使用这个变量名作为存储时的名字"><a href="#1-对于-init-中使用self定义的变量会使用这个变量名作为存储时的名字" class="headerlink" title="1. 对于__init__中使用self定义的变量会使用这个变量名作为存储时的名字."></a>1. 对于__init__中使用self定义的变量会使用这个变量名作为存储时的名字.</h6><p>卷积层有两个参数：权重和偏移项，对应名称为<code>conv1.weight, conv1.bias</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.conv1 = nn.Conv2d(<span class="number">3</span>,<span class="number">12</span>,kernel_size=<span class="number">3</span>,stride=<span class="number">1</span>,padding=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>BN层有5个参数: <code>bn1.weight</code>, <code>bn1.bias</code>, <code>bn1.running_mean</code>, <code>bn1.running_var</code>, <code>bn1.num_batches_tracked</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.bn1 = nn.BatchNorm2d(<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+<h6 id="2-当使用nn-Sequential时会根据传入的list的顺序对其进行编号，从0开始。"><a href="#2-当使用nn-Sequential时会根据传入的list的顺序对其进行编号，从0开始。" class="headerlink" title="2. 当使用nn.Sequential时会根据传入的list的顺序对其进行编号，从0开始。"></a>2. 当使用<code>nn.Sequential</code>时会根据传入的list的顺序对其进行编号，从0开始。</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">12</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>)</span><br><span class="line">bn1 = nn.BatchNorm2d(<span class="number">12</span>)</span><br><span class="line">s1 = [conv1, bn1]</span><br><span class="line">self.stage1 = nn.Sequential(*s1)</span><br></pre></td></tr></table></figure>
+<p>注意此时的conv1和bn1都没有self，stage1有self，由于Sequential将conv1和bn1进行顺序封装，因此conv1会被编号为stage1.0，bn1会被编号为stage1.1，具体结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stage1<span class="number">.0</span>.weight、stage1<span class="number">.0</span>.bias</span><br><span class="line">stage1<span class="number">.1</span>.weight、stage1<span class="number">.1</span>.bias、stage1<span class="number">.1</span>.running_mean、stage1<span class="number">.1</span>.running_var、stage1<span class="number">.1</span>.num_batches_tracked</span><br></pre></td></tr></table></figure>
+<h6 id="3-当一个module被from-torch-nn-import-DataParallel或者from-torch-nn-paralledl-import-DistributedDataParalledl包围住后，会在这个变量名后加上module。"><a href="#3-当一个module被from-torch-nn-import-DataParallel或者from-torch-nn-paralledl-import-DistributedDataParalledl包围住后，会在这个变量名后加上module。" class="headerlink" title="3. 当一个module被from torch.nn import DataParallel或者from torch.nn.paralledl import DistributedDataParalledl包围住后，会在这个变量名后加上module。"></a>3. 当一个module被<code>from torch.nn import DataParallel</code>或者<code>from torch.nn.paralledl import DistributedDataParalledl</code>包围住后，会在这个变量名后加上<code>module</code>。</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conv1 = nn.Conv2d(<span class="number">3</span>, <span class="number">12</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>)</span><br><span class="line">bn1 = nn.BatchNorm2d(<span class="number">12</span>)</span><br><span class="line">s1 = [conv1, bn1]</span><br><span class="line">stage1 = nn.Sequential(*s1)</span><br><span class="line">self.stage2 = DataParallel(stage1)</span><br></pre></td></tr></table></figure>
+<p>注意只有<code>stage2</code>前面有<code>self</code>，输出结果如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stage2.module<span class="number">.0</span>.weight, stage2.module<span class="number">.0</span>.bias</span><br><span class="line">stage2.module<span class="number">.1</span>.weight, stage2.module<span class="number">.1</span>.bias, stage2.module<span class="number">.1</span>.running_mean, stage2.module<span class="number">.1</span>.running_var, stage2.module<span class="number">.1</span>.num_batches_tracked</span><br></pre></td></tr></table></figure>
+<h5 id="3-操作目标"><a href="#3-操作目标" class="headerlink" title="3. 操作目标"></a>3. 操作目标</h5><p>直接针对diffpool进行修改，将模块里面的标号改成直接生成的。</p>
+<ul>
+<li>把所有的weights传入；</li>
+<li>然后在最底层根据需要进行挑选；</li>
+<li>知道weights的命名规则。</li>
+</ul>
+<h5 id="4-对标号的修改"><a href="#4-对标号的修改" class="headerlink" title="4. 对标号的修改"></a>4. 对标号的修改</h5><p>1 没问题，只在最开始出现。</p>
+<h4 id="4-重写diffpool准备"><a href="#4-重写diffpool准备" class="headerlink" title="4. 重写diffpool准备"></a>4. 重写diffpool准备</h4><h5 id="1-查看原本diffpool需要什么东西"><a href="#1-查看原本diffpool需要什么东西" class="headerlink" title="1. 查看原本diffpool需要什么东西"></a>1. 查看原本diffpool需要什么东西</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self, max_num_nodes, input_dim, hidden_dim, embedding_dim, label_dim, num_layers,</span><br><span class="line">                 assign_hidden_dim, assign_ratio=<span class="number">0.25</span>, assign_num_layers=<span class="number">-1</span>, num_pooling=<span class="number">1</span>,</span><br><span class="line">                 pred_hidden_dims=[<span class="number">50</span>], concat=<span class="literal">True</span>, bn=<span class="literal">True</span>, dropout=<span class="number">0.0</span>, linkpred=<span class="literal">True</span>,</span><br><span class="line">                 assign_input_dim=<span class="number">-1</span>, args=<span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-GCN类里带的参数"><a href="#2-GCN类里带的参数" class="headerlink" title="2. GCN类里带的参数"></a>2. GCN类里带的参数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self, nfeat, nhid, nclass, dropout</span><br></pre></td></tr></table></figure>
+<h5 id="3-分析有无必要保留"><a href="#3-分析有无必要保留" class="headerlink" title="3. 分析有无必要保留"></a>3. 分析有无必要保留</h5><ul>
+<li>max_num_nodes: GCN中没有，用于最开始计算assign_dim，保留。</li>
+<li>input_dim: 即nfeat，保留。</li>
+<li>hidden_dim: 即nhid， 保留</li>
+<li>embedding_dim: diffpool特有参数，参与$Z$的运算，参见下图，应该保留。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200725183312050.png" alt="image-20200725183312050" title="">
+                </div>
+                <div class="image-caption">image-20200725183312050</div>
+            </figure></li>
+<li>label_dim: 就是类别数，对应nclass，保留。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200725183419107.png" alt="image-20200725183419107" title="">
+                </div>
+                <div class="image-caption">image-20200725183419107</div>
+            </figure></li>
+<li>num_layers:  就是两个diffpool之间夹的图卷积的层数，保留。暂时丢弃。</li>
+<li>assign_hidden_dim: 就是$S$的hidden_dim，保留。暂时丢弃。</li>
+<li>assign_ratio:  用最大节点数*assign_ratio得到assign_dim，保留。</li>
+<li>assign_num_layers: 就是assign矩阵的层数，保留。暂时丢弃。</li>
+<li>num_pooling：pooling的次数，保留。暂时丢弃。</li>
+<li>pred_hidden_dims:中间层的维度，保留。暂时丢弃。</li>
+<li>concat: True的话就是每一个embedding的out都会拼在一起预测结果，False就只有最后一层。丢弃。</li>
+<li>bn: True，batch_normalization。丢弃。</li>
+<li>dropout: 即dropout。保留。</li>
+<li>linkpred: 只在loss里出现，忽略。丢弃。</li>
+<li>assign_input_dim: 就是assign矩阵的inpud_dim。这里就是input_dim，丢弃。</li>
+</ul>
+<h5 id="4-pred-hidden-dims存在的价值是什么？为什么assign矩阵要pred一次"><a href="#4-pred-hidden-dims存在的价值是什么？为什么assign矩阵要pred一次" class="headerlink" title="4. pred_hidden_dims存在的价值是什么？为什么assign矩阵要pred一次?"></a>4. pred_hidden_dims存在的价值是什么？为什么assign矩阵要pred一次?</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.assign_tensor = nn.Softmax(dim=<span class="number">-1</span>)(self.assign_pred_modules[i](self.assign_tensor, <span class="number">40</span>+i, weights))</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+X^{\left( l+1 \right)}=S^{\left( l \right) ^T}Z^{\left( l \right)}\in R^{n_{l+1}\times d}\\A^{\left( l+1 \right)}=S^{\left( l \right) ^T}A^{\left( l \right)}S^{\left( l \right)}\in R^{n_{l+1}\times n_{l+1}}</script><p>这里assign_dim其实就是d，然后assign_pred才是$n_{l+1}$。</p>
+<h5 id="5-其实GCN并不是调用的forward，而是调用的GCN-forward，分析其作用。"><a href="#5-其实GCN并不是调用的forward，而是调用的GCN-forward，分析其作用。" class="headerlink" title="5. 其实GCN并不是调用的forward，而是调用的GCN_forward，分析其作用。"></a>5. 其实GCN并不是调用的forward，而是调用的GCN_forward，分析其作用。</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200725195431728.png" alt="image-20200725195431728" title="">
+                </div>
+                <div class="image-caption">image-20200725195431728</div>
+            </figure>
+<p><strong>不同点：</strong></p>
+<ol>
+<li>正常forward多一个mask。（忽略）</li>
+<li>正常forward多了对x的max操作等。（忽略）</li>
+<li>最后没有全连接层了。</li>
+</ol>
+<h4 id="5-重写pool部分代码"><a href="#5-重写pool部分代码" class="headerlink" title="5. 重写pool部分代码"></a>5. 重写pool部分代码</h4><h5 id="1-process-sparse的作用和意义"><a href="#1-process-sparse的作用和意义" class="headerlink" title="1. process_sparse的作用和意义"></a>1. process_sparse的作用和意义</h5><p>还要看<code>gnn_lib.py</code>中的<code>PrepareSparseMatrices</code>函数。</p>
+<h5 id="2-了解预测层的作用"><a href="#2-了解预测层的作用" class="headerlink" title="2. 了解预测层的作用"></a>2. 了解预测层的作用</h5><p>其实x应该是3维的，但是这里的函数把它变成了2维，第2维是属性的长度，第1维应该是batch数和节点数的结合。是直接把10个图放到了一起。</p>
+<h5 id="3-抉择"><a href="#3-抉择" class="headerlink" title="3. 抉择"></a>3. 抉择</h5><p>现在有两种方式，一种是大矩阵，一种是小矩阵。</p>
+<p>大矩阵的话gcn_forward那里直接把x输出就可以了，306<em>32维的矩阵，然后pool阶段和adj直接相乘。然后得到的x维度降低了，adj维度也降低了，但是后面gcn需要将graph_list和x输入，x有了，<em>*graph_list没有</em></em>。</p>
+<p>小矩阵的话gcn_forward那里输出数组形式的x，3个维度，然后用for循环对每个矩阵相乘（貌似可以改造成直接相乘），然后pool阶段和adj相乘，<strong>adj是大的，要变成小的</strong>。然后把小矩阵的x和adj算出graph_list，组合成x，然后继续算。（不能这么做，因为换成小矩阵阻断了反向传播。）</p>
+<h4 id="6-写GraphPooling"><a href="#6-写GraphPooling" class="headerlink" title="6. 写GraphPooling"></a>6. 写GraphPooling</h4><h5 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h5><p>输入应该是邻接矩阵、属性矩阵</p>
+<h5 id="输出："><a href="#输出：" class="headerlink" title="输出："></a>输出：</h5><p>更小的邻接矩阵，更小的属性矩阵。</p>
+<h5 id="论文"><a href="#论文" class="headerlink" title="论文"></a>论文</h5><p>论文里的做法是我将输入的两个矩阵训练一个嵌入GNN，生成Z，再用输入的两个矩阵训练一个分配GNN，生成S，然后矩阵相乘得到输出。</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><p>代码里的做法和论文中是一样的，里面都是gcn_forward.</p>
+<h5 id="考虑实现"><a href="#考虑实现" class="headerlink" title="考虑实现"></a>考虑实现</h5><h6 id="实际输入："><a href="#实际输入：" class="headerlink" title="实际输入："></a>实际输入：</h6><p>给了graph_list, node_feat,然后可以生成出</p>
+<ul>
+<li>graph_sizes: 是一个list，长度为图的数目，各个元素为图的节点数；</li>
+<li>n2n_sp: 是一个稀疏的tensor，是十个图邻接矩阵合并起来形成的大邻接矩阵。</li>
+<li>e2n_sp: 后续没有用到，一个维度是节点数，另一个维度应该是边数。</li>
+<li>subg_sp: 稀疏tensor，后续没有用到，图数*节点数。</li>
+<li>node_degs: tensor，每个节点的度数。</li>
+</ul>
+<h6 id="总体实现："><a href="#总体实现：" class="headerlink" title="总体实现："></a>总体实现：</h6><p>首先调用gcn_forward算出embedding矩阵和assignment矩阵，然后embedding矩阵和X计算得到下一层的X，然后assignment矩阵和呢n_sp计算得到下一层的A。然后这个过程都要在比较低的程度写，不能把graphlist泄露出来。</p>
+<h6 id="具体实现："><a href="#具体实现：" class="headerlink" title="具体实现："></a>具体实现：</h6><p>layers.py里面编写Pooling类，然后在里面不涉及利用gcn_forward，这个类输入Z和S大矩阵，计算并输出A和X。</p>
+<h4 id="7-遇到的问题"><a href="#7-遇到的问题" class="headerlink" title="7. 遇到的问题"></a>7. 遇到的问题</h4><h6 id="大邻接矩阵的pool可能会导致某一个图的节点全消失："><a href="#大邻接矩阵的pool可能会导致某一个图的节点全消失：" class="headerlink" title="大邻接矩阵的pool可能会导致某一个图的节点全消失："></a>大邻接矩阵的pool可能会导致某一个图的节点全消失：</h6><p>每次传入一个图，在pool和maml中间再加一层。</p>
+<h4 id="8-反向传播被阻断的机制？"><a href="#8-反向传播被阻断的机制？" class="headerlink" title="8. 反向传播被阻断的机制？"></a>8. 反向传播被阻断的机制？</h4><p>应该是中间转换成了numpy的原因。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
+<li><a href="https://blog.csdn.net/u014734886/article/details/106230535" target="_blank" rel="noopener">pytorch中存储各层权重参数时的命名规则，为什么有些层的名字中带module.</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-08-05T00:32:07.282Z" itemprop="dateUpdated">2020/08/05 08:32:07</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/diffpool/" rel="tag">diffpool</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/09/21/202007301434/&title=《深入调试diffpool》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/09/21/202007301434/&title=《深入调试diffpool》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/09/21/202007301434/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《深入调试diffpool》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/09/21/202007301434/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/09/21/202007301434/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/20/202009201656/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Ubuntu无root权限安装多版本cuda</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/09/21/202007301434/&title=《深入调试diffpool》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/09/21/202007301434/&title=《深入调试diffpool》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/09/21/202007301434/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《深入调试diffpool》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/09/21/202007301434/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/09/21/202007301434/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/09/21/202007301434/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

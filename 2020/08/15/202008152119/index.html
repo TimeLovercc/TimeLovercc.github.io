@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>deeplearning.ai第四部分 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="卷积">
+    <meta name="description" content="deeplearning.ai第四部分Week 11. 计算机视觉机器学习可以用于各种识别、检测，这标志着新型应用的形成。 几种问题，图片识别、目标检测、风格迁移。在图片识别任务中，很可能输入的数据非常大。比如1000*1000像素的照片，这样使得特征向量的维度达到了三百万。 所以人们开发出了卷积。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deeplearning.ai第四部分">
+<meta property="og:url" content="http://timelovercc.github.io/2020/08/15/202008152119/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="deeplearning.ai第四部分Week 11. 计算机视觉机器学习可以用于各种识别、检测，这标志着新型应用的形成。 几种问题，图片识别、目标检测、风格迁移。在图片识别任务中，很可能输入的数据非常大。比如1000*1000像素的照片，这样使得特征向量的维度达到了三百万。 所以人们开发出了卷积。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814161810028.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814163309965.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814164131487.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814175719502.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814181021966.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814183200588.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814190833456.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814192239338.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814195003073.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814200024619.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814234346741.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815104203596.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815104210162.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815104215830.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815105016713.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815112127565.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815114534372.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815115430026.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815115437144.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815143311660.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815143930029.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815144538595.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815150050368.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815153636611.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815183310741.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815184316458.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815185528973.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815191002677.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815191522811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815192224773.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815195336684.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815200902248.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815201558284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815201813673.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815203251944.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815203702684.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815204336280.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815210315701.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815211834112.png">
+<meta property="article:published_time" content="2020-08-15T13:19:47.823Z">
+<meta property="article:modified_time" content="2020-08-15T13:20:23.657Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="卷积">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814161810028.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">deeplearning.ai第四部分</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">deeplearning.ai第四部分</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-08-15T13:19:47.823Z" itemprop="datePublished" class="page-time">
+  2020/08/15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/deeplearning-ai/">deeplearning.ai</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#deeplearning-ai第四部分"><span class="post-toc-text">deeplearning.ai第四部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week-1"><span class="post-toc-text">Week 1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-计算机视觉"><span class="post-toc-text">1. 计算机视觉</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-边缘检测示例"><span class="post-toc-text">2. 边缘检测示例</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-更多类型的边缘检测"><span class="post-toc-text">3. 更多类型的边缘检测</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-Padding"><span class="post-toc-text">4. Padding</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-卷积步长"><span class="post-toc-text">5. 卷积步长</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-卷积为何有效"><span class="post-toc-text">6. 卷积为何有效</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-单层卷积网络"><span class="post-toc-text">7. 单层卷积网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#标记"><span class="post-toc-text">标记</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-简单卷积网络示例"><span class="post-toc-text">8. 简单卷积网络示例</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-池化层"><span class="post-toc-text">9. 池化层</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-为什么使用卷积"><span class="post-toc-text">10. 为什么使用卷积</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week-2"><span class="post-toc-text">Week 2</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-为什么使用实例"><span class="post-toc-text">1. 为什么使用实例</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-经典网络"><span class="post-toc-text">2. 经典网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#LeNet-5"><span class="post-toc-text">LeNet-5</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#AlexNet"><span class="post-toc-text">AlexNet</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#VGG-16"><span class="post-toc-text">VGG-16</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-残差网络"><span class="post-toc-text">3. 残差网络</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-残差网络为何有效"><span class="post-toc-text">4.残差网络为何有效</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-网络中的网络和1-1卷积"><span class="post-toc-text">5. 网络中的网络和1*1卷积</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-谷歌Inception网络"><span class="post-toc-text">6. 谷歌Inception网络</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#动机"><span class="post-toc-text">动机</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#做法"><span class="post-toc-text">做法</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-Inception网络"><span class="post-toc-text">7. Inception网络</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-使用开源的实现方案"><span class="post-toc-text">8. 使用开源的实现方案</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-迁移学习"><span class="post-toc-text">9. 迁移学习</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-数据增强"><span class="post-toc-text">10. 数据增强</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#11-计算机视觉现状"><span class="post-toc-text">11. 计算机视觉现状</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#赢得竞赛"><span class="post-toc-text">赢得竞赛</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week-3"><span class="post-toc-text">Week 3</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-目标检测"><span class="post-toc-text">1. 目标检测</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-特征点检测"><span class="post-toc-text">2. 特征点检测</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-目标检测"><span class="post-toc-text">3. 目标检测</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-卷积的滑动窗口实现"><span class="post-toc-text">4. 卷积的滑动窗口实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-Bounding-Box预测"><span class="post-toc-text">5. Bounding Box预测</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-如何判断预测的效果"><span class="post-toc-text">6. 如何判断预测的效果</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-非极大值抑制算法"><span class="post-toc-text">7. 非极大值抑制算法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-Anchor-Boxes"><span class="post-toc-text">8. Anchor Boxes</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-YOLO对象检测"><span class="post-toc-text">9. YOLO对象检测</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-RPN网络"><span class="post-toc-text">10. RPN网络</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week-4"><span class="post-toc-text">Week 4</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-人脸识别"><span class="post-toc-text">1. 人脸识别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-One-shot学习"><span class="post-toc-text">2. One-shot学习</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-Siamese网络"><span class="post-toc-text">3. Siamese网络</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-Triplet损失函数"><span class="post-toc-text">4. Triplet损失函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-面部验证与二分类"><span class="post-toc-text">5. 面部验证与二分类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-神经风格迁移"><span class="post-toc-text">6. 神经风格迁移</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-深度卷积网络在学什么"><span class="post-toc-text">7. 深度卷积网络在学什么</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-代价函数"><span class="post-toc-text">8. 代价函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-内容代价函数"><span class="post-toc-text">9. 内容代价函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-风格损失函数"><span class="post-toc-text">10. 风格损失函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#11-一维到三维推广"><span class="post-toc-text">11. 一维到三维推广</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202008152119"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">deeplearning.ai第四部分</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/08/15 21:19:47" datetime="2020-08-15T13:19:47.823Z"  itemprop="datePublished">2020/08/15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/deeplearning-ai/">deeplearning.ai</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="deeplearning-ai第四部分"><a href="#deeplearning-ai第四部分" class="headerlink" title="deeplearning.ai第四部分"></a>deeplearning.ai第四部分</h2><h3 id="Week-1"><a href="#Week-1" class="headerlink" title="Week 1"></a>Week 1</h3><h4 id="1-计算机视觉"><a href="#1-计算机视觉" class="headerlink" title="1. 计算机视觉"></a>1. 计算机视觉</h4><p>机器学习可以用于各种识别、检测，这标志着新型应用的形成。</p>
+<p>几种问题，图片识别、目标检测、风格迁移。在图片识别任务中，很可能输入的数据非常大。比如1000*1000像素的照片，这样使得特征向量的维度达到了三百万。</p>
+<p>所以人们开发出了卷积。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814161810028.png" alt="image-20200814161810028" title="">
+                </div>
+                <div class="image-caption">image-20200814161810028</div>
+            </figure>
+<h4 id="2-边缘检测示例"><a href="#2-边缘检测示例" class="headerlink" title="2. 边缘检测示例"></a>2. 边缘检测示例</h4><p>在之前视频中，我们提到神经网络检测特征。前面的层很多就是检测边缘了。</p>
+<p>我们要构造过滤器，3*3矩阵，也叫做核。用这个对整个图形进行卷积操作。</p>
+<font color=red>我感觉图或声音都有很多模糊的信息，所以可以卷积，但是图似乎并不适合？</font>
+
+<p>卷积之后的结果我们可以当作输出。</p>
+<p>假如有一个这样的边缘，就是左右两侧颜色差别比较大。然后通过我们的过滤器，我们得到了右边的矩阵。这里我们看到了结果，中间高光，说明把边缘提取出来了。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814163309965.png" alt="image-20200814163309965" title="">
+                </div>
+                <div class="image-caption">image-20200814163309965</div>
+            </figure>
+<h4 id="3-更多类型的边缘检测"><a href="#3-更多类型的边缘检测" class="headerlink" title="3. 更多类型的边缘检测"></a>3. 更多类型的边缘检测</h4><p>之前讨论过很多的滤波器，比如Sobel filter，还有Scharr滤波器等等。深度学习得发展，告诉我们可以不用非得设置固定的参数，可以通过学习更新权重。</p>
+<p>其实这也是一种非全连接的神经网络，考虑到了之间的位置。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814164131487.png" alt="image-20200814164131487" title="">
+                </div>
+                <div class="image-caption">image-20200814164131487</div>
+            </figure>
+<h4 id="4-Padding"><a href="#4-Padding" class="headerlink" title="4. Padding"></a>4. Padding</h4><p>一个基本的卷积操作Padding。我们之前用3*3滤波器去卷积6*6的图像。那么我们的输出是4*4的图像。这样我们得到大小是$(n-f+1)*(n-f+1)$。</p>
+<p>这样的卷积改变了图像大小，图像会越来越凶啊，我们就要用Padding填充，来保证图像的大小。这时大小变成了$(n+2p-f+1)*(n+2p-f+1)$.</p>
+<p>Valid卷积意味着不填充，最开始讨论的那样。另一种选择叫做Same卷积，保证输出和输入是同样大的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814175719502.png" alt="image-20200814175719502" title="">
+                </div>
+                <div class="image-caption">image-20200814175719502</div>
+            </figure>
+<p>我们可以计算得到保证卷积后大小一致的条件。很少看到偶数的过滤器，因为大小不能保证一样，并且没有中心点，不便于指出。</p>
+<h4 id="5-卷积步长"><a href="#5-卷积步长" class="headerlink" title="5. 卷积步长"></a>5. 卷积步长</h4><p>这时下一层的大小是：</p>
+<script type="math/tex; mode=display">
+\lfloor \frac{n+2p-f}{s}+1 \rfloor \times \lfloor \frac{n+2p-f}{s}+1 \rfloor</script><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814181021966.png" alt="image-20200814181021966" title="">
+                </div>
+                <div class="image-caption">image-20200814181021966</div>
+            </figure>
+<p>数学教科书中的卷积首先是中心对称一下，我们的操作被称为互相关而不是卷积。按照机器学习的惯例，我们还是叫它卷积。数学上的卷积有结合律，这对于信号处理很重要，但是深度学习中不重要，所以无所谓了。</p>
+<h4 id="6-卷积为何有效"><a href="#6-卷积为何有效" class="headerlink" title="6. 卷积为何有效"></a>6. 卷积为何有效</h4><p>在RGB图上的卷积。为了检测图像，卷积过滤器也必须是3层的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814183200588.png" alt="image-20200814183200588" title="">
+                </div>
+                <div class="image-caption">image-20200814183200588</div>
+            </figure>
+<p>我们用很多个过滤器，生成很多层。</p>
+<h4 id="7-单层卷积网络"><a href="#7-单层卷积网络" class="headerlink" title="7. 单层卷积网络"></a>7. 单层卷积网络</h4><p>通过多个过滤器卷积操作，加上bias，然后用上非线性激活函数，得到一个矩阵。最终得到一个$4<em>4</em>2$的输出。</p>
+<h5 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h5><ul>
+<li>$f^{[l]}=filter\;size$</li>
+<li>$p^{[l]}=padding$</li>
+<li><p>$s^{[l]}=stride$</p>
+</li>
+<li><p>输入$n_H^{\left[ l-1 \right]}\times n_W^{\left[ l-1 \right]}\times n_c^{\left[ l-1 \right]}$</p>
+</li>
+<li>输出$n_H^{\left[ l \right]}\times n_W^{\left[ l \right]}\times n_c^{\left[ l \right]}$</li>
+<li>$n_H^{\left[ l \right]}=\lfloor \frac{n_W^{\left[ l-1 \right]}+2p^{\left[ l \right]}-f^{\left[ l \right]}}{s^{\left[ l \right]}}+1 \rfloor $</li>
+</ul>
+<h4 id="8-简单卷积网络示例"><a href="#8-简单卷积网络示例" class="headerlink" title="8. 简单卷积网络示例"></a>8. 简单卷积网络示例</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814190833456.png" alt="image-20200814190833456" title="">
+                </div>
+                <div class="image-caption">image-20200814190833456</div>
+            </figure>
+<p>主要用3种层：</p>
+<ul>
+<li>Convolution(Conv)</li>
+<li>Pooling(Pool)</li>
+<li>Fully connected(FC)</li>
+</ul>
+<h4 id="9-池化层"><a href="#9-池化层" class="headerlink" title="9. 池化层"></a>9. 池化层</h4><p> 没有参数，然后大小计算公式也可以用卷积的那个。池化如果多层，那它是逐层计算。</p>
+<p>最大pooling用得比较多，平均pooling用得很少。</p>
+<p>超级参数包括过滤器大小和步长。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814192239338.png" alt="image-20200814192239338" title="">
+                </div>
+                <div class="image-caption">image-20200814192239338</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814195003073.png" alt="image-20200814195003073" title="">
+                </div>
+                <div class="image-caption">image-20200814195003073</div>
+            </figure>
+<h4 id="10-为什么使用卷积"><a href="#10-为什么使用卷积" class="headerlink" title="10. 为什么使用卷积"></a>10. 为什么使用卷积</h4><p>优势：参数共享、稀疏连接。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814200024619.png" alt="image-20200814200024619" title="">
+                </div>
+                <div class="image-caption">image-20200814200024619</div>
+            </figure>
+<h3 id="Week-2"><a href="#Week-2" class="headerlink" title="Week 2"></a>Week 2</h3><h4 id="1-为什么使用实例"><a href="#1-为什么使用实例" class="headerlink" title="1. 为什么使用实例"></a>1. 为什么使用实例</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200814234346741.png" alt="image-20200814234346741" title="">
+                </div>
+                <div class="image-caption">image-20200814234346741</div>
+            </figure>
+<h4 id="2-经典网络"><a href="#2-经典网络" class="headerlink" title="2. 经典网络"></a>2. 经典网络</h4><h5 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815104203596.png" alt="image-20200815104203596" title="">
+                </div>
+                <div class="image-caption">image-20200815104203596</div>
+            </figure>
+<p>针对灰度图像训练的。每个过滤器用了上层所有信道。</p>
+<h5 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815104210162.png" alt="image-20200815104210162" title="">
+                </div>
+                <div class="image-caption">image-20200815104210162</div>
+            </figure>
+<p> 卷积、池化，包含6000W个参数。它使用了ReLU。还有LRN层，局部响应归一化。后来发现没什么作用。</p>
+<h5 id="VGG-16"><a href="#VGG-16" class="headerlink" title="VGG-16"></a>VGG-16</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815104215830.png" alt="image-20200815104215830" title="">
+                </div>
+                <div class="image-caption">image-20200815104215830</div>
+            </figure>
+<p>它只用简单的过滤器和池化层，重复做几次，包含16个卷积层和全连接层，一共1.38亿个参数。</p>
+<p>VGG-19，一个更大的网络，但是表现和VGG-16大小差不多。</p>
+<h4 id="3-残差网络"><a href="#3-残差网络" class="headerlink" title="3. 残差网络"></a>3. 残差网络</h4><p>ResNets是由残差块构成，可以帮助构造很深的网络。</p>
+<p>在残差网络中有变化，将$a^{[l]}$的信息提前传到后面。</p>
+<script type="math/tex; mode=display">
+a^{\left[ l+2 \right]}=g\left( z^{\left[ l+2 \right]}+a^{\left[ l \right]} \right)</script><p>捷径、跳远连接。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815105016713.png" alt="image-20200815105016713" title="">
+                </div>
+                <div class="image-caption">image-20200815105016713</div>
+            </figure>
+<p>残差网络就是每两层添加一个跳远连接。普通的网络错误率降低后会再次升高，但是ResNet却让它一直降低。</p>
+<p>这种方式有助于解决梯度消失和梯度爆炸。它让训练深度网络有了可能。</p>
+<h4 id="4-残差网络为何有效"><a href="#4-残差网络为何有效" class="headerlink" title="4.残差网络为何有效"></a>4.残差网络为何有效</h4><script type="math/tex; mode=display">
+a^{\left[ l+2 \right]}=g\left( z^{\left[ l+2 \right]}+a^{\left[ l \right]} \right)</script><p>它学习恒等函数很简单，如果$z$为0，它输出的就是$a$，所以不会影响到效率。很多时候至少不减低效率，甚至可以提升性能。为了保证$z$和$a$相同，所以经常使用相同连接，保证维度相同。</p>
+<p>如果维度不相同，可以再增加一个矩阵，让维度发生变化。</p>
+<h4 id="5-网络中的网络和1-1卷积"><a href="#5-网络中的网络和1-1卷积" class="headerlink" title="5. 网络中的网络和1*1卷积"></a>5. 网络中的网络和1*1卷积</h4><p>如果是一个单通道的，似乎只能起到扩大相同倍数的作用。但是如果多通道的，那就不一样了。也叫network in network。</p>
+<p>用这个可以改变通道数，在不改变高宽的情况下。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815112127565.png" alt="image-20200815112127565" title="">
+                </div>
+                <div class="image-caption">image-20200815112127565</div>
+            </figure>
+<h4 id="6-谷歌Inception网络"><a href="#6-谷歌Inception网络" class="headerlink" title="6. 谷歌Inception网络"></a>6. 谷歌Inception网络</h4><p>构建卷积层时候要考虑过滤器大小，Inception代替你做选择。</p>
+<h5 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h5><p>代替人工来确定创建卷积层和池化层，以及确定大小。</p>
+<h5 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h5><p>卷积时候用不同的过滤器。考虑5*5的过滤器的计算成本。 生成bottleneck layer。中间有一个bottleneck层，减小计算量0倍。</p>
+<p>事实证明，合理构建，显著减小表示层规模，也不会影响性能。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815114534372.png" alt="image-20200815114534372" title="">
+                </div>
+                <div class="image-caption">image-20200815114534372</div>
+            </figure>
+<h4 id="7-Inception网络"><a href="#7-Inception网络" class="headerlink" title="7. Inception网络"></a>7. Inception网络</h4><p>pooling层之后通道太多，所以还是用1*1卷积改变通道数。这就是一个Inception module。然后将这些块重复几次，就形成了最终结果。</p>
+<p>并且结构中还在隐藏层中预测了。它确保了即便隐藏层也参与了特征计算。起到了一种帮助debug的作用。</p>
+<p>Inception从哪里来的，盗梦空间，作者通过它来表明要建立深度网络的决心。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815115430026.png" alt="image-20200815115430026" title="">
+                </div>
+                <div class="image-caption">image-20200815115430026</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815115437144.png" alt="image-20200815115437144" title="">
+                </div>
+                <div class="image-caption">image-20200815115437144</div>
+            </figure>
+<h4 id="8-使用开源的实现方案"><a href="#8-使用开源的实现方案" class="headerlink" title="8. 使用开源的实现方案"></a>8. 使用开源的实现方案</h4><p>很多神经网络复杂细致，难以复制。很多时候仅仅读论文也不能复制。</p>
+<p>网络上找到开源的实现快很多。</p>
+<h4 id="9-迁移学习"><a href="#9-迁移学习" class="headerlink" title="9. 迁移学习"></a>9. 迁移学习</h4><p>如果下载别人的参数，进行预训练，也很有效。你可以直接下载别人训练好的权重，放在自己的网络上。</p>
+<p>把别人模型下下来，然后把最后输出调整一下，只训练后面自己增加的一部分。通过使用别人预训练的权重，很可能得到很好的效果。把前面的权重冻结即可。或者直接拿隐藏层输出。</p>
+<p>预计算就是先计算好，后面就快了。</p>
+<p>如果有更大的数据集，就不要只训练最后的了，可以考虑多训练积层。从后往前训练。</p>
+<p>或者直接训练整个网络，预训练+微调这样。</p>
+<h4 id="10-数据增强"><a href="#10-数据增强" class="headerlink" title="10. 数据增强"></a>10. 数据增强</h4><p>计算机视觉很复杂。最大问题就是没有足够的数据。也就是说，数据增强通常是有用的。</p>
+<ul>
+<li>镜像：将图片翻转。</li>
+<li>随机裁剪。</li>
+<li>颜色转换，RGB的PCA颜色增强。</li>
+</ul>
+<p>训练时完成图片的扭曲，可以一边加载，一边扭曲，一边僧成mini-batch。使用一个线程处理数据，一个线程训练，这样可以并发。</p>
+<h4 id="11-计算机视觉现状"><a href="#11-计算机视觉现状" class="headerlink" title="11. 计算机视觉现状"></a>11. 计算机视觉现状</h4><p>语音识别数据很多。大型数据集图像识别和图片分类一般多。物体检测，我们拥有的数据很少。因为获取边框的成本更高。</p>
+<p>当有很多数据时，人们倾向于更简单的网络，更少的手工。当数据多时候，手工工程精心设计。</p>
+<p>我们的学习算法来自于两种知识，一种是标记的数据，另一种是手工工程。为什么模型复杂？因为数据不够，只能增加手工工程。</p>
+<p>从历史上来看，我们现在用的数据集还是太小了。不过增加的很多。超参数还是很多。</p>
+<p>当数据量很少的时候，可以用迁移学习。对于计算机视觉研究者，很多人在推进benchmark。还有很多人在发展最有用的。</p>
+<h5 id="赢得竞赛"><a href="#赢得竞赛" class="headerlink" title="赢得竞赛"></a>赢得竞赛</h5><p>集成学习，训练几个独立的网络，并把它们的输出平均。这需要很大的训练量。要占用比较大的内存。</p>
+<p>另一个方法是multi-crop，数据扩展应用到测试数据集的作用。就是测试集上的数据增强。10-crop，训练后取平均。这可能会得到更好地效果。</p>
+<p>要建立一个实用的系统，最好从他人的工作入手。</p>
+<h3 id="Week-3"><a href="#Week-3" class="headerlink" title="Week 3"></a>Week 3</h3><h4 id="1-目标检测"><a href="#1-目标检测" class="headerlink" title="1. 目标检测"></a>1. 目标检测</h4><p>目标检测之前，先学习目标定位。定位分类问题。先判断汽车的具体位置，再对其进行分类。</p>
+<p>定位问题只是一个，检测是所有的。</p>
+<p>合理定义输出即可，然后定义损失函数。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815143311660.png" alt="image-20200815143311660" title="">
+                </div>
+                <div class="image-caption">image-20200815143311660</div>
+            </figure>
+<h4 id="2-特征点检测"><a href="#2-特征点检测" class="headerlink" title="2. 特征点检测"></a>2. 特征点检测</h4><p>比如想确定人脸眼角的具体位置。就设定输出横纵坐标。通过这些关键点，可以完成进一步的判断。</p>
+<p>也可以进行身体的特征点检测。这些都需要数据仔细的标注。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815143930029.png" alt="image-20200815143930029" title="">
+                </div>
+                <div class="image-caption">image-20200815143930029</div>
+            </figure>
+<h4 id="3-目标检测"><a href="#3-目标检测" class="headerlink" title="3. 目标检测"></a>3. 目标检测</h4><p>目标检测，然后用分类器判断。滑动窗口检测。不同粒度需要考虑准确度和计算成本。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815144538595.png" alt="image-20200815144538595" title="">
+                </div>
+                <div class="image-caption">image-20200815144538595</div>
+            </figure>
+<h4 id="4-卷积的滑动窗口实现"><a href="#4-卷积的滑动窗口实现" class="headerlink" title="4. 卷积的滑动窗口实现"></a>4. 卷积的滑动窗口实现</h4><p>用一个很大的过滤器，那么输出就会成为1行的了。这就用卷积层代替了FC层。</p>
+<p>在图片上剪切一个区域，然后继续下一个区域，直到某个区域识别出汽车。我们可以直接对全图计算，一下算出所有值。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815150050368.png" alt="image-20200815150050368" title="">
+                </div>
+                <div class="image-caption">image-20200815150050368</div>
+            </figure>
+<h4 id="5-Bounding-Box预测"><a href="#5-Bounding-Box预测" class="headerlink" title="5. Bounding Box预测"></a>5. Bounding Box预测</h4><p>如何得到更准确的边界框？</p>
+<p>YOLO算法，You Only Look Once.</p>
+<p>举个例子，一个3*3的网格。采用图像分类和定位算法，逐一应用到9个格子中。9个格子，每个都会得到一个8维的输出向量。就会得到一个$3<em>3</em>8$的矩阵。 </p>
+<p>对象横跨多个格子，只会分配到1个上面。</p>
+<h4 id="6-如何判断预测的效果"><a href="#6-如何判断预测的效果" class="headerlink" title="6. 如何判断预测的效果"></a>6. 如何判断预测的效果</h4><p>在对象检测任务中，为了评估效果，需要指定损失函数。这里我们用交并比。用交集/并集作为预测效果。只要大于等于0.5，效果就是挺好的，0.5是阈值，用来判断预测的边界框是否正确。<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815153636611.png" alt="image-20200815153636611" title="">
+                </div>
+                <div class="image-caption">image-20200815153636611</div>
+            </figure></p>
+<h4 id="7-非极大值抑制算法"><a href="#7-非极大值抑制算法" class="headerlink" title="7. 非极大值抑制算法"></a>7. 非极大值抑制算法</h4><p>算法可能对一个对象做出多次检测，非极大值抑制可以解决这个问题。</p>
+<p>找到IoU最大的，然后把小的去掉。只输出概率最大的预测结果。</p>
+<p>找到最大的，然后把和输出结果重叠程度过高的放弃。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815183310741.png" alt="image-20200815183310741" title="">
+                </div>
+                <div class="image-caption">image-20200815183310741</div>
+            </figure>
+<h4 id="8-Anchor-Boxes"><a href="#8-Anchor-Boxes" class="headerlink" title="8. Anchor Boxes"></a>8. Anchor Boxes</h4><p>如果想让一个box检测多个对象，就用anchor boxes。输出变成多个。</p>
+<p>能够让模型更有针对性。人们一般手动选择anchor box的形状。后期有更好地方法，用k-means聚类。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815184316458.png" alt="image-20200815184316458" title="">
+                </div>
+                <div class="image-caption">image-20200815184316458</div>
+            </figure>
+<h4 id="9-YOLO对象检测"><a href="#9-YOLO对象检测" class="headerlink" title="9. YOLO对象检测"></a>9. YOLO对象检测</h4><p>分成九宫格，逐个检测。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815185528973.png" alt="image-20200815185528973" title="">
+                </div>
+                <div class="image-caption">image-20200815185528973</div>
+            </figure>
+<h4 id="10-RPN网络"><a href="#10-RPN网络" class="headerlink" title="10. RPN网络"></a>10. RPN网络</h4><p>R-CNN带区域的CNN，不再针对每个窗格运行卷积神经网络。</p>
+<p>先选定区域，然后每个区域输出。</p>
+<p>R-CNN太慢了。所以有了Fast R-CNN，用滑动窗口的卷积实现。得到候选区域的聚类慢。</p>
+<p>Faster R-CNN，用卷积提出区域。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815191002677.png" alt="image-20200815191002677" title="">
+                </div>
+                <div class="image-caption">image-20200815191002677</div>
+            </figure>
+<h3 id="Week-4"><a href="#Week-4" class="headerlink" title="Week 4"></a>Week 4</h3><h4 id="1-人脸识别"><a href="#1-人脸识别" class="headerlink" title="1. 人脸识别"></a>1. 人脸识别</h4><p>人脸验证，输入图片和个人ID，判断是否对应。</p>
+<p>人脸识别，难很多。K个人的数据库，给出一个人脸，判断人脸对应数据库中哪个信息。之所以难，在于要解决one-shot的问题。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815191522811.png" alt="image-20200815191522811" title="">
+                </div>
+                <div class="image-caption">image-20200815191522811</div>
+            </figure>
+<h4 id="2-One-shot学习"><a href="#2-One-shot学习" class="headerlink" title="2. One-shot学习"></a>2. One-shot学习</h4><p>仅仅一个人脸样例，就记住这个人。</p>
+<p>输入图片，比较和数据库中图片的距离。</p>
+<p><img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815192224773.png" alt="image-20200815192224773"></p>
+<h4 id="3-Siamese网络"><a href="#3-Siamese网络" class="headerlink" title="3. Siamese网络"></a>3. Siamese网络</h4><p>映射到一个特征空间，然后比较两个特征向量即可。</p>
+<p>学得参数，使得同一个照片的距离足够小。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815195336684.png" alt="image-20200815195336684" title="">
+                </div>
+                <div class="image-caption">image-20200815195336684</div>
+            </figure>
+<h4 id="4-Triplet损失函数"><a href="#4-Triplet损失函数" class="headerlink" title="4. Triplet损失函数"></a>4. Triplet损失函数</h4><p>比较成对的图像。定义锚点，然后Postive的接近，Negative的远。</p>
+<p>为了保证不要一直输出0，所以不能小于等于，而是小于。</p>
+<script type="math/tex; mode=display">
+||f\left( A \right) -f\left( p \right) ||^2-||f\left( A \right) -f\left( n \right) ||^2+\alpha \leqslant 0</script><p>三元组损失函数定义基于三张图片，anchor、positive和negative图片。</p>
+<p>如果随机选择，那很容易满足条件。所以要尽量选择比较难的三元组。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815200902248.png" alt="image-20200815200902248" title="">
+                </div>
+                <div class="image-caption">image-20200815200902248</div>
+            </figure>
+<h4 id="5-面部验证与二分类"><a href="#5-面部验证与二分类" class="headerlink" title="5. 面部验证与二分类"></a>5. 面部验证与二分类</h4><p>把人脸识别问题降维，嵌入，然后进行面部验证与二分类。</p>
+<p>并且可以先嵌入，新脸再走整个过程。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815201558284.png" alt="image-20200815201558284" title="">
+                </div>
+                <div class="image-caption">image-20200815201558284</div>
+            </figure>
+<h4 id="6-神经风格迁移"><a href="#6-神经风格迁移" class="headerlink" title="6. 神经风格迁移"></a>6. 神经风格迁移</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815201813673.png" alt="image-20200815201813673" title="">
+                </div>
+                <div class="image-caption">image-20200815201813673</div>
+            </figure>
+<h4 id="7-深度卷积网络在学什么"><a href="#7-深度卷积网络在学什么" class="headerlink" title="7. 深度卷积网络在学什么"></a>7. 深度卷积网络在学什么</h4><p>怎么看深度神经网路哦在学什么？找到最大化单元激活的9张图片。找到单元对应的图片中的位置。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815203251944.png" alt="image-20200815203251944" title="">
+                </div>
+                <div class="image-caption">image-20200815203251944</div>
+            </figure>
+<h4 id="8-代价函数"><a href="#8-代价函数" class="headerlink" title="8. 代价函数"></a>8. 代价函数</h4><p>定义一个代价函数来表示成功与否。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815203702684.png" alt="image-20200815203702684" title="">
+                </div>
+                <div class="image-caption">image-20200815203702684</div>
+            </figure>
+<h4 id="9-内容代价函数"><a href="#9-内容代价函数" class="headerlink" title="9. 内容代价函数"></a>9. 内容代价函数</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815204336280.png" alt="image-20200815204336280" title="">
+                </div>
+                <div class="image-caption">image-20200815204336280</div>
+            </figure>
+<h4 id="10-风格损失函数"><a href="#10-风格损失函数" class="headerlink" title="10. 风格损失函数"></a>10. 风格损失函数</h4><p>将图片的风格定义为激活层的不同通道的系数。</p>
+<p>风格矩阵。 $Gram$矩阵。</p>
+<p>这时一个不标准的互协方差。</p>
+<p>关键还是对风格的定义，来源于对卷积的理解。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815210315701.png" alt="image-20200815210315701" title="">
+                </div>
+                <div class="image-caption">image-20200815210315701</div>
+            </figure>
+<h4 id="11-一维到三维推广"><a href="#11-一维到三维推广" class="headerlink" title="11. 一维到三维推广"></a>11. 一维到三维推广</h4><p>卷积是一种基于位置的，可以推广。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20200815211834112.png" alt="image-20200815211834112" title="">
+                </div>
+                <div class="image-caption">image-20200815211834112</div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-08-15T13:20:23.657Z" itemprop="dateUpdated">2020/08/15 21:20:23</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%B7%E7%A7%AF/" rel="tag">卷积</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/08/15/202008152119/&title=《deeplearning.ai第四部分》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/08/15/202008152119/&title=《deeplearning.ai第四部分》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/08/15/202008152119/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai第四部分》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/08/15/202008152119/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/08/15/202008152119/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/08/30/202008302316/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">deeplearning.ai 第五部分</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/08/14/202008141515/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">deeplearning.ai第三部分</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/08/15/202008152119/&title=《deeplearning.ai第四部分》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/08/15/202008152119/&title=《deeplearning.ai第四部分》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/08/15/202008152119/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《deeplearning.ai第四部分》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/08/15/202008152119/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/08/15/202008152119/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/08/15/202008152119/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
