@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>XPath学习和HTML基本信息 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="HTML,前端">
+    <meta name="description" content="XPath学习和HTML基本信息1. 背景知识XPathXPath，即XML Path Language，是一个在XML文档中查找信息的语言。它最初设计是用来搜寻XML文档的，但是它同样适用于HTML文档的搜索。通过XPath的选择功能，我们可以很方便地处理XML、HTML格式的数据。 XML和HTMLXML是可扩展标记语言，HTML是超文本标记语言。两者语法有所不同，XML语法比较严谨而HTML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XPath学习和HTML基本信息">
+<meta property="og:url" content="http://timelovercc.github.io/2020/10/04/202010041630/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="XPath学习和HTML基本信息1. 背景知识XPathXPath，即XML Path Language，是一个在XML文档中查找信息的语言。它最初设计是用来搜寻XML文档的，但是它同样适用于HTML文档的搜索。通过XPath的选择功能，我们可以很方便地处理XML、HTML格式的数据。 XML和HTMLXML是可扩展标记语言，HTML是超文本标记语言。两者语法有所不同，XML语法比较严谨而HTML">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-31438577e9c24d05064584714bc3ba67_r.jpg">
+<meta property="article:published_time" content="2020-10-04T08:30:27.609Z">
+<meta property="article:modified_time" content="2020-10-04T08:31:02.654Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/v2-31438577e9c24d05064584714bc3ba67_r.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">XPath学习和HTML基本信息</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">XPath学习和HTML基本信息</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-04T08:30:27.609Z" itemprop="datePublished" class="page-time">
+  2020/10/04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/XPath/">XPath</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#XPath学习和HTML基本信息"><span class="post-toc-text">XPath学习和HTML基本信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-背景知识"><span class="post-toc-text">1. 背景知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#XPath"><span class="post-toc-text">XPath</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#XML和HTML"><span class="post-toc-text">XML和HTML</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#XML和JSON"><span class="post-toc-text">XML和JSON</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#元数据"><span class="post-toc-text">元数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-XPath常用规则"><span class="post-toc-text">2. XPath常用规则</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-lxml库的基本使用"><span class="post-toc-text">3. lxml库的基本使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#数据的加载"><span class="post-toc-text">数据的加载</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#数据的输出"><span class="post-toc-text">数据的输出</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#节点的选取"><span class="post-toc-text">节点的选取</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#轴的选择："><span class="post-toc-text">轴的选择：</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-HTML"><span class="post-toc-text">4. HTML</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#最常见的网页结构"><span class="post-toc-text">最常见的网页结构</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#基本元素"><span class="post-toc-text">基本元素</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#表格"><span class="post-toc-text">表格</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#列表"><span class="post-toc-text">列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#有序列表"><span class="post-toc-text">有序列表</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#无序列表"><span class="post-toc-text">无序列表</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#嵌套列表"><span class="post-toc-text">嵌套列表</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#和"><span class="post-toc-text">\和\&lt;script&gt;&lt;&#x2F;h5&gt;&lt;p&gt;加入css样式有三种形势：内联样式，内部样式表，外部样式表。&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;内联样式：&lt;code&gt;&lt;h1 style&#x3D;&quot;font-family:arial;&quot;&gt; 文字文字文字&lt;&#x2F;h1&gt;&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;内部样式表：&lt;code&gt;&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt; body {background-color:yellow;}  &lt;&#x2F;style&gt;&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;外部样式表：&lt;code&gt;&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;mystyle.css&quot;&gt;&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h5 id&#x3D;&quot;思维导图&quot;&gt;&lt;a href&#x3D;&quot;#思维导图&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;思维导图&quot;&gt;&lt;&#x2F;a&gt;思维导图&lt;&#x2F;h5&gt;&lt;figure class&#x3D;&quot;image-bubble&quot;&gt;
+                &lt;div class&#x3D;&quot;img-lightbox&quot;&gt;
+                    &lt;div class&#x3D;&quot;overlay&quot;&gt;&lt;&#x2F;div&gt;
+                    &lt;img src&#x3D;&quot;https:&#x2F;&#x2F;pic4.zhimg.com&#x2F;v2-31438577e9c24d05064584714bc3ba67_r.jpg&quot; alt&#x3D;&quot;preview&quot; title&#x3D;&quot;&quot;&gt;
+                &lt;&#x2F;div&gt;
+                &lt;div class&#x3D;&quot;image-caption&quot;&gt;preview&lt;&#x2F;div&gt;
+            &lt;&#x2F;figure&gt;
+&lt;h4 id&#x3D;&quot;参考资料&quot;&gt;&lt;a href&#x3D;&quot;#参考资料&quot; class&#x3D;&quot;headerlink&quot; title&#x3D;&quot;参考资料&quot;&gt;&lt;&#x2F;a&gt;参考资料&lt;&#x2F;h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;30141652&#x2F;answer&#x2F;165110357&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener&quot;&gt;&lt;em&gt;XML&lt;&#x2F;em&gt;是什么，通常都有哪些用途，&lt;em&gt;和HTML&lt;&#x2F;em&gt;有什么区别啊？&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;20679872&#x2F;answer&#x2F;65565699&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener&quot;&gt;什么是&lt;em&gt;元数据&lt;&#x2F;em&gt;？为何需要&lt;em&gt;元数据&lt;&#x2F;em&gt;？&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;104859486&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener&quot;&gt;&lt;em&gt;HTML&lt;&#x2F;em&gt;入门速成&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202010041630"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">XPath学习和HTML基本信息</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/10/04 16:30:27" datetime="2020-10-04T08:30:27.609Z"  itemprop="datePublished">2020/10/04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/XPath/">XPath</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="XPath学习和HTML基本信息"><a href="#XPath学习和HTML基本信息" class="headerlink" title="XPath学习和HTML基本信息"></a>XPath学习和HTML基本信息</h2><h4 id="1-背景知识"><a href="#1-背景知识" class="headerlink" title="1. 背景知识"></a>1. 背景知识</h4><h5 id="XPath"><a href="#XPath" class="headerlink" title="XPath"></a>XPath</h5><p>XPath，即XML Path Language，是一个在XML文档中查找信息的语言。它最初设计是用来搜寻XML文档的，但是它同样适用于HTML文档的搜索。通过XPath的选择功能，我们可以很方便地处理XML、HTML格式的数据。</p>
+<h5 id="XML和HTML"><a href="#XML和HTML" class="headerlink" title="XML和HTML"></a>XML和HTML</h5><p>XML是可扩展标记语言，HTML是超文本标记语言。两者语法有所不同，XML语法比较严谨而HTML语法比较松散。并且XML主要用于数据格式化存储而HTML主要用于网页的编辑。</p>
+<h5 id="XML和JSON"><a href="#XML和JSON" class="headerlink" title="XML和JSON"></a>XML和JSON</h5><p>XML和JSON是互联网中最常用的两种数据交换格式。两者文档都很完善，两种格式并没有哪一个比另一个更强，只是两者适用的领域不同。具体来说有几点区别。</p>
+<ul>
+<li>对元数据的处理，XML往往是更好地选择；</li>
+<li>XML的树形结构让它更易于结构化；</li>
+<li>XML可以记录混合内容；</li>
+<li>JSON比XML简洁，约束更多；</li>
+<li>JSON文件更小，有更快的传输和处理速度；</li>
+<li>JSON对对象和数组的表述和宿主语言中的数据结构相对应。</li>
+</ul>
+<p>总体来说，XML的目标是标记文档，JSON的目标是数据交换。</p>
+<h5 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h5><p>元(meta)，一般被我们翻译成“关于…的…”。这个前缀来源于希腊文，含有“归纳”、“总结”的意思。因此，元，就代表着“本原”、“体系”的意思。</p>
+<p>元数据，（meta data），“data about data”。关于数据的数据，一般是结构化数据。元数据是指从信息资源中抽取出来的用于说明其特征、内容的结构化的数据，用于组织、描述、检索、保存、管理信息和知识资源。</p>
+<p>互联网发展加快，元数据的格式要求越来越多，为了统一标准出现了XML。</p>
+<h4 id="2-XPath常用规则"><a href="#2-XPath常用规则" class="headerlink" title="2. XPath常用规则"></a>2. XPath常用规则</h4><ul>
+<li>nodename： 选取此节点的所有子节点；</li>
+<li>/ ：从当前节点选取直接子节点；</li>
+<li>//：从当前节点选取子孙节点；</li>
+<li>.：选取当前节点；</li>
+<li>..：选取当前节点的父节点；</li>
+<li>@：选取属性。</li>
+</ul>
+<h4 id="3-lxml库的基本使用"><a href="#3-lxml库的基本使用" class="headerlink" title="3. lxml库的基本使用"></a>3. lxml库的基本使用</h4><h5 id="数据的加载"><a href="#数据的加载" class="headerlink" title="数据的加载"></a>数据的加载</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line">html = etree.HTML(text)</span><br></pre></td></tr></table></figure>
+<p>我们还可以直接读取html的文本文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html = etree.parse(<span class="string">'./test.html'</span>, etree.HTMLParser())</span><br></pre></td></tr></table></figure>
+<h5 id="数据的输出"><a href="#数据的输出" class="headerlink" title="数据的输出"></a>数据的输出</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = etree.tostring(html)</span><br><span class="line">print(result.decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+<p>HTML类对象，利用<code>tostring()</code>输出是<code>bytes</code>类型，我们要利用<code>decode()</code>将其转换成<code>str</code>类型。</p>
+<h5 id="节点的选取"><a href="#节点的选取" class="headerlink" title="节点的选取"></a>节点的选取</h5><ul>
+<li><p>所有节点：<code>result = html.xpath(&#39;//*&#39;)</code></p>
+</li>
+<li><p>所有li节点：<code>html.xpath(&#39;//li&#39;)</code></p>
+</li>
+<li><p>所有li节点的所有直接a子节点：<code>html.xpath(&#39;//li/a&#39;)</code></p>
+</li>
+<li><p>首先选中 href 是 link4.html 的 a 节点，然后再获取其父节点，然后再获取其 class 属性：<code>html.xpath(&#39;//a[@href=&quot;https://ask.hellobi.com/link4.html&quot;]/../@class&#39;)</code></p>
+</li>
+<li><p>文本选取：<code>//li[@class=&quot;item-0&quot;]/a/text()</code></p>
+</li>
+<li><p>属性多值匹配：<code>html.xpath(&#39;//li[contains(@class, &quot;li&quot;)]/a/text()&#39;)</code></p>
+</li>
+<li><p>多属性匹配<code>and or mod</code>：<code>html.xpath(&#39;//li[contains(@class, &quot;li&quot;) and @name=&quot;item&quot;]/a/text()&#39;)</code></p>
+</li>
+<li><p>位置限定<code>last(), 1, position()&lt;3</code>：<code>html.xpath(&#39;//li[position()&lt;3]/a/text()&#39;)</code></p>
+</li>
+</ul>
+<h5 id="轴的选择："><a href="#轴的选择：" class="headerlink" title="轴的选择："></a>轴的选择：</h5>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">result = html.xpath(<span class="string">'//li[1]/ancestor::*'</span>)</span><br><span class="line">print(result)</span><br><span class="line">result = html.xpath(<span class="string">'//li[1]/ancestor::div'</span>)</span><br><span class="line">print(result)</span><br><span class="line">result = html.xpath(<span class="string">'//li[1]/attribute::*'</span>)</span><br><span class="line">print(result)</span><br><span class="line">result = html.xpath(<span class="string">'//li[1]/child::a[@href="https://ask.hellobi.com/link1.html"]'</span>)</span><br><span class="line">print(result)</span><br><span class="line">result = html.xpath(<span class="string">'//li[1]/descendant::span'</span>)</span><br><span class="line">print(result)</span><br><span class="line">result = html.xpath(<span class="string">'//li[1]/following::*[2]'</span>)</span><br><span class="line">print(result)</span><br><span class="line">result = html.xpath(<span class="string">'//li[1]/following-sibling::*'</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="4-HTML"><a href="#4-HTML" class="headerlink" title="4. HTML"></a>4. HTML</h4><h5 id="最常见的网页结构"><a href="#最常见的网页结构" class="headerlink" title="最常见的网页结构"></a>最常见的网页结构</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>开始HTML<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>你今天码代码了吗？<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h5><p>文字粗细，斜体，上/下标，链接，加载图片，删除线，下划线。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">'utf-8'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>教程<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我的第一个标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>我的第一个段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.runoob.com"</span>&gt;</span>这是我的第一个链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/images/logo.png"</span> <span class="attr">width</span>=<span class="string">"258"</span> <span class="attr">height</span>=<span class="string">"28"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">b</span>&gt;</span>加粗文本<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span>&gt;</span>斜体文本<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是<span class="tag">&lt;<span class="name">sub</span>&gt;</span>下标<span class="tag">&lt;/<span class="name">sub</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>这是<span class="tag">&lt;<span class="name">sup</span>&gt;</span>上标<span class="tag">&lt;/<span class="name">sup</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>My favorite color is <span class="tag">&lt;<span class="name">del</span>&gt;</span>blue<span class="tag">&lt;/<span class="name">del</span>&gt;</span> <span class="tag">&lt;<span class="name">ins</span>&gt;</span>red<span class="tag">&lt;/<span class="name">ins</span>&gt;</span>!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">"1"</span> <span class="attr">cellspacing</span>=<span class="string">"0"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">caption</span>&gt;</span>工资单<span class="tag">&lt;/<span class="name">caption</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>年份<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>季度<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>工资<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>奖金<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>个税<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">th</span>&gt;</span>扣除个税工资<span class="tag">&lt;/<span class="name">th</span>&gt;</span>&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">rowspan</span>=<span class="string">"4"</span>&gt;</span>2019<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span> <span class="attr">rowspan</span>=<span class="string">"4"</span>&gt;</span>王建民<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>28900<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3458<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3988<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>21454<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>27366<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3458<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3988<span class="tag">&lt;/<span class="name">td</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>21454<span class="tag">&lt;/<span class="name">td</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>27366<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3458<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3988<span class="tag">&lt;/<span class="name">td</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>21454<span class="tag">&lt;/<span class="name">td</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>4<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>27366<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3458<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>3988<span class="tag">&lt;/<span class="name">td</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">td</span>&gt;</span>21454<span class="tag">&lt;/<span class="name">td</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h5><h6 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span> <span class="attr">type</span>=<span class="string">"A"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>苹果<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>雪梨<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>西瓜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">type</span>=<span class="string">"A"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>苹果<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>雪梨<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>西瓜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="嵌套列表"><a href="#嵌套列表" class="headerlink" title="嵌套列表"></a>嵌套列表</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">type</span>=<span class="string">"A"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>苹果<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>大苹果<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>小苹果<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>雪梨<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>西瓜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="和"><a href="#和" class="headerlink" title="\和\"></a>\<style>和\<script></h5><p>加入css样式有三种形势：内联样式，内部样式表，外部样式表。</p>
+<ul>
+<li>内联样式：<code>&lt;h1 style=&quot;font-family:arial;&quot;&gt; 文字文字文字&lt;/h1&gt;</code></li>
+<li>内部样式表：<code>&lt;style type=&quot;text/css&quot;&gt; body {background-color:yellow;}  &lt;/style&gt;</code></li>
+<li>外部样式表：<code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;mystyle.css&quot;&gt;</code></li>
+</ul>
+<h5 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://pic4.zhimg.com/v2-31438577e9c24d05064584714bc3ba67_r.jpg" alt="preview" title="">
+                </div>
+                <div class="image-caption">preview</div>
+            </figure>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
+<li><a href="https://www.zhihu.com/question/30141652/answer/165110357" target="_blank" rel="noopener"><em>XML</em>是什么，通常都有哪些用途，<em>和HTML</em>有什么区别啊？</a></li>
+<li><a href="https://www.zhihu.com/question/20679872/answer/65565699" target="_blank" rel="noopener">什么是<em>元数据</em>？为何需要<em>元数据</em>？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/104859486" target="_blank" rel="noopener"><em>HTML</em>入门速成</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-10-04T08:31:02.654Z" itemprop="dateUpdated">2020/10/04 16:31:02</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/10/04/202010041630/&title=《XPath学习和HTML基本信息》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/10/04/202010041630/&title=《XPath学习和HTML基本信息》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/10/04/202010041630/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《XPath学习和HTML基本信息》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/10/04/202010041630/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/10/04/202010041630/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/09/28/202009281612/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python模块和包的导入相关概念</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/10/04/202010041630/&title=《XPath学习和HTML基本信息》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/10/04/202010041630/&title=《XPath学习和HTML基本信息》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/10/04/202010041630/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《XPath学习和HTML基本信息》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/10/04/202010041630/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/10/04/202010041630/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/10/04/202010041630/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
