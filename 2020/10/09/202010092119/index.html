@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python语法 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python">
+    <meta name="description" content="Python语法1. 前言这是我在学习《利用Python进行数据分析》第二章的记录。 2. Python解释器Python有官方的解释器，可以在命令行交互，也可以执行。 IPython是一个强化的Python解释器，它和Jupyter notebooks语法一样，可以在解释器中用%run命令执行文件中的代码，并且结束之后可以与结果交互。而且Ipython还可以执行很多bash中命令。可以当成一个s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python语法">
+<meta property="og:url" content="http://timelovercc.github.io/2020/10/09/202010092119/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="Python语法1. 前言这是我在学习《利用Python进行数据分析》第二章的记录。 2. Python解释器Python有官方的解释器，可以在命令行交互，也可以执行。 IPython是一个强化的Python解释器，它和Jupyter notebooks语法一样，可以在解释器中用%run命令执行文件中的代码，并且结束之后可以与结果交互。而且Ipython还可以执行很多bash中命令。可以当成一个s">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-09T13:19:45.867Z">
+<meta property="article:modified_time" content="2020-10-09T13:20:32.933Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python语法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python语法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-09T13:19:45.867Z" itemprop="datePublished" class="page-time">
+  2020/10/09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python语法"><span class="post-toc-text">Python语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-前言"><span class="post-toc-text">1. 前言</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-Python解释器"><span class="post-toc-text">2. Python解释器</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-IPython基础"><span class="post-toc-text">3. IPython基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Tab补全"><span class="post-toc-text">Tab补全</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#自省"><span class="post-toc-text">自省</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-run命令"><span class="post-toc-text">4. %run命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-键盘快捷键和魔术函数"><span class="post-toc-text">5. 键盘快捷键和魔术函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#matplotlib"><span class="post-toc-text">matplotlib</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-Python语法基础"><span class="post-toc-text">6. Python语法基础</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-数据结构和序列"><span class="post-toc-text">7. 数据结构和序列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#元组"><span class="post-toc-text">元组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#拆分"><span class="post-toc-text">拆分</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#tuple方法"><span class="post-toc-text">tuple方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#列表"><span class="post-toc-text">列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#添加和删除元素"><span class="post-toc-text">添加和删除元素</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#切片"><span class="post-toc-text">切片</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一些函数"><span class="post-toc-text">一些函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#序列函数"><span class="post-toc-text">序列函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#sorted函数"><span class="post-toc-text">sorted函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#zip函数"><span class="post-toc-text">zip函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#reversed函数"><span class="post-toc-text">reversed函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#字典"><span class="post-toc-text">字典</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#序列创建字典"><span class="post-toc-text">序列创建字典</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#默认值"><span class="post-toc-text">默认值</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#有效的键类型"><span class="post-toc-text">有效的键类型</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#集合"><span class="post-toc-text">集合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#常用的集合方法"><span class="post-toc-text">常用的集合方法</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#不可变"><span class="post-toc-text">不可变</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#列表、集合和字典推导式"><span class="post-toc-text">列表、集合和字典推导式</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-函数"><span class="post-toc-text">8. 函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#命名空间、作用域，和局部函数"><span class="post-toc-text">命名空间、作用域，和局部函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#返回多个值"><span class="post-toc-text">返回多个值</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#函数也是对象"><span class="post-toc-text">函数也是对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#函数列表"><span class="post-toc-text">函数列表</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#函数作为参数"><span class="post-toc-text">函数作为参数</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#匿名函数"><span class="post-toc-text">匿名函数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#柯里化：部分参数应用"><span class="post-toc-text">柯里化：部分参数应用</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#生成器"><span class="post-toc-text">生成器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#生成器表达式"><span class="post-toc-text">生成器表达式</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#itertools模块"><span class="post-toc-text">itertools模块</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#错误和异常处理"><span class="post-toc-text">错误和异常处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#异常类型"><span class="post-toc-text">异常类型</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-文件和操作系统"><span class="post-toc-text">9. 文件和操作系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#文件的字节和Unicode"><span class="post-toc-text">文件的字节和Unicode</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202010092119"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python语法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/10/09 21:19:45" datetime="2020-10-09T13:19:45.867Z"  itemprop="datePublished">2020/10/09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Python语法"><a href="#Python语法" class="headerlink" title="Python语法"></a>Python语法</h2><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h4><p>这是我在学习《利用Python进行数据分析》第二章的记录。</p>
+<h4 id="2-Python解释器"><a href="#2-Python解释器" class="headerlink" title="2. Python解释器"></a>2. Python解释器</h4><p>Python有官方的解释器，可以在命令行交互，也可以执行。</p>
+<p>IPython是一个强化的Python解释器，它和Jupyter notebooks语法一样，可以在解释器中用<code>%run</code>命令执行文件中的代码，并且结束之后可以与结果交互。而且Ipython还可以执行很多bash中命令。可以当成一个shell来用。</p>
+<h4 id="3-IPython基础"><a href="#3-IPython基础" class="headerlink" title="3. IPython基础"></a>3. IPython基础</h4><p>IPython解释器直接输出会组织成更舒适的格式，称为<code>pretty-printed</code>，如果是<code>print</code>函数，则会保持原样，可读性较差。并且，IPython还支持执行任意代码块和整段Python脚本。</p>
+<p>Jupyter Notebook是交互式文档，和IPython shell几乎所有的命令和工具都可以通用。</p>
+<h5 id="Tab补全"><a href="#Tab补全" class="headerlink" title="Tab补全"></a>Tab补全</h5><p>Tab补全是一个很好用的功能，Jupyter需要安装插件才可以，IPython中直接用。IPython会隐藏下划线开头的方法和属性。</p>
+<h5 id="自省"><a href="#自省" class="headerlink" title="自省"></a>自省</h5><p>在变量前后使用问号<code>?</code>可以显示对象的信息。如果对象是一个函数或实例方法，定义过的文档字符串，也会显示出信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_numbers</span><span class="params">(a ,b)</span>:</span></span><br><span class="line">	<span class="string">"""</span></span><br><span class="line"><span class="string">	ADD two numbers together</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	Returns</span></span><br><span class="line"><span class="string">	-------</span></span><br><span class="line"><span class="string">	the_sum : type of arguments</span></span><br><span class="line"><span class="string">	"""</span></span><br><span class="line">	<span class="keyword">return</span> a + b</span><br></pre></td></tr></table></figure>
+<p>使用一个问号会返回注释里的信息，如果使用两个问号，则会显示函数的源码。</p>
+<p><code>?</code>还有一个用途，像命令行一样搜索IPython的命名空间。字符与通配符结合可以匹配所有的名字。</p>
+<h4 id="4-run命令"><a href="#4-run命令" class="headerlink" title="4. %run命令"></a>4. %run命令</h4><p>在IPython解释器中，<code>%run</code>就像<code>python</code>一样。这段脚本运行之后，文件中所有定义的变量，都可以在IPython shell中随后访问。<code>-i</code>参数，可以加入命令行参数。</p>
+<p><code>%load</code>指令，将脚本导入到代码格中，对于函数，并不会直接运行输出结果。发现<code>%run</code>其实也不会输出结果。</p>
+<p><code>Ctrl-C</code>可以导致Python程序停止。</p>
+<p><code>%paste</code>和<code>cpaste</code>会直接运行剪贴板</p>
+<h4 id="5-键盘快捷键和魔术函数"><a href="#5-键盘快捷键和魔术函数" class="headerlink" title="5. 键盘快捷键和魔术函数"></a>5. 键盘快捷键和魔术函数</h4><p>键盘快捷键的功能很常规，自行查找使用。魔术命令特点是<code>%</code>，可以看作IPython中有粘性的命令行，一些情况下会很有帮助。</p>
+<h5 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h5><p>通过魔术命令运行matplotlib。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot(np.random.randn(<span class="number">50</span>).cumsum())</span><br></pre></td></tr></table></figure>
+<h4 id="6-Python语法基础"><a href="#6-Python语法基础" class="headerlink" title="6. Python语法基础"></a>6. Python语法基础</h4><ul>
+<li>Python使用缩进而不是括号。分号可以给同一行的语句划分。</li>
+<li>Python中赋值不是复制，而是同一个对象。即赋值后两个变量实际内容都是一样的。</li>
+<li>Python虽然没有声明变量，但是是强类型的语言。可以用isinstance判断对象是某个类型的实例。<code>isinstance(a, (int, float))</code></li>
+<li>鸭子类型，判断是否迭代器和某种类型实例。有一个<code>__iter__</code>魔术方法。</li>
+<li>导入模块。</li>
+<li>运算。<code>is</code>方法可以判断两个对象是否相同。<code>a is b</code>。这和<code>==</code>不同，<code>is</code>是指向同一对象。</li>
+<li>可变与不可变对象。字符串和元组是不可变的。尽量避免副作用，进能量避免修改对象。</li>
+<li>数值类型。<code>int</code>任意大，<code>float</code>双精度，也可以用科学计数法表示。<code>/</code>会得到浮点数, <code>//</code>C风格除法。</li>
+<li>字符串。有换行符的字符串可以用三引号。<code>c.count(&#39;\n&#39;)</code>可以计算行数。反斜杠用来转义，’r’可以说明字符就是本身。字符串的格式化用<code>{2:.2f}</code>或<code>s,d</code>这样的形式。字节文本前面加上一个<code>b</code>。</li>
+<li>日期和时间，内建的<code>datetime</code>模块提供了<code>datetime, date, time</code>。</li>
+<li><code>break, continue, pass</code>。</li>
+<li><code>range</code>产生迭代器，三个参数是起点终点和步进。</li>
+<li>三元表达式<code>value = true if condition else false</code>。</li>
+</ul>
+<h4 id="7-数据结构和序列"><a href="#7-数据结构和序列" class="headerlink" title="7. 数据结构和序列"></a>7. 数据结构和序列</h4><h5 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h5><p>元组是固定长度，不可改变的序列对象。最简单方式是用逗号分隔一列值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tup = <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>可以用方括号访问，但不能修改。如果元组中某个对象可变，可以在原位修改。可以理解为指针。可以串联和复制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="string">'foo'</span>, <span class="string">'bar'</span>) * <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>对象本身并没有复制，只是引用了它。</p>
+<h6 id="拆分"><a href="#拆分" class="headerlink" title="拆分"></a>拆分</h6><p>注意拆分时候是复制。</p>
+<p>利用元组赋值可以起到拆分的作用，替换变量名字很容易。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b = b, a</span><br></pre></td></tr></table></figure>
+<p>用<code>*rest</code>可以实现抓取任意长度列表的位置参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a, b, *_ = values</span><br></pre></td></tr></table></figure>
+<h6 id="tuple方法"><a href="#tuple方法" class="headerlink" title="tuple方法"></a>tuple方法</h6><p><code>count</code>比较有用。</p>
+<h5 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h5><p>与元组相比，列表的长度可变、内容可以被修改。</p>
+<h6 id="添加和删除元素"><a href="#添加和删除元素" class="headerlink" title="添加和删除元素"></a>添加和删除元素</h6><p><code>list.append(&#39;ad&#39;)</code>。</p>
+<p><code>list.insert(1, &#39;red&#39;)</code>。<code>insert</code>的逆运算是<code>pop</code>，它移除指定位置的元素；而<code>remove</code>移除某个值的第一个对象。</p>
+<p><code>in</code>可以用来判断列表是否包含某个值。</p>
+<h6 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h6><p><code>[start:end:step]</code>注意可以有三个参数。</p>
+<h5 id="一些函数"><a href="#一些函数" class="headerlink" title="一些函数"></a>一些函数</h5><h6 id="序列函数"><a href="#序列函数" class="headerlink" title="序列函数"></a>序列函数</h6><p><code>enumerate</code>可以返回<code>(i, value)</code>的元组序列。</p>
+<h6 id="sorted函数"><a href="#sorted函数" class="headerlink" title="sorted函数"></a>sorted函数</h6><p>可以从任意序列的元素返回一个新的排好序的列表。</p>
+<h6 id="zip函数"><a href="#zip函数" class="headerlink" title="zip函数"></a>zip函数</h6><p><code>zip</code>函数可以将多个列表、元组或其它序列成对组合成一个元组列表。元素的个数取决于最短的序列。最常见用法是同时迭代多个序列，结合<code>enumerate</code>使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, (a, b) <span class="keyword">in</span> enumerate(zip(seq1, seq2)):</span><br><span class="line">    print(<span class="string">'&#123;0&#125;:&#123;1&#125;, &#123;2&#125;'</span>.format(i,a,b))</span><br></pre></td></tr></table></figure>
+<p><code>zip</code>还可以实现压缩序列的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ppitchers = [(<span class="string">'Nolan'</span>, <span class="string">'Ryan'</span>), (<span class="string">'Roger'</span>, <span class="string">'Clemens'</span>),</span><br><span class="line">....: (<span class="string">'Schilling'</span>, <span class="string">'Curt'</span>)]</span><br><span class="line">first_names, last_names = zip(*pitchers)</span><br><span class="line">first_names</span><br><span class="line">(<span class="string">'Nolan'</span>, <span class="string">'Roger'</span>, <span class="string">'Schilling'</span>)</span><br><span class="line">last_names</span><br><span class="line">(<span class="string">'Ryan'</span>, <span class="string">'Clemens'</span>, <span class="string">'Curt'</span>)</span><br></pre></td></tr></table></figure>
+<h6 id="reversed函数"><a href="#reversed函数" class="headerlink" title="reversed函数"></a>reversed函数</h6><p>可以从后向前迭代一个序列。</p>
+<h5 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h5><p>字典是键值对的大小可变集合。可以用<code>del</code>或<code>pop</code>方法（返回值的同时删除键）删除值。</p>
+<p>迭代器方法<code>keys</code>和<code>values</code>，虽然键值对没有顺序，但是这两个方法可以用相同的顺序输出键和值。</p>
+<p><code>update</code>方法可以将一个字典与另一个融合。</p>
+<h6 id="序列创建字典"><a href="#序列创建字典" class="headerlink" title="序列创建字典"></a>序列创建字典</h6><ul>
+<li><code>zip</code>循环；</li>
+<li><code>dict(zip(a, b))</code>函数。</li>
+</ul>
+<h6 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value = some_dict.get(key, default_value)</span><br></pre></td></tr></table></figure>
+<p><code>get</code>默认会返回<code>None</code>。</p>
+<p><code>by_letter.setdefault(letter, []).append(word)</code>可以实现通过首字母，将一个列表中的单词分类。</p>
+<h6 id="有效的键类型"><a href="#有效的键类型" class="headerlink" title="有效的键类型"></a>有效的键类型</h6><p>字典的值可以是任意Python对象，而键通常是不可变的标量类型。这叫做可哈希性。要用列表当作键，一种方法是将列表转化成元组，只要内部元素可以被哈希，它也可以被哈希。</p>
+<h5 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h5><p>集合是无序的不可重复的元素的集合。</p>
+<h6 id="常用的集合方法"><a href="#常用的集合方法" class="headerlink" title="常用的集合方法"></a>常用的集合方法</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">a.add(x)</span><br><span class="line">a.clear()</span><br><span class="line">a.remover(x) </span><br><span class="line">a.pop()</span><br><span class="line">a.union(b) <span class="comment"># |</span></span><br><span class="line">a.update(b)</span><br><span class="line">a.intersection(b) <span class="comment"># &amp;</span></span><br><span class="line">a.intersection_update(b)</span><br><span class="line">a.different(b) <span class="comment"># -</span></span><br><span class="line">a.different_update(b)</span><br><span class="line">a.symmetric_difference(b) <span class="comment"># ^</span></span><br><span class="line">a.symmetric_difference_update(b)</span><br><span class="line">a.issubset(b)</span><br><span class="line">a.issuperset(b)</span><br><span class="line">a.isdisjoint(b)</span><br></pre></td></tr></table></figure>
+<h6 id="不可变"><a href="#不可变" class="headerlink" title="不可变"></a>不可变</h6><p>列表不可以，必须转换成元组。</p>
+<h5 id="列表、集合和字典推导式"><a href="#列表、集合和字典推导式" class="headerlink" title="列表、集合和字典推导式"></a>列表、集合和字典推导式</h5><p>在里面嵌套一级或者多级循环。</p>
+<h4 id="8-函数"><a href="#8-函数" class="headerlink" title="8. 函数"></a>8. 函数</h4><p>函数是Python最重要的代码组织和复用手段。函数使用<code>def</code>关键字声明，用<code>return</code>关键字返回值。可以写多条<code>return</code>语句，如果没有遇到任何一条<code>return</code>语句，则返回<code>None</code>。函数可以有一些位置参数和关键字参数。关键字参数必须位于位置参数之后。</p>
+<h5 id="命名空间、作用域，和局部函数"><a href="#命名空间、作用域，和局部函数" class="headerlink" title="命名空间、作用域，和局部函数"></a>命名空间、作用域，和局部函数</h5><p>变量的作用域有两种，全局和局部。Python中描述变量作用域的名称，叫做命名空间。函数中复制的变量默认都是被分配到局部命名空间。座椅，下面情形必须给<code>a</code>用<code>global</code>关键字声明。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        a.append(i)</span><br></pre></td></tr></table></figure>
+<p><code>nonlocal</code>可以使用外层的变量。</p>
+<blockquote>
+<p>不要频繁使用<code>global</code>关键字，如果使用了很多，可能就说明要来点面向对象编程了。</p>
+</blockquote>
+<h5 id="返回多个值"><a href="#返回多个值" class="headerlink" title="返回多个值"></a>返回多个值</h5><p><code>return a, b, c</code> 其实返回的是元组，我们可以拆分他。我们还可以返回字典：<code>return {&#39;a&#39;:a, &#39;b&#39;:b, &#39;c&#39;:c}</code></p>
+<h5 id="函数也是对象"><a href="#函数也是对象" class="headerlink" title="函数也是对象"></a>函数也是对象</h5><p>Python函数都是对象，所以在其他语言中难表达的一些思想在Python中会简单很多。比如字符串去掉一些无聊的标志：<code>value.strip()</code>.我们看到字符串作为对象，用它的方法处理很方便。</p>
+<h6 id="函数列表"><a href="#函数列表" class="headerlink" title="函数列表"></a>函数列表</h6><p>我们还可以将不同的处理的函数做成一个列表，然后不断用这个列表中的函数对值进行处理。</p>
+<h6 id="函数作为参数"><a href="#函数作为参数" class="headerlink" title="函数作为参数"></a>函数作为参数</h6><p>比如<code>map</code>函数，我们可以在一组数据上应用另一个函数。</p>
+<h5 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h5><p>Python支持一种被称为匿名的、或lambda函数。它仅由单条语句组成，该语句的结果就是返回值。通过<code>lambda</code>关键字定义。</p>
+<p>根据个字符串不同字母数量对其排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings.sort(key=<span class="keyword">lambda</span> x:len(set(list(x))))</span><br></pre></td></tr></table></figure>
+<h5 id="柯里化：部分参数应用"><a href="#柯里化：部分参数应用" class="headerlink" title="柯里化：部分参数应用"></a>柯里化：部分参数应用</h5><p>柯里化，指的是通过“部分参数应用”从现有函数派生出新函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_numbers</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line">add_five = <span class="keyword">lambda</span> y: add_numbers(<span class="number">5</span>, y)</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial </span><br><span class="line">add_five = partial(add_numbers, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h5><p>能以一种一致的方式对序列进行迭代时Python的一个重要特点。通过迭代器协议的方式实现的。</p>
+<p>比如<code>for key in some_dict:</code>，解释其首先会尝试<code>iter(some_dict)</code>创建一个迭代器。</p>
+<p>生成器时构造新的可迭代对象的一种简单方式。一般函数执行之后返回单个值，生成器一个一个地返回。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">squares</span><span class="params">(n=<span class="number">10</span>)</span>:</span></span><br><span class="line">	print(<span class="string">'Generating squares from 1 to &#123;0&#125;'</span>.format(n ** <span class="number">2</span>))</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">		<span class="keyword">yield</span> i ** <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h6 id="生成器表达式"><a href="#生成器表达式" class="headerlink" title="生成器表达式"></a>生成器表达式</h6><p>创建方式为：把列表推导式两端的方括号改成圆括号。生成器表达式可以取代列表推导式，作为函数参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum(x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+<h5 id="itertools模块"><a href="#itertools模块" class="headerlink" title="itertools模块"></a>itertools模块</h5><p>itertools模块中有一组用于许多常见数据算法的生成器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> letter, names <span class="keyword">in</span> itertools.groupby(names, first_letter)</span><br></pre></td></tr></table></figure>
+<h5 id="错误和异常处理"><a href="#错误和异常处理" class="headerlink" title="错误和异常处理"></a>错误和异常处理</h5><p>错误和异常处理与分支结构不同，分支是二选一，错误和异常处理是先走一，一不行才走二。</p>
+<h6 id="异常类型"><a href="#异常类型" class="headerlink" title="异常类型"></a>异常类型</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">except</span>:</span><br><span class="line"><span class="keyword">except</span> TypeError:</span><br><span class="line"><span class="keyword">except</span> (TypeError, ValueError):</span><br></pre></td></tr></table></figure>
+<p><code>except</code>只在失败时运行，<code>else</code>只在成功时运行，<code>finally</code>无论如何都运行。</p>
+<h4 id="9-文件和操作系统"><a href="#9-文件和操作系统" class="headerlink" title="9. 文件和操作系统"></a>9. 文件和操作系统</h4><p>我们可以用内置的<code>open</code>函数以及一个相对或绝对的文件路径打开文件以便读写。默认是以制度模式打开的，然后我们可以像对列表那样对文件句柄<code>f</code>处理。注意，文件中去除的行都带有完整的行结束符<code>EOL</code>。</p>
+<p>打开后一定要关闭，<code>f.close()</code>，这样可以返回操作系统资源。</p>
+<p><code>with</code>语句可以更容易地清理打开的文件。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>只读模式</td>
+</tr>
+<tr>
+<td>w</td>
+<td>只写模式，会创建新文件</td>
+</tr>
+<tr>
+<td>a</td>
+<td>附加到现有文件，也会创建新文件</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>读写模式</td>
+</tr>
+<tr>
+<td>b</td>
+<td>用于二进制文件</td>
+</tr>
+<tr>
+<td>U</td>
+<td>通用换行模式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>对于可读文件, <code>read()</code>, <code>seek()</code>, <code>tell()</code>, <code>readlines()</code>会从文件返回字符。</p>
+<p>写入，可以用<code>write()</code>或者<code>writelines()</code>方法。</p>
+<p>还有<code>flush()</code>和<code>closed()</code>等文件方法。</p>
+<h5 id="文件的字节和Unicode"><a href="#文件的字节和Unicode" class="headerlink" title="文件的字节和Unicode"></a>文件的字节和Unicode</h5><p>Python文件默认操作是“文本模式”，即需要处理Unicode，它与“二进制模式”相对。</p>
+<p>UTF-8是长度可变的Unicode编码，所以有时一个字符串用二进制形式解码并不都能解出字符。</p>
+<p>注意不要再二进制模式中使用<code>seek</code>，可能会出错。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-10-09T13:20:32.933Z" itemprop="dateUpdated">2020/10/09 21:20:32</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/10/09/202010092119/&title=《Python语法》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/10/09/202010092119/&title=《Python语法》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/10/09/202010092119/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python语法》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/10/09/202010092119/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/10/09/202010092119/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/10/09/202010091642/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">正则表达式速查记录</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/10/09/202010092119/&title=《Python语法》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/10/09/202010092119/&title=《Python语法》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/10/09/202010092119/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python语法》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/10/09/202010092119/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/10/09/202010092119/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/10/09/202010092119/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
