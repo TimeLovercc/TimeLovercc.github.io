@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    
+    <title>pandas入门 | Zhimeng&#39;s Personal Website | Welcome!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="pandas">
+    <meta name="description" content="pandas入门1. 前言这是我在学习这是我在学习《利用Python进行数据分析》第五章的记录。 pandas介绍pandas含有使数据清晰和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas入门">
+<meta property="og:url" content="http://timelovercc.github.io/2020/10/11/202010111714/index.html">
+<meta property="og:site_name" content="Zhimeng&#39;s Personal Website">
+<meta property="og:description" content="pandas入门1. 前言这是我在学习这是我在学习《利用Python进行数据分析》第五章的记录。 pandas介绍pandas含有使数据清晰和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011103021721.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011105154215.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011110151405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011151600981.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011154154464.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011164206942.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011165331753.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011165612927.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011171248626.png">
+<meta property="article:published_time" content="2020-10-11T09:15:01.563Z">
+<meta property="article:modified_time" content="2020-10-11T09:15:38.942Z">
+<meta property="article:author" content="Zhimeng Guo(郭志猛)">
+<meta property="article:tag" content="pandas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011103021721.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zhimeng&#39;s Personal Website" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/icon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/zhimeng.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Zhimeng Guo(郭志猛)</h5>
+          <a href="mailto:guozhimeng98@outlook.com" title="guozhimeng98@outlook.com" class="mail">guozhimeng98@outlook.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/plan"  >
+                <i class="icon icon-lg icon-check-square-o"></i>
+                Plan
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/thoughts"  >
+                <i class="icon icon-lg icon-lightbulb-o"></i>
+                Thoughts
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/timelovercc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/projects"  >
+                <i class="icon icon-lg icon-code"></i>
+                Projects
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                About me
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">pandas入门</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">pandas入门</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-11T09:15:01.563Z" itemprop="datePublished" class="page-time">
+  2020/10/11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pandas入门"><span class="post-toc-text">pandas入门</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-前言"><span class="post-toc-text">1. 前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#pandas介绍"><span class="post-toc-text">pandas介绍</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-pandas的数据结构介绍"><span class="post-toc-text">2. pandas的数据结构介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Series"><span class="post-toc-text">Series</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#DataFrame"><span class="post-toc-text">DataFrame</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#索引对象"><span class="post-toc-text">索引对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-基本功能"><span class="post-toc-text">3. 基本功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#重新索引"><span class="post-toc-text">重新索引</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#丢弃指定轴上的项"><span class="post-toc-text">丢弃指定轴上的项</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#索引、选取和过滤"><span class="post-toc-text">索引、选取和过滤</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#用loc和iloc进行选取"><span class="post-toc-text">用loc和iloc进行选取</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#整数索引"><span class="post-toc-text">整数索引</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#算数运算和数据对齐"><span class="post-toc-text">算数运算和数据对齐</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在算术方法中填充值"><span class="post-toc-text">在算术方法中填充值</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#DataFrame和Series之间的运算"><span class="post-toc-text">DataFrame和Series之间的运算</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#函数应用和映射"><span class="post-toc-text">函数应用和映射</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#排序和排名"><span class="post-toc-text">排序和排名</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#带有重复标签的轴索引"><span class="post-toc-text">带有重复标签的轴索引</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-汇总和计算描述统计"><span class="post-toc-text">4. 汇总和计算描述统计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#相关系数与协方差"><span class="post-toc-text">相关系数与协方差</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#唯一值、值计数以及成员资格"><span class="post-toc-text">唯一值、值计数以及成员资格</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-202010111714"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">pandas入门</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020/10/11 17:15:01" datetime="2020-10-11T09:15:01.563Z"  itemprop="datePublished">2020/10/11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="pandas入门"><a href="#pandas入门" class="headerlink" title="pandas入门"></a>pandas入门</h2><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h4><p>这是我在学习这是我在学习《利用Python进行数据分析》第五章的记录。</p>
+<h5 id="pandas介绍"><a href="#pandas介绍" class="headerlink" title="pandas介绍"></a>pandas介绍</h5><p>pandas含有使数据清晰和分析工作变得更快更简单的数据结构和操作工具。pandas经常和其它工具一同使用，如数值计算工具NumPy和SciPy，分析库statsmodels和scikit-learn，和数据可视化库matplotlib。pandas是基于NumPy数组构建的，特别是基于数组的函数和不适用for循环的数据处理。</p>
+<p>pandas采用了大量的NumPy编码风格，但两者最大的<strong>不同</strong>是pandas是专门为处理表盒和混杂数据设计的。而NumPy更适合处理统一的数值数组数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series, DataFrame</span><br></pre></td></tr></table></figure>
+<h4 id="2-pandas的数据结构介绍"><a href="#2-pandas的数据结构介绍" class="headerlink" title="2. pandas的数据结构介绍"></a>2. pandas的数据结构介绍</h4><p>pandas的两个主要数据结构<code>Series</code>和<code>DataFrame</code>。</p>
+<h5 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h5><p>Series是一种类似于一维数组的对象，它由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（索引）组成。</p>
+<p><code>pd.Series([4, 7, -5, 3])</code>：Series的字符串表现形式为索引在左边，值在右边。默认会自动创建从0开始的整数型索引。</p>
+<p><code>obj.values</code>属性会输出np数组。</p>
+<p><code>obj.index</code>属性会输出索引对象。</p>
+<p><code>obj2 = pd.Series([4, 7, -5, 3], index=[&#39;d&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;])</code>这样我们就有了对各个数据点进行标记的索引。</p>
+<p><code>obj2[&#39;a&#39;]</code>我们可以通过索引取得值。</p>
+<p><strong>注意：</strong>使用NumPy函数或类似NumPy的运算都会保留索引值的链接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj2[obj2 &gt; <span class="number">0</span>]</span><br><span class="line">obj2 * <span class="number">2</span></span><br><span class="line">np.exe(obj2)</span><br></pre></td></tr></table></figure>
+<p><code>&#39;b&#39; in obj2</code>可以将Series看成是一个定长的有序字典，因为它是索引值到数据值的一个映射。</p>
+<p><code>obj3 = pd.Series(dict)</code>可以直接通过字典来创建Series。</p>
+<p><strong>注意：</strong>传入index和字典输入，那么只会保留index中的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sdata = &#123;<span class="string">'Ohio'</span>: <span class="number">35000</span>, <span class="string">'Texas'</span>: <span class="number">71000</span>, <span class="string">'Oregon'</span>: <span class="number">16000</span></span><br><span class="line">, <span class="string">'Utah'</span>: <span class="number">5000</span>&#125;</span><br><span class="line">states = [<span class="string">'California'</span>, <span class="string">'Ohio'</span>, <span class="string">'Oregon'</span>, <span class="string">'Texas'</span>]</span><br><span class="line">obj4 = pd.Series(sdata, index=states)</span><br><span class="line">obj4</span><br><span class="line">Out[<span class="number">31</span>]:</span><br><span class="line">California NaN</span><br><span class="line">Ohio <span class="number">35000.0</span></span><br><span class="line">Oregon <span class="number">16000.0</span></span><br><span class="line">Texas <span class="number">71000.0</span></span><br><span class="line">dtype: float64</span><br></pre></td></tr></table></figure>
+<p><code>pd.isnull(obj4)</code>和<code>pd.notnull(obj4)</code>可以检测缺失数据。</p>
+<p><code>obj3 + obj4</code> pandas可以自动对齐数据并将其相加。</p>
+<p><code>name</code> Series对象本身及其索引都有一个<code>name</code>属性，跟<code>pandas</code>其他的关键功能关系非常密切。</p>
+<h5 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h5><p>DataFrame是一个表格型的数据结构，它含有一组有序的列，每列可以是不同的值类型。DataFrame既有行索引也有列索引。DataFrame是一个表格型的数据结构，它含有一组有序的列，每列可以实不同的值类型。DataFrame既有行索引也有列索引，它可以被看做由Series组成的字典。DataFrame中的数据是以一个或多个二维块存放的。</p>
+<p><strong>建立DataFrame</strong> 最常用的一种是直接传入一个由等长列表或NumPy数组组成的字典。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'state'</span>: [<span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Ohio'</span>, <span class="string">'Nevada'</span>, <span class="string">'Nevada'</span>, <span class="string">'N</span></span><br><span class="line"><span class="string">evada'</span>],</span><br><span class="line"><span class="string">'year'</span>: [<span class="number">2000</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2001</span>, <span class="number">2002</span>, <span class="number">2003</span>],</span><br><span class="line"><span class="string">'pop'</span>: [<span class="number">1.5</span>, <span class="number">1.7</span>, <span class="number">3.6</span>, <span class="number">2.4</span>, <span class="number">2.9</span>, <span class="number">3.2</span>]&#125;</span><br><span class="line">frame = pd.DataFrame(data)</span><br><span class="line">In [<span class="number">45</span>]: frame</span><br><span class="line">Out[<span class="number">45</span>]:</span><br><span class="line">pop state year</span><br><span class="line"><span class="number">0</span> <span class="number">1.5</span> Ohio <span class="number">2000</span></span><br><span class="line"><span class="number">1</span> <span class="number">1.7</span> Ohio <span class="number">2001</span></span><br><span class="line"><span class="number">2</span> <span class="number">3.6</span> Ohio <span class="number">2002</span></span><br><span class="line"><span class="number">3</span> <span class="number">2.4</span> Nevada <span class="number">2001</span></span><br><span class="line"><span class="number">4</span> <span class="number">2.9</span> Nevada <span class="number">2002</span></span><br><span class="line"><span class="number">5</span> <span class="number">3.2</span> Nevada <span class="number">2003</span></span><br></pre></td></tr></table></figure>
+<p><code>head</code>方法，会选取DataFrame的前五行。如果制定了列序列，则DataFrame的列就会按照指定顺序进行排列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(data, columns=[<span class="string">'year'</span>,<span class="string">'state'</span>, <span class="string">'pop'</span>]， index=[<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>, <span class="string">'five'</span>,<span class="string">'six'</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>同Series一样，如果传入的列缺失，结果中会产生缺失值。</p>
+<p><code>frame2[&#39;state&#39;]</code>或者<code>frame2.year</code> 通过类似字典的方式，可以将DataFrame的列获取为一个Series。</p>
+<p><code>loc</code>属性可以取得行。</p>
+<p><code>frome2[&#39;debt&#39;] = np.arange(6)</code>列可以通过赋值的方式进行修改。将列表、数组复制给某个列时，长度必须跟DataFrame的长度相匹配。如果赋值的是一个Series，就会精确匹配DataFrame的索引。</p>
+<p><strong>注意：</strong>为不存在的列赋值会创建出一个新列。</p>
+<p><code>del</code> 关键字可以删除列。</p>
+<p><strong>注意：</strong>通过索引方式返回的列只是相应数据的视图而已，如果要副本用<code>copy</code>方法。</p>
+<p><code>pop = {&#39;Nevada&#39;:{2001:2.4, 2002:2.9}, &#39;Ohio&#39;:{2000:1.5,2001:1.7,2002:3.6}}</code> 如果嵌套字典传入DataFrame, pandas也能接受，并会产生缺失值。</p>
+<p><code>frame3.T</code> 可以对DataFrame交换行和列。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011103021721.png" alt="image-20201011103021721" title="">
+                </div>
+                <div class="image-caption">image-20201011103021721</div>
+            </figure>
+<p><code>name</code> DataFrame可以设置index和columns的<code>name</code>属性，并将其显示出来。</p>
+<p><code>value</code>属性会以二维ndarray的形式返回DataFrame中的数据。</p>
+<p><strong>注意：</strong>如果DataFrame各列书类型不同，数组dtype就会选用能兼容所有列的数据类型。</p>
+<h5 id="索引对象"><a href="#索引对象" class="headerlink" title="索引对象"></a>索引对象</h5><p>pandas的索引对象负责管理轴标签和其他元数据（比如轴名称等）。</p>
+<p><strong>注意：</strong>Index对象是不可变的，因此用户不能对其进行修改。不可变可以使<code>Index</code>对象在多个数据结构之间安全共享。</p>
+<p><code>pd.Index()</code> 可以让用户先生成<code>Index</code>。</p>
+<p><code>&#39;Ohio&#39; in frame3.columns</code> Index也类似一个固定大小的集合，但是与集合不同，可以包含重复的标签。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011105154215.png" alt="image-20201011105154215" title="">
+                </div>
+                <div class="image-caption">image-20201011105154215</div>
+            </figure>
+<h4 id="3-基本功能"><a href="#3-基本功能" class="headerlink" title="3. 基本功能"></a>3. 基本功能</h4><h5 id="重新索引"><a href="#重新索引" class="headerlink" title="重新索引"></a>重新索引</h5><p><code>reindex</code> 可以将Series根据新索引进行重排。如果某个索引值当前不存在，就引入缺失值。优势后重新索引时需要做一些插值处理，<code>method</code>可以达成此目的，比如用<code>ffill</code>就可以实现前向值填充。如果是列，用<code>columns</code>关键字重新索引。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011110151405.png" alt="image-20201011110151405" title="">
+                </div>
+                <div class="image-caption">image-20201011110151405</div>
+            </figure>
+<h5 id="丢弃指定轴上的项"><a href="#丢弃指定轴上的项" class="headerlink" title="丢弃指定轴上的项"></a>丢弃指定轴上的项</h5><p><code>drop</code>方法返回得视一个指定轴上删除了指定的值的新对象。</p>
+<p><code>obj.drop(&#39;c&#39;)</code> 会丢掉索引’c’的行。通过传递<code>asix=1</code>或<code>asis=&#39;columns&#39;</code>可以删除列的值。但是删除只是返回的值，实际对象并没有删除。如果用<code>inplace=True</code>，就地完成了修改对象。</p>
+<h5 id="索引、选取和过滤"><a href="#索引、选取和过滤" class="headerlink" title="索引、选取和过滤"></a>索引、选取和过滤</h5><p>Series索引的工作方式类似于NumPy数组的索引，只不过Series的索引值不只是整数。</p>
+<p><code>obj[&#39;b&#39;]</code>和<code>obj[1]</code>是两种切片方式。</p>
+<p><code>obj[&#39;b&#39;:&#39;c]</code> 利用标签的切片运算于普通运算不同，其末端是包含的。</p>
+<p><strong>注意：</strong>切片可以对<code>Series</code>的相应部分进行设置，即改变对应部分的值。</p>
+<p><strong>注意：</strong>如果用类似NumPy的方式切片，那么是先切行，再列。如果是用标签切片，则先切列，再切行。</p>
+<h5 id="用loc和iloc进行选取"><a href="#用loc和iloc进行选取" class="headerlink" title="用loc和iloc进行选取"></a>用loc和iloc进行选取</h5><p>对于DataFrame的行的标签索引，可以用特殊的标签运算符<code>loc</code>和<code>iloc</code>处理。<code>loc</code>轴标签和<code>iloc</code>证书索引，可以从DataFrame选择行和列的子集。</p>
+<p><code>loc</code>和<code>iloc</code>都是先行后列。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011151600981.png" alt="image-20201011151600981" title="">
+                </div>
+                <div class="image-caption">image-20201011151600981</div>
+            </figure>
+<h5 id="整数索引"><a href="#整数索引" class="headerlink" title="整数索引"></a>整数索引</h5><p>之前提到的索引方式有一点问题，既可以用标签索引又可以用整数索引的话会造成歧义的<code>bug</code>。所以我们可以用<code>loc</code>作为标签索引和<code>iloc</code>作为整数索引。</p>
+<h5 id="算数运算和数据对齐"><a href="#算数运算和数据对齐" class="headerlink" title="算数运算和数据对齐"></a>算数运算和数据对齐</h5><p>pandas可以对不同索引的对象进行算数运算，在将对象相加时，如果存在不同的索引对，则结果的索引就是该索引对的并集。类似于数据库，就就像是进行自动外连接。</p>
+<p><strong>注意：</strong>自动的数据对齐操作再不重叠的索引处引入了<code>NA</code>值。</p>
+<h5 id="在算术方法中填充值"><a href="#在算术方法中填充值" class="headerlink" title="在算术方法中填充值"></a>在算术方法中填充值</h5><p><code>+</code> 的算术方法没有重叠的地方就会产生<code>NA</code>值。</p>
+<p><code>add</code>方法，传入一个<code>fill_value</code>参数，就可以实现自动填充值的功能。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011154154464.png" alt="image-20201011154154464" title="">
+                </div>
+                <div class="image-caption">image-20201011154154464</div>
+            </figure>
+<h5 id="DataFrame和Series之间的运算"><a href="#DataFrame和Series之间的运算" class="headerlink" title="DataFrame和Series之间的运算"></a>DataFrame和Series之间的运算</h5><p><strong>注意：</strong>默认情况下，DataFrame和Series之间的算数运算会将Series的索引匹配到DataFrame的列，然后沿着行一直向下广播。</p>
+<p><strong>如果索引找不到：</strong>则参与运算的两个对象就会被重新索引以形成并集。</p>
+<p><strong>如果想匹配行索引：</strong>必须用 方法 ，里面说明轴<code>axis</code>参数<code>axis=&#39;index&#39;</code>。</p>
+<h5 id="函数应用和映射"><a href="#函数应用和映射" class="headerlink" title="函数应用和映射"></a>函数应用和映射</h5><p>NumPy的ufuncs（元素级数组方法）也可用于操作pandas对象。</p>
+<p><strong>将函数应用到行或者列：</strong>可以用apply方法进行计算。并且通过<code>axis</code>参数完成行或者列的修改。传递到<code>apply</code>的函数不是必须返回一个标量，还可以返回由多个值组成的Series。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x:x.max() - x.min()</span><br><span class="line">frame.apply(y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> pd.Series([x.min(), x.max()], index=[<span class="string">'min'</span>, <span class="string">'max'</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>元素级的Python函数：</strong>加入想得到frame中各个浮点值的格式化字符串，使用<code>applymap</code>即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">format &#x3D; lambda x: &#39;%.2f&#39; % x</span><br><span class="line">frame.applymap(format)</span><br></pre></td></tr></table></figure>
+<p><code>map</code> Series有一个用于应用元素级函数的<code>map</code>方法。</p>
+<h5 id="排序和排名"><a href="#排序和排名" class="headerlink" title="排序和排名"></a>排序和排名</h5><p><code>sort_index</code> 方法，它将返回一个已排序的新对象，默认是<code>axis=0</code>，可以利用<code>axis</code>对轴进行选择，利用<code>ascending</code>参数选择升序还是降序。</p>
+<p><code>sort_values</code> 可以按值对<code>Series</code>进行排序，也可以对<code>DataFrame</code>排序，利用<code>by</code>可以选择拍个排序依据。</p>
+<p><code>rank</code>方法，可以给出排名，默认是通过为各组分配一个平均排名的方式破坏平级关系，<code>method=&#39;first&#39;</code>可以根据值在原数据中出现的顺序给出排名。<code>ascending</code>可以给出降序或者升序。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011164206942.png" alt="image-20201011164206942" title="">
+                </div>
+                <div class="image-caption">image-20201011164206942</div>
+            </figure>
+<h5 id="带有重复标签的轴索引"><a href="#带有重复标签的轴索引" class="headerlink" title="带有重复标签的轴索引"></a>带有重复标签的轴索引</h5><p>许多pandas函数（如<code>reindex</code>）都要求标签唯一，但并不是强制性的。</p>
+<p><code>is_unique</code>方法可以用来判断索引是否唯一。</p>
+<p><strong>注意：</strong>对于重复值的索引，会全部输出。</p>
+<h4 id="4-汇总和计算描述统计"><a href="#4-汇总和计算描述统计" class="headerlink" title="4. 汇总和计算描述统计"></a>4. 汇总和计算描述统计</h4><p>pandas对象拥有一组常用的数学和统计方法，大部分属于约简和汇总统计，用于从Series中提取单个值或者从DataFrame的行或者列提取一个Series。跟对应的NumPy数组方法相比，它们都是基于没有缺失数据的假设而构建的。</p>
+<p><code>sum</code>方法会返回一个含有列的和的Series，<code>axis</code>可以改变轴。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011165331753.png" alt="image-20201011165331753" title="">
+                </div>
+                <div class="image-caption">image-20201011165331753</div>
+            </figure>
+<p><code>idxmin, idxmax</code>返回的是间接统计，即达到最小值或最大值的索引。</p>
+<p><code>cumsum</code>累积型的。</p>
+<p><code>discribe</code>一次性产生多个汇总统计，对于非数值型会产生另一种汇总统计。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011165612927.png" alt="image-20201011165612927" title="">
+                </div>
+                <div class="image-caption">image-20201011165612927</div>
+            </figure>
+<h5 id="相关系数与协方差"><a href="#相关系数与协方差" class="headerlink" title="相关系数与协方差"></a>相关系数与协方差</h5><p><code>corr</code>方法用于计算两个Series中重叠的、非NA的、按索引对其的值的相关系数。对于DataFrame会输出矩阵。</p>
+<p><code>cov</code>方法计算协方差。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">returns[<span class="string">'MSFT'</span>].corr(returns[<span class="string">'IBM'</span>])</span><br><span class="line">returns.MSFT.corr(returns.IBM)</span><br></pre></td></tr></table></figure>
+<p><code>corrwith</code>可以计算其列或行跟另一个Series或DataFrame之间的相关系数。</p>
+<h5 id="唯一值、值计数以及成员资格"><a href="#唯一值、值计数以及成员资格" class="headerlink" title="唯一值、值计数以及成员资格"></a>唯一值、值计数以及成员资格</h5><p><code>unique</code>方法可以得到Series中的唯一值数组。</p>
+<p><code>value_counts</code>方法可以计算一个Series中各值出现的频率。</p>
+<p><code>isin</code>用于判断矢量化集合的成员资格，判断容器中是否有变量。</p>
+<p><code>Index.get_indexer</code>方法可以给我们一个索引数组，从可能包含重复值的数组到另一个不同值的数组。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/TimeLovercc/img/master/image-20201011171248626.png" alt="image-20201011171248626" title="">
+                </div>
+                <div class="image-caption">image-20201011171248626</div>
+            </figure>
+<p><code>pd.value_counts</code>函数作为参数传入<code>apply</code>方法里面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = data.apply(pd.value_counts).fillna(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2020-10-11T09:15:38.942Z" itemprop="dateUpdated">2020/10/11 17:15:38</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://timelovercc.github.io">
+            <img src="/img/zhimeng.jpg" alt="Zhimeng Guo(郭志猛)">
+            Zhimeng Guo(郭志猛)
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pandas/" rel="tag">pandas</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/10/11/202010111714/&title=《pandas入门》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/10/11/202010111714/&title=《pandas入门》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/10/11/202010111714/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pandas入门》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/10/11/202010111714/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/10/11/202010111714/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/10/10/202010102040/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">NumPy 基础：数组和矢量计算</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '97e01c203da2dd9ce96d',
+            clientSecret: 'c7221665d8c36ac320001b51cf5170faec22d5f2',
+            repo: 'TimeLovercc.github.io',
+            owner: 'TimeLovercc',
+            admin: 'TimeLovercc',
+            id: location.pathname,  // Ensure uniqueness and length less than 50
+            perPage: 50,
+            distractionFreeMode: 'true'
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+</section>
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        Total number of visitors：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        Total site visits：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Zhimeng Guo(郭志猛) &copy; 2015 - 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://timelovercc.github.io/2020/10/11/202010111714/&title=《pandas入门》 — Zhimeng's Personal Website&pic=http://timelovercc.github.io/img/zhimeng.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://timelovercc.github.io/2020/10/11/202010111714/&title=《pandas入门》 — Zhimeng's Personal Website&source=A website to share my thoughts." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://timelovercc.github.io/2020/10/11/202010111714/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《pandas入门》 — Zhimeng's Personal Website&url=http://timelovercc.github.io/2020/10/11/202010111714/&via=http://timelovercc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://timelovercc.github.io/2020/10/11/202010111714/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://timelovercc.github.io/2020/10/11/202010111714/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Zhimeng's Personal Website';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Zhimeng's Personal Website';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
