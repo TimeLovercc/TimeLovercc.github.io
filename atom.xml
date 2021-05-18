@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://timelovercc.github.io/"/>
-  <updated>2020-10-27T02:50:28.202Z</updated>
+  <updated>2021-05-18T13:11:26.423Z</updated>
   <id>http://timelovercc.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客的重新启动</title>
+    <link href="http://timelovercc.github.io/2021/05/18/202105182107/"/>
+    <id>http://timelovercc.github.io/2021/05/18/202105182107/</id>
+    <published>2021-05-18T13:07:52.317Z</published>
+    <updated>2021-05-18T13:11:26.423Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>好久没有更新博客了。时不时会查阅一下之前自己写的博客中的内容，看到博客日期停留在了2020年10月27日，还是会想：自己好像又没能坚持做好一件事。</p><p>是也不是。我其实也没有闲着，只不过很多被动的时间消耗和催命的ddl，让自己没有时间学自己喜欢的东西并记录了。大约去年10月26日开始准备托福，准备了一个月，然后紧接着完成各项文书工作和申请工作。到了今年，忙于应付各种各样的面试以及毕业设计。另外，Workflow从Typora转换到Notion也让工作的同步变得更加简单，似乎不用博客也可以了。</p><p>其实博客还是很有用的，作为一种公开的展示自己的方式，博客是我与这个世界的一个宝贵的接口。我想，博客我要坚持写下去，作为同步的良好工具，作为费曼学习法的实践，作为与世界的接口。</p><h2 id="2-怎么写"><a href="#2-怎么写" class="headerlink" title="2. 怎么写"></a>2. 怎么写</h2><p>我的博客分为Blog，Plan，Thoughts，Projects，About me共五个原创部分。因为有了Notion我不再需要Blog帮助同步，所以我希望我写出来的Blog能更完整，更新一点，或许是多个Notion文档的抽象和升华。Plan部分下部分再说。Thoughts部分写一些小的灵感，不需要完整，不需要实践，只要新就行。Projects部分则跟自己科研息息相关，要及时把自己的主业科研上的工作放上去。About me则是类似于个人主页的位置，及时更新自己的主业变化信息。</p><h2 id="3-规划系统"><a href="#3-规划系统" class="headerlink" title="3. 规划系统"></a>3. 规划系统</h2><p>Plan是我的规划系统的一部分，这里把我的规划系统明确一下，方便自己。我的规划系统主要利用Notion的Milestones和Diary，Trello的年计划、月计划、周计划，以及Hexo博客的Plan部分。有时还用一下软件追踪。</p><h3 id="固定部分"><a href="#固定部分" class="headerlink" title="固定部分"></a>固定部分</h3><ul><li>年计划：Trello</li><li>月计划：Trello</li><li>周计划：Trello</li><li>日计划：Diary</li></ul><h3 id="动态部分"><a href="#动态部分" class="headerlink" title="动态部分"></a>动态部分</h3><ul><li>多年或跨月计划：Plan</li><li>完成的较大计划：Milestones</li></ul><h3 id="时间管理"><a href="#时间管理" class="headerlink" title="时间管理"></a>时间管理</h3><ul><li>时间追踪：ATracker Pro</li><li>番茄钟：Focus</li><li>日历：Google Calendar</li><li>生活相关：Days Matter</li></ul><h2 id="4-当前的Workflow"><a href="#4-当前的Workflow" class="headerlink" title="4. 当前的Workflow"></a>4. 当前的Workflow</h2><p>作为一个喜欢收集软件的人，我用过了很多软件，但是使用频率最高的可以总结一下。</p><ul><li>Notion: 大部分记录、收集及文档工作。</li><li>Trello：日程规划。</li><li>Hexo: 定期总结，灵感记录，科研进展。</li><li>Google Calendar: 提醒。</li><li><a href="http://draw.io" target="_blank" rel="noopener">draw.io</a> : 作图。</li><li>VSCode: 编程。</li><li>Snipaste ：截屏相关。</li><li>Overleaf：正式写作。</li><li>Bitwarden ：密码管理。</li><li>欧路词典：词典。</li><li>DeepL : 翻译。</li><li>PDF Expert 和 Kami：Ipad和PC阅读论文。</li><li>Notebility：笔记。</li><li>Outlook: 邮箱。</li><li>Chrome 和 Safari：浏览器。</li><li>Axmath : 公式编辑。</li><li>Mathpix：公式OCR。</li><li>Google Drive: 科研，分享相关。</li><li>Onedrive: PC同步盘。</li><li>ICloud：手机同步盘。</li><li>ITunes： 音乐。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-前言&quot;&gt;&lt;a href=&quot;#1-前言&quot; class=&quot;headerlink&quot; title=&quot;1. 前言&quot;&gt;&lt;/a&gt;1. 前言&lt;/h2&gt;&lt;p&gt;好久没有更新博客了。时不时会查阅一下之前自己写的博客中的内容，看到博客日期停留在了2020年10月27日，还是会想：自己
+      
+    
+    </summary>
+    
+    
+      <category term="博客" scheme="http://timelovercc.github.io/categories/%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="日程管理" scheme="http://timelovercc.github.io/tags/%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="Workflow" scheme="http://timelovercc.github.io/tags/Workflow/"/>
+    
+  </entry>
   
   <entry>
     <title>托福口语模板</title>
