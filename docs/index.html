@@ -32,7 +32,7 @@
 <img style="float:right; width: 100px; margin:10px" src="./portrait.jpg" alt="My portrait">
 
 <h2 id="bio">Brief Bio</h2>
-<p> I am a graduate student at Penn State, dedicated to enhancing the reliability and alignment of machine learning systems with human values. My work focuses on challenges associated with <strong>robustness</strong> and <strong>alignment</strong>, such as addressing spurious correlations, mitigating hallucinations, and improving aspects like model interpretation and model personalization. Here is my <a href="https://drive.google.com/file/d/14nmmR53OqkZORRePHs2XMOcZnJ-u2R3N/view?usp=sharing">CV</a> and <a href="https://drive.google.com/file/d/10VJBMje8QGlgRE3PAaShhWXexGrZA9cP/view?usp=sharing">Research Statement</a>. </p>
+<p> I am a graduate student at Penn State, specializing in the development of reliable and controllable Large Language Models. My research addresses fundamental challenges in AI alignment and verification through two primary streams: (1) <u>advancing reasoning and safety alignment mechanisms</u>, including post-training techniques and watermarking approaches, and (2) developing frameworks for <u>interactive learning</u> that enable models to engage in open-world problem solving and long-horizon planning. </p>
 <ul>
 <li>2021 - Present: Graduate student at <a href="https://www.psu.edu/">Penn State</a>, advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>.</li>
 <li>2017 - 2021: B.Sc. at <a href="https://en.uestc.edu.cn/">UESTC</a>, advised by <a href="https://lianligao.github.io/">Prof. Lianli Gao</a> and <a href="https://scholar.google.com/citations?user=KFt5oWsAAAAJ&hl=en">Prof. Linyuan Lv</a>.</li>
@@ -54,19 +54,35 @@
 </script>
 
 <ul>
-  <!-- <li class="paper"> <strong>On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?</strong> <br>
-  Hangfan Zhang, <u>Zhimeng Guo</u>, Huaisheng Zhu, Bochuan Cao, Lu Lin, Jinyuan Jia, Jinghui Chen, and Dinghao Wu. <i>arXiv</i>, 2023. <br>
+  <li class="paper"> <strong>Jailbreak Open-Sourced Large Language Models via Enforced Decoding</strong> <br>
+  Hangfan Zhang, <u>Zhimeng Guo</u>, Huaisheng Zhu, Bochuan Cao, Lu Lin, Jinyuan Jia, Jinghui Chen, and Dinghao Wu. <i>ACL</i>, 2024. <br>
   [<a href="https://zhimeng.page/" onclick="toggleItem('zhang2023safety'); return false;">bib</a>]
   [<a href="https://arxiv.org/abs/2310.01581">paper</a>] </li>
   <div id="zhang2023safety" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
   <pre>
-@article{zhang2023safety,
-  title={On the Safety of Open-Sourced Large Language Models: Does Alignment Really Prevent Them From Being Misused?},
-  author={Zhang, Hangfan and Guo, Zhimeng and Zhu, Huaisheng and Cao, Bochuan and Lin, Lu and Jia, Jinyuan and Chen, Jinghui and Wu, Dinghao},
-  journal={arXiv preprint arXiv:2310.01581},
-  year={2023}
-}
-  </pre> </div> -->
+    @inproceedings{zhang2024jailbreak,
+      title={Jailbreak open-sourced large language models via enforced decoding},
+      author={Zhang, Hangfan and Guo, Zhimeng and Zhu, Huaisheng and Cao, Bochuan and Lin, Lu and Jia, Jinyuan and Chen, Jinghui and Wu, Dinghao},
+      booktitle={Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+      pages={5475--5493},
+      year={2024}
+    }
+  </pre> </div>
+
+  <li class="paper"> <strong>Addressing shortcomings in fair graph learning datasets: Towards a new benchmark</strong> <br>
+    Xiaowei Qian*, <u>Zhimeng Guo*</u>, Jialiang Li, Haitao Mao, Bingheng Li, Suhang Wang, Yao Ma. <i>KDD</i>, 2024. <br>
+    [<a href="https://zhimeng.page/" onclick="toggleItem('qian2024addressing'); return false;">bib</a>]
+    [<a href="https://arxiv.org/abs/2403.06017">paper</a>] </li>
+    <div id="qian2024addressing" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
+    <pre>
+      @inproceedings{qian2024addressing,
+        title={Addressing shortcomings in fair graph learning datasets: Towards a new benchmark},
+        author={Qian, Xiaowei and Guo, Zhimeng and Li, Jialiang and Mao, Haitao and Li, Bingheng and Wang, Suhang and Ma, Yao},
+        booktitle={Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+        pages={5602--5612},
+        year={2024}
+      }
+    </pre> </div>
 
 <li class="paper"> <strong>Towards Fair Graph Neural Networks via Graph Counterfactual.</strong> <br>
 <u>Zhimeng Guo</u>, Jialiang Li, Teng Xiao, Yao Ma, and Suhang Wang. <i>CIKM</i>, 2023. <br>
@@ -82,6 +98,21 @@
   year={2023}
 }
 </pre> </div>
+
+<li class="paper"> <strong>Efficient Contrastive Learning for Fast and Accurate Inference on Graphs.</strong> <br>
+  Teng Xiao, Huaisheng Zhu, Zhiwei Zhang, <u>Zhimeng Guo</u>, Charu C Aggarwal, Suhang Wang, Vasant G Honavar. <i>ICML</i>, 2024. <br>
+  [<a href="https://zhimeng.page/" onclick="toggleItem('xiao2024efficient'); return false;">bib</a>]
+  [<a href="https://dl.acm.org/doi/10.1145/3583780.3615092">paper</a>]
+  [<a href="https://github.com/TimeLovercc/CAF-GNN">code</a>] </li>
+  <div id="xiao2024efficient" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
+  <pre>
+    @inproceedings{xiao2024efficient,
+      title={Efficient contrastive learning for fast and accurate inference on graphs},
+      author={Xiao, Teng and Zhu, Huaisheng and Zhang, Zhiwei and Guo, Zhimeng and Aggarwal, Charu C and Wang, Suhang and Honavar, Vasant G},
+      booktitle={Forty-first International Conference on Machine Learning},
+      year={2024}
+    }
+  </pre> </div>
 
 <li class="paper"> <strong>Counterfactual Learning on Graphs: A Survey.</strong> <br>
   <u>Zhimeng Guo</u>, Teng Xiao, Charu Aggarwal, Hui Liu, and Suhang Wang. <i>arXiv</i>, 2023. <br>
@@ -100,7 +131,7 @@
 }    
 </pre> </div>
 
-<!-- <li class="paper"> <strong>Fairness-aware Message Passing for Graph Neural Networks.</strong> <br>
+<li class="paper"> <strong>Fairness-aware Message Passing for Graph Neural Networks.</strong> <br>
   Huaisheng Zhu, Guoji Fu, <u>Zhimeng Guo</u>, Zhiwei Zhang, Teng Xiao, and Suhang Wang. <i>arXiv</i>, 2023. <br>
   [<a href="https://zhimeng.page/" onclick="toggleItem('zhu2023fairnessaware'); return false;">bib</a>]
   [<a href="https://arxiv.org/abs/2306.11132">paper</a>] </li>
@@ -113,9 +144,9 @@
   title = {Fairness-aware Message Passing for Graph Neural Networks},
   volume = {abs/2306.11132},
 } 
-</pre> </div> -->
+</pre> </div>
 
-<!-- <li class="paper"> <strong>Decoupled Self-supervised Learning for Graphs.</strong> <br>
+<li class="paper"> <strong>Decoupled Self-supervised Learning for Graphs.</strong> <br>
   Teng Xiao, Zhengyu Chen, <u>Zhimeng Guo</u>, Zeyang Zhuang, and Suhang Wang. <i>NeurIPS</i>, 2022. <br>
   [<a href="https://zhimeng.page/" onclick="toggleItem('xiao2022decoupled'); return false;">bib</a>]
   [<a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/040c816286b3844fd78f2124eec75f2e-Abstract-Conference.html">paper</a>] </li>
@@ -129,9 +160,9 @@
   title = {Decoupled Self-supervised Learning for Graphs},
   volume = {35},
 }
-</pre> </div> -->
+</pre> </div>
 
-<!-- <li class="paper"> <strong>Label-Wise Graph Convolutional Network for Heterophilic Graphs.</strong> <br>
+<li class="paper"> <strong>Label-Wise Graph Convolutional Network for Heterophilic Graphs.</strong> <br>
   Enyan Dai, Shijie Zhou, <u>Zhimeng Guo</u>, and Suhang Wang. <i>LoG</i>, 2022. <br>
   [<a href="https://zhimeng.page/" onclick="toggleItem('dai2022comprehensive'); return false;">bib</a>]
   [<a href="https://proceedings.mlr.press/v198/dai22b.html">paper</a>] 
@@ -144,9 +175,9 @@
   journal={arXiv preprint arXiv:2204.08570},
   year={2022}
 }
-</pre> </div> -->
+</pre> </div>
 
-<!-- <li class="paper"> <strong>Link Prediction on Heterophilic Graphs via Disentangled Representation Learning.</strong> <br>
+<li class="paper"> <strong>Link Prediction on Heterophilic Graphs via Disentangled Representation Learning.</strong> <br>
   Shijie Zhou, <u>Zhimeng Guo</u>, Charu Aggarwal, Xiang Zhang, and Suhang Wang. <i>arXiv</i>, 2022. <br>
   [<a href="https://zhimeng.page/" onclick="toggleItem('zhou2022link'); return false;">bib</a>]
   [<a href="https://arxiv.org/abs/2208.01820">paper</a>] 
@@ -160,9 +191,9 @@
   title = {Link Prediction on Heterophilic Graphs via Disentangled Representation Learning},
   volume = {abs/2208.01820},
 }
-</pre> </div> -->
+</pre> </div>
 
-<!-- <li class="paper"> <strong>A Comprehensive Survey on Trustworthy Graph Neural Networks: Privacy, Robustness, Fairness, and Explainability.</strong> <br>
+<li class="paper"> <strong>A Comprehensive Survey on Trustworthy Graph Neural Networks: Privacy, Robustness, Fairness, and Explainability.</strong> <br>
   Enyan Dai, Tianxiang Zhao, Huaisheng Zhu, Junjie Xu, <u>Zhimeng Guo</u>, Hui Liu, Jiliang Tang, and Suhang Wang. <i>arXiv</i>, 2022. <br>
   [<a href="https://zhimeng.page/" onclick="toggleItem('dai2022a'); return false;">bib</a>]
   [<a href="https://arxiv.org/abs/2204.08570">paper</a>]
@@ -176,7 +207,7 @@
   title = {A comprehensive survey on trustworthy graph neural networks: Privacy, robustness, fairness, and explainability},
   volume = {abs/2204.08570},
 }
-</pre> </div> -->
+</pre> </div>
 
 </ul>
 
