@@ -21,6 +21,7 @@
 <h1>Zhimeng Guo</h1>
 <hr>
 <a href="https://www.zhimeng.page/#bio">Brief Bio</a> |
+<a href="https://www.zhimeng.page/#experience">Experience</a> |
 <a href="https://www.zhimeng.page/#publications">Publications</a> |
 <a href="https://www.zhimeng.page/#teaching">Teaching</a> |
 <a href="https://www.zhimeng.page/#services">Services</a> |
@@ -32,18 +33,24 @@
 <img style="float:right; width: 100px; margin:10px" src="./portrait.jpg" alt="My portrait">
 
 <h2 id="bio">Brief Bio</h2>
-<p> I am a graduate student at Penn State, specializing in <strong>LLM for code generation</strong> and <strong>LLM agents</strong> for long-horizon problem solving. I am interested in solving practical real-world problems using LLMs. I consider two main approaches for leveraging LLM capabilities: (1) agentic approaches to decompose complex problems into smaller ones and solve them systematically; (2) designing environments and using RL and SFT post-training to enhance LLM capabilities. My research focuses on RL and agentic system design.</p>
+<p>I am a graduate student at Penn State, advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>. I am currently a research intern at ByteDance Seed, where I work on <strong>long context pretraining</strong>: model architecture, load balancing, data, and evaluation. On the side, I open-source <strong>long-horizon automatic agents</strong>. <a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a>, released 2 months before OpenClaw, is my take on an agent OS that decouples planning from execution. Overall, I aim to build practical <strong>coding agents</strong> from two angles: designing the long-horizon agent on top of a base LLM, and strengthening the atomic LLM capabilities the agent depends on.</p>
+
+<hr>
+
+<h2 id="experience">Experience</h2>
 <ul>
-<li>2021 - Present: Graduate student at <a href="https://www.psu.edu/">Penn State</a>, advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>.</li>
-<li>2017 - 2021: B.Sc. at <a href="https://en.uestc.edu.cn/">UESTC</a>, advised by <a href="https://lianligao.github.io/">Prof. Lianli Gao</a> and <a href="https://scholar.google.com/citations?user=KFt5oWsAAAAJ&hl=en">Prof. Linyuan Lv</a>.</li>
-</li></ul>
+<li><strong>ByteDance Seed</strong>, Research Intern (Jan 2026 &mdash; Present). Long context pretraining.</li>
+<li><strong>Amazon</strong>, Applied Scientist Intern (Jun 2025 &mdash; Sep 2025). Long-horizon automatic agent.</li>
+<li><strong>Penn State</strong>, Ph.D. student in Informatics (2021 &mdash; Present). Advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>.</li>
+<li><strong>UESTC</strong>, B.Sc. in Mathematics, Physics, and Computer Science (Sep 2017 &mdash; Jun 2021).</li>
+</ul>
 
 <hr>
 
 <h2 id="projects" style="margin-bottom: 5px;">Code Repos</h2>
 <ul style="margin-top: 5px;">
-<li><a href="https://github.com/context-machine-lab/ContextAgent">ContextAgent</a>: An lightweight multi-agent framework for context-driven system design.</li>
-<li><a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a>: An agentOS for long-horizon problem solving.</li>
+<li><a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a> (820&#9733;): A lightweight agentOS that decouples planning from execution for long-horizon, automatic problem solving. <em>Released 2 months before OpenClaw.</em></li>
+<li><a href="https://github.com/context-machine-lab/ContextAgent">ContextAgent</a> (74&#9733;): A lightweight multi-agent framework for context-driven system design.</li>
 </ul>
 
 <hr>
@@ -62,22 +69,37 @@
 </script>
 
 <ul>
-  <li class="paper"> <strong>Optimizing Token Choice for Code Watermarking: An RL Approach</strong> <br>
-    <u>Zhimeng Guo</u>, Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, Minhao Cheng. <i>arXiv</i>, 2025. <br>
-    [<a href="https://zhimeng.page/" onclick="toggleItem('guo2025optimizing'); return false;">bib</a>]
+  <li class="paper"> <strong>How to Build Long-Horizon Web Agents? (Effectively)</strong> <br>
+    <u>Zhimeng Guo</u>, Hangfan Zhang, Teng Xiao, Siyuan Xu, Huaisheng Zhu, Shijie Zhou, Minhao Cheng. <i>Submitted to NeurIPS</i>, 2026. </li>
+
+  <li class="paper"> <strong>ContextAgent: Lightweight Context-Driven Multi-Agent System Design</strong> <br>
+    <u>Zhimeng Guo</u>, Hangfan Zhang, Siyuan Xu, Huaisheng Zhu, Teng Xiao, Jingyi Chen, Minhao Cheng. <i>Technical Report</i>, 2026.
+    [<a href="https://github.com/context-machine-lab/ContextAgent">code</a>] </li>
+
+  <li class="paper"> <strong>Adaptive Code Watermarking Through Reinforcement Learning</strong> <br>
+    <u>Zhimeng Guo</u>, Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, Minhao Cheng. <i>ICML</i>, 2026. <br>
+    [<a href="https://zhimeng.page/" onclick="toggleItem('guo2026adaptive'); return false;">bib</a>]
     [<a href="https://arxiv.org/abs/2508.11925">paper</a>] </li>
-    <div id="guo2025optimizing" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
+    <div id="guo2026adaptive" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
     <pre>
-      @misc{guo2025optimizing,
-        title={Optimizing Token Choice for Code Watermarking: An RL Approach}, 
+      @inproceedings{guo2026adaptive,
+        title={Adaptive Code Watermarking Through Reinforcement Learning},
         author={Zhimeng Guo and Huaisheng Zhu and Siyuan Xu and Hangfan Zhang and Teng Xiao and Minhao Cheng},
-        year={2025},
-        eprint={2508.11925},
-        archivePrefix={arXiv},
-        primaryClass={cs.CR},
-        url={https://arxiv.org/abs/2508.11925}, 
-    }
+        booktitle={Forty-third International Conference on Machine Learning},
+        year={2026}
+      }
   </pre> </div>
+
+  <li class="paper"> <strong>Simple Denoising Diffusion Language Models</strong> <br>
+    Huaisheng Zhu, Zhengyu Chen, Shijie Zhou, Zhihui Xie, Yige Yuan, Shiqi Chen, <u>Zhimeng Guo</u>, Siyuan Xu, Hangfan Zhang, Vasant Honavar, Teng Xiao. <i>ICML</i>, 2026. </li>
+
+  <li class="paper"> <strong>Self-Aware Reinforcement Learning for Improving LLMs with Minimal Data</strong> <br>
+    Hangfan Zhang, Siyuan Xu, <u>Zhimeng Guo</u>, Huaisheng Zhu, Shicheng Liu, Xinrun Wang, Qiaosheng Zhang, Yang Chen, Peng Ye, Lei Bai, Shuyue Hu. <i>Preprint</i>, 2026. <br>
+    [<a href="https://openreview.net/pdf?id=k3ylkWMJAc">paper</a>] </li>
+
+  <li class="paper"> <strong>Do Audio LLMs Really LISTEN, or Just Transcribe? Measuring Lexical vs. Acoustic Emotion Cues Reliance</strong> <br>
+    Jingyi Chen, <u>Zhimeng Guo</u>, Jiyun Chun, Pichao Wang, Andrew Perrault, Micha Elsner. <i>EACL</i>, 2026. <br>
+    [<a href="https://arxiv.org/pdf/2510.10444">paper</a>] </li>
 
   <li class="paper"> <strong>Practical and Effective Code Watermarking for Large Language Models</strong> <br>
     <u>Zhimeng Guo</u>, Minhao Cheng. <i>NeurIPS</i>, 2025. <br>
@@ -95,6 +117,12 @@
         url={https://openreview.net/forum?id=RpE4HeuX69}
         }
   </pre> </div>
+
+  <li class="paper"> <strong>Simple Distillation for One-Step Diffusion Models</strong> <br>
+    Huaisheng Zhu, Teng Xiao, Shijie Zhou, <u>Zhimeng Guo</u>, Hangfan Zhang, Siyuan Xu, Vasant G. Honavar. <i>NeurIPS</i>, 2025. </li>
+
+  <li class="paper"> <strong>Reinforcement Learning for Large Language Models via Group Preference Reward Shaping</strong> <br>
+    Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, <u>Zhimeng Guo</u>, Shijie Zhou, Shuyue Hu, Vasant G. Honavar. <i>EMNLP</i>, 2025. </li>
 
   <li class="paper"> <strong>Jailbreak Open-Sourced Large Language Models via Enforced Decoding</strong> <br>
   Hangfan Zhang, <u>Zhimeng Guo</u>, Huaisheng Zhu, Bochuan Cao, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. <i>ACL</i>, 2024. <br>
@@ -272,7 +300,7 @@
 </ul>
 
 <hr>
-Last update on Sep 25th, 2025.
+Last update on May 9th, 2026.
 <hr>
 
 </div>
