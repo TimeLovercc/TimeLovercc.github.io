@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Continuous Agent and Environment Dynamics — Zhimeng Guo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Why long-horizon agents fail, and a small state table that recovers a surprising fraction of them.">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="module" src="https://unpkg.com/dark-mode-toggle"></script>
+<script src="/assets/js/theme.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/"><span class="accent-blue">Z</span>himeng <span class="accent-orange">G</span>uo</a>
+    <div class="header-right">
+      <nav class="site-nav">
+        <a href="/">About</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+      <dark-mode-toggle appearance="toggle"></dark-mode-toggle>
+    </div>
+  </div>
+</header>
+
+<main class="page-content">
+  <div class="wrapper">
+
+    <article>
+      <header class="post-header">
+        <h1 class="post-title">Continuous Agent and Environment Dynamics</h1>
+        <p class="post-date">May 2026</p>
+        <p class="post-lede">Why long-horizon agents fail, and a small state table that recovers a surprising fraction of them.</p>
+      </header>
+
+      <p>When a long-horizon web agent fails in WebArena, the natural reaction is "the LLM can't plan." After staring at a hundred or so failure trajectories, I have come to a different view: the LLM <em>can</em> plan. What it cannot do is <em>maintain</em> a plan across a noisy, append-only context window. The failure mode looks like execution drift, repeated mistakes, and an inability to recover after the first slip.</p>
+
+      <p>This post sketches the argument and the preliminary evidence behind it.</p>
+
+      <h2>The conjecture</h2>
+
+      <p>Modern web agents typically receive an append-only stream: <code>instruction, action₀, observation₀, action₁, observation₁, …</code> Each turn extends the context. In principle a sufficiently capable LLM should track the full history and act accordingly. In practice three things go wrong:</p>
+
+      <ol>
+        <li><strong>Append-only is not a state.</strong> There is no stable, updatable representation of "where I am in the task." The model must re-derive the current stage from a long, growing string of tokens at every step.</li>
+        <li><strong>Important facts get buried.</strong> A confirmed price, address, or constraint from step 3 is lost in the haystack by step 25.</li>
+        <li><strong>Failure has no slot.</strong> When something goes wrong, there is no explicit "I just failed; here are my options" representation, so the model often repeats the failed action.</li>
+      </ol>
+
+      <p>The complaint that "LLMs can't plan" is, on this view, a downstream symptom. The upstream cause is that the LLM has no execution state — only a transcript.</p>
+
+      <h2>Error taxonomy</h2>
+
+      <p>To check this, I labeled 100 failed trajectories from a WebArena-style setup. The breakdown:</p>
+
+      <table>
+        <thead>
+          <tr><th>Error type</th><th>Mechanism</th><th>Count</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Execution-state drift</td>
+            <td>History grows but no updatable state; loses track of "where am I"</td>
+            <td>29</td>
+          </tr>
+          <tr>
+            <td>Important facts buried</td>
+            <td>Lost-in-the-haystack on facts already observed</td>
+            <td>23</td>
+          </tr>
+          <tr>
+            <td>Repair failure</td>
+            <td>After a local error, no explicit failure type or recovery options</td>
+            <td>17</td>
+          </tr>
+          <tr>
+            <td>Environment dynamics gap</td>
+            <td>Missing UI / affordance priors</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>Genuine planning gap</td>
+            <td>Even with clean state, cannot decompose</td>
+            <td>13</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td><td></td><td><strong>100</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>The first three rows — 69 of 100 — are all symptoms of the missing-state hypothesis. Only the last 13 cases look like a genuine planning ceiling.</p>
+
+      <h2>Counterfactual state intervention</h2>
+
+      <p>If the diagnosis is right, then injecting a small, well-typed state slot at the moment of failure should rescue some of these trajectories. The setup:</p>
+
+      <p>For each failed trajectory, freeze the environment state at the first clearly-wrong step. Re-run from that point with the same model and the same page, varying only the context representation:</p>
+
+      <ul>
+        <li><strong>A.</strong> Original append-only stream.</li>
+        <li><strong>B.</strong> Original stream plus longer context.</li>
+        <li><strong>C.</strong> Original stream plus an oracle state summary.</li>
+        <li><strong>D.</strong> Original stream plus <code>goal + current stage + verified facts + uncertainty + last failure type</code>.</li>
+        <li><strong>E.</strong> Original stream plus a same-length irrelevant summary (control).</li>
+      </ul>
+
+      <p>The interesting condition is D: a structured, <em>short</em> state slot. Aggregate rescue rate across all four diagnostic buckets was 46%, with the per-bucket numbers:</p>
+
+      <table>
+        <thead>
+          <tr><th>Bucket</th><th>Minimal intervention</th><th>Rescue rate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Execution-state drift</td><td>Explicit stage state</td><td>45%</td></tr>
+          <tr><td>Important facts buried</td><td>Verified-facts slot</td><td>52%</td></tr>
+          <tr><td>Repair failure</td><td>Recovery slot (failure type + options)</td><td>47%</td></tr>
+          <tr><td>Environment dynamics gap</td><td>Affordance hints</td><td>50%</td></tr>
+          <tr><td>Planning gap</td><td>Plan sketch + decision checklist</td><td>31%</td></tr>
+        </tbody>
+      </table>
+
+      <p>The four state-related buckets all rescue at 45–52%. The planning bucket — the only one that <em>should</em> be capacity-bound — rescues at 31%. The gap is consistent with the hypothesis: most "planning failures" are actually state failures wearing a planning costume.</p>
+
+      <h2>Method sketch: an explicit state table</h2>
+
+      <p>If a short structured slot recovers half of the state-related failures with oracle injection, the question becomes: can we <em>maintain</em> such a slot during execution, online, without an oracle?</p>
+
+      <p>The proposal is a state table with three families of entries:</p>
+
+      <ul>
+        <li><strong>Goal state.</strong> Claims to verify, current sub-goal, completed sub-goals.</li>
+        <li><strong>Experience state.</strong> Stale-locator ledger, repeat-action counts, last failure and recovery options.</li>
+        <li><strong>Environment state.</strong> Commit affordances ("there is a Submit button at <code>bid 789</code>"), form-submission watermarks.</li>
+      </ul>
+
+      <p>A small <code>updater</code> step maintains the table after each observation. The <code>policy</code> step reads the table alongside the recent context.</p>
+
+      <h2>Four concrete failure buckets</h2>
+
+      <p>To make the proposal less abstract, here are four real failures and the single typed slot that would have changed the action.</p>
+
+      <h3>1. Sent-wrong-answer shortcut</h3>
+      <p><strong>Original.</strong> Task: "count reviews mentioning 'disappointed'." Agent opens the shopping-admin home, sees <code>Reviews: 3214</code> on the dashboard, and at step 3 calls <code>send_msg_to_user("3214")</code>. It never enters the filter flow.</p>
+      <p><strong>With state.</strong> Step 1 the updater extracts <code>goal_claims = [{claim: "count reviews mentioning 'disappointed'", status: "unknown", evidence_step: null}]</code>. At step 3 the policy sees <code>status=unknown</code> and <code>evidence_step=null</code>; the prompt directly states "there is an unverified claim, do not submit," and the policy keeps walking the search/filter path instead of taking the shortcut.</p>
+
+      <h3>2. Stale-bid loop</h3>
+      <p><strong>Original.</strong> On <code>/admin/catalog/product/</code>, the agent clicks <code>bid 233</code> thirteen times in a row. Neither the URL nor the accessibility tree changes between clicks; the model never registers that it is spinning in place.</p>
+      <p><strong>With state.</strong> By step 3 the runtime has filled <code>stale_locator_ledger = [{bid: "233", click_count: 3, last_url: "/admin/catalog/product/"}]</code> and <code>step_env_signature.steps_since_change = 3</code>. By step 5, with <code>click_count=5</code>, the policy prompt explicitly notes "bid 233 has been clicked 5 times, URL has not changed in 5 steps," and the agent is steered toward <code>back</code> or a different locator.</p>
+
+      <h3>3. Post-error recovery failure</h3>
+      <p><strong>Original.</strong> <code>click [456]</code> raises <code>scroll_into_view_if_needed timeout 500ms</code>. The next step the model issues <code>click [456]</code> again, or clicks a neighbouring <code>bid 457</code>. No recovery action is attempted.</p>
+      <p><strong>With state.</strong> The runtime fills <code>post_error_flag = {active: true, error_step: 3, error_text: "TimeoutError 500ms", action_that_errored: "click [456]"}</code>. At step 4 the policy prompt sees <code>active=true</code> and is required to draw from a recovery class — <code>back</code>, <code>reload</code>, <code>scroll</code> — rather than repeating the action.</p>
+
+      <h3>4. Modal commit-button missed</h3>
+      <p><strong>Original.</strong> On a GitLab "create issue" page, the agent fills in the title and description, sees that the form is "filled," and replies <code>send_msg_to_user("issue created")</code>. The "Create issue" button was never clicked.</p>
+      <p><strong>With state.</strong> The updater fills <code>commit_affordance = {has_submit: true, submit_bid: "789", submit_label: "Create issue", enabled: true}</code> and <code>form_submission_watermark = {last_fill_step: 4, submitted: false}</code>. At decision time the policy sees <code>has_submit=true &amp;&amp; submitted=false</code>, clicks <code>[789]</code> first, and only then reports completion.</p>
+
+      <p>None of these are "more capable model" stories. The same model on the same page picks a different action, because one small typed slot is exposed to the policy.</p>
+
+      <h2>What is left</h2>
+
+      <p>The sketch above is the easy half. The harder questions:</p>
+
+      <ul>
+        <li><strong>How is the state table built online?</strong> The oracle experiment shows a 46% rescue is reachable in principle. The online updater introduces noise: claim extraction errors, mis-classified failures, missed affordances. The interesting empirical question is how much of the oracle ceiling survives the updater.</li>
+        <li><strong>When does typed experience transfer across environments?</strong> Raw-trajectory replay is a known anti-pattern. Condition-matched replay — typed by stage and environment signature — is what we want. A sequential variant benchmark (E0 → E1 → E2) makes the transfer question testable.</li>
+        <li><strong>What is the right benchmark?</strong> Static WebArena measures a subset. Sequential variants of the same template, plus counterfactual perturbations (renamed fields, hidden prerequisites, transient failures), expose recovery and transfer far more directly than the static success rate does.</li>
+      </ul>
+
+      <p>If the conjecture is right, the next step in agent research is not longer context windows or fancier planners. It is giving the agent a small, stable, typed place to keep its execution state, and the discipline to read from and write to it.</p>
+
+      <p><a href="/blog.html">← Back to blog</a></p>
+    </article>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p class="footer-links">
+      <a href="https://github.com/TimeLovercc">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/zhimengg/">LinkedIn</a> ·
+      <a href="https://scholar.google.com/citations?user=Du6bnGQAAAAJ&hl=en">Google Scholar</a>
+    </p>
+    <p class="footer-meta">Last updated May 9, 2026.</p>
+  </div>
+</footer>
+
+</body>
+</html>

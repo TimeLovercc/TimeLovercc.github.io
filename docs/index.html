@@ -1,309 +1,375 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <title>Zhimeng Guo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zhimeng Guo — Ph.D. student at Penn State, research intern at ByteDance Seed. Long-context pretraining and long-horizon coding agents.">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="module" src="https://unpkg.com/dark-mode-toggle"></script>
+<script src="/assets/js/theme.js" defer></script>
 
-<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8HTZVLRHN"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-X8HTZVLRHN');
 </script>
-
 </head>
-<body style="-webkit-text-size-adjust: 100%; margin:0; background-image: linear-gradient(#7ba7d6, #e3f2fd);">
-<div style="max-width: 500pt; margin:auto; margin-bottom:30px; border: 1px solid gray; padding:5px 20px; background: white; box-shadow: 1px 1px 10px #22222277;">
+<body>
 
-<h1>Zhimeng Guo</h1>
-<hr>
-<a href="https://www.zhimeng.page/#bio">Brief Bio</a> |
-<a href="https://www.zhimeng.page/#experience">Experience</a> |
-<a href="https://www.zhimeng.page/#publications">Publications</a> |
-<a href="https://www.zhimeng.page/#teaching">Teaching</a> |
-<a href="https://www.zhimeng.page/#services">Services</a> |
-<a href="mailto:gzjz07@outlook.com">Email</a> | 
-<a href="https://github.com/TimeLovercc">GitHub</a> |
-<a href="https://scholar.google.com/citations?user=Du6bnGQAAAAJ&hl=en">Scholar</a>
-<hr>
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/"><span class="accent-blue">Z</span>himeng <span class="accent-orange">G</span>uo</a>
+    <div class="header-right">
+      <nav class="site-nav">
+        <a href="/">About</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+      <dark-mode-toggle appearance="toggle"></dark-mode-toggle>
+    </div>
+  </div>
+</header>
 
-<img style="float:right; width: 100px; margin:10px" src="./portrait.jpg" alt="My portrait">
+<main class="page-content">
+  <div class="wrapper">
 
-<h2 id="bio">Brief Bio</h2>
-<p>I am a graduate student at Penn State, advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>. I am currently a research intern at ByteDance Seed, where I work on <strong>long context pretraining</strong>: model architecture, load balancing, data, and evaluation. On the side, I open-source <strong>long-horizon automatic agents</strong>. <a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a>, released 2 months before OpenClaw, is my take on an agent OS that decouples planning from execution. Overall, I aim to build practical <strong>coding agents</strong> from two angles: designing the long-horizon agent on top of a base LLM, and strengthening the atomic LLM capabilities the agent depends on.</p>
+    <img class="profile-photo" src="/portrait.jpg" alt="Portrait of Zhimeng Guo">
 
-<hr>
+    <p>I am a Ph.D. student at Penn State, advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>. I am currently a research intern at ByteDance Seed, where I work on <strong>long-context pretraining</strong>, spanning model architecture, load balancing, data, and evaluation. On the side, I open-source <strong>long-horizon autonomous agents</strong>. <a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a>, released two months before OpenClaw, is a long-horizon autonomous agent for research. Overall, I aim to build practical <strong>coding agents</strong> from two angles: designing the long-horizon agent on top of a base LLM, and strengthening the atomic LLM capabilities the agent depends on.</p>
 
-<h2 id="experience">Experience</h2>
-<ul>
-<li><strong>ByteDance Seed</strong>, Research Intern (Jan 2026 &mdash; Present). Long context pretraining.</li>
-<li><strong>Amazon</strong>, Applied Scientist Intern (Jun 2025 &mdash; Sep 2025). Long-horizon automatic agent.</li>
-<li><strong>Penn State</strong>, Ph.D. student in Informatics (2021 &mdash; Present). Advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>.</li>
-<li><strong>UESTC</strong>, B.Sc. in Mathematics, Physics, and Computer Science (Sep 2017 &mdash; Jun 2021).</li>
-</ul>
+    <p>Before Penn State, I received my B.Sc. in Mathematics, Physics, and Computer Science from UESTC. My earlier research centered on graph machine learning, including fairness, counterfactual reasoning, and self-supervised learning on graphs. That perspective continues to shape how I think about the data and structure side of language models. In the summer of 2025, I was an Applied Scientist Intern at Amazon, where I worked on long-horizon autonomous agents.</p>
 
-<hr>
+    <p>I'm a big fan of <strong>open-source</strong>. Most of what I build lives on <a href="https://github.com/TimeLovercc">GitHub</a>, and my papers are tracked on <a href="https://scholar.google.com/citations?user=Du6bnGQAAAAJ&hl=en">Google Scholar</a>. I'm generally happy to chat about research, agents, or open-source, so feel free to drop me a line at gzjz07 [at] outlook [dot] com, or find me on <a href="https://www.linkedin.com/in/zhimengg/">LinkedIn</a> or WeChat (<code>JZGZ07</code>).</p>
 
-<h2 id="projects" style="margin-bottom: 5px;">Code Repos</h2>
-<ul style="margin-top: 5px;">
-<li><a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a> (820&#9733;): A lightweight agentOS that decouples planning from execution for long-horizon, automatic problem solving. <em>Released 2 months before OpenClaw.</em></li>
-<li><a href="https://github.com/context-machine-lab/ContextAgent">ContextAgent</a> (74&#9733;): A lightweight multi-agent framework for context-driven system design.</li>
-</ul>
+    <hr>
 
-<hr>
+    <h2 id="projects">Code Repos</h2>
+    <ul>
+      <li><a href="https://github.com/context-machine-lab/sleepless-agent">Sleepless Agent</a> (820★) is a long-horizon autonomous agent for research. <em>Released 2 months before OpenClaw.</em></li>
+      <li><a href="https://github.com/context-machine-lab/ContextAgent">ContextAgent</a> (74★) is a lightweight multi-agent framework for context-driven system design.</li>
+    </ul>
 
-<h2 id="publications">Selected Publications</h2>
+    <hr>
+
+    <h2 id="publications">Publications</h2>
+
+    <p>See below for papers I've worked on. You can also check out my <a href="https://scholar.google.com/citations?user=Du6bnGQAAAAJ&hl=en">Google Scholar</a> profile.</p>
+
+    <!-- 2026 -->
+    <section class="year-section" id="year-2026">
+      <button class="year-toggle" data-target="content-2026" aria-expanded="true">
+        <span class="arrow">▼</span><span>2026</span>
+      </button>
+      <div class="year-content" id="content-2026">
+        <ul>
+          <li>
+            <span class="paper-title">How to Build Long-Horizon Web Agents? (Effectively)</span><br>
+            <u>Zhimeng Guo</u>, Hangfan Zhang, Teng Xiao, Siyuan Xu, Huaisheng Zhu, Shijie Zhou, Minhao Cheng.
+          </li>
+
+          <li>
+            <span class="paper-title">ContextAgent: Lightweight Context-Driven Multi-Agent System Design</span><br>
+            <u>Zhimeng Guo</u>, Hangfan Zhang, Siyuan Xu, Huaisheng Zhu, Teng Xiao, Jingyi Chen, Minhao Cheng. <span class="paper-meta">Technical Report, 2026.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://github.com/context-machine-lab/ContextAgent">Code</a>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Adaptive Code Watermarking Through Reinforcement Learning</span><br>
+            <u>Zhimeng Guo</u>, Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, Minhao Cheng. <span class="paper-meta">ICML, 2026.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://arxiv.org/abs/2508.11925">PDF</a>
+              <button class="btn" data-toggle="bib-guo2026adaptive">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-guo2026adaptive">
+<pre>@inproceedings{guo2026adaptive,
+  title     = {Adaptive Code Watermarking Through Reinforcement Learning},
+  author    = {Guo, Zhimeng and Zhu, Huaisheng and Xu, Siyuan and Zhang, Hangfan and Xiao, Teng and Cheng, Minhao},
+  booktitle = {Forty-third International Conference on Machine Learning},
+  year      = {2026}
+}</pre>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Simple Denoising Diffusion Language Models</span><br>
+            Huaisheng Zhu, Zhengyu Chen, Shijie Zhou, Zhihui Xie, Yige Yuan, Shiqi Chen, <u>Zhimeng Guo</u>, Siyuan Xu, Hangfan Zhang, Vasant Honavar, Teng Xiao. <span class="paper-meta">ICML, 2026.</span>
+          </li>
+
+          <li>
+            <span class="paper-title">Self-Aware Reinforcement Learning for Improving LLMs with Minimal Data</span><br>
+            Hangfan Zhang, Siyuan Xu, <u>Zhimeng Guo</u>, Huaisheng Zhu, Shicheng Liu, Xinrun Wang, Qiaosheng Zhang, Yang Chen, Peng Ye, Lei Bai, Shuyue Hu. <span class="paper-meta">Preprint, 2026.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://openreview.net/pdf?id=k3ylkWMJAc">PDF</a>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Do Audio LLMs Really LISTEN, or Just Transcribe? Measuring Lexical vs. Acoustic Emotion Cues Reliance</span><br>
+            Jingyi Chen, <u>Zhimeng Guo</u>, Jiyun Chun, Pichao Wang, Andrew Perrault, Micha Elsner. <span class="paper-meta">EACL, 2026.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://arxiv.org/pdf/2510.10444">PDF</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2025 -->
+    <section class="year-section" id="year-2025">
+      <button class="year-toggle" data-target="content-2025" aria-expanded="true">
+        <span class="arrow">▼</span><span>2025</span>
+      </button>
+      <div class="year-content" id="content-2025">
+        <ul>
+          <li>
+            <span class="paper-title">Practical and Effective Code Watermarking for Large Language Models</span><br>
+            <u>Zhimeng Guo</u>, Minhao Cheng. <span class="paper-meta">NeurIPS, 2025.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://openreview.net/forum?id=RpE4HeuX69">PDF</a>
+              <a class="btn" href="https://github.com/TimeLovercc/code-watermark">Code</a>
+              <button class="btn" data-toggle="bib-guo2025practical">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-guo2025practical">
+<pre>@inproceedings{guo2025practical,
+  title     = {Practical and Effective Code Watermarking for Large Language Models},
+  author    = {Guo, Zhimeng and Cheng, Minhao},
+  booktitle = {The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+  year      = {2025},
+  url       = {https://openreview.net/forum?id=RpE4HeuX69}
+}</pre>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Simple Distillation for One-Step Diffusion Models</span><br>
+            Huaisheng Zhu, Teng Xiao, Shijie Zhou, <u>Zhimeng Guo</u>, Hangfan Zhang, Siyuan Xu, Vasant G. Honavar. <span class="paper-meta">NeurIPS, 2025.</span>
+          </li>
+
+          <li>
+            <span class="paper-title">Reinforcement Learning for Large Language Models via Group Preference Reward Shaping</span><br>
+            Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, <u>Zhimeng Guo</u>, Shijie Zhou, Shuyue Hu, Vasant G. Honavar. <span class="paper-meta">EMNLP, 2025.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2024 -->
+    <section class="year-section" id="year-2024">
+      <button class="year-toggle collapsed" data-target="content-2024" aria-expanded="false">
+        <span class="arrow">▼</span><span>2024</span>
+      </button>
+      <div class="year-content" id="content-2024" style="display:none;">
+        <ul>
+          <li>
+            <span class="paper-title">Jailbreak Open-Sourced Large Language Models via Enforced Decoding</span><br>
+            Hangfan Zhang, <u>Zhimeng Guo</u>, Huaisheng Zhu, Bochuan Cao, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. <span class="paper-meta">ACL, 2024.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://arxiv.org/abs/2310.01581">PDF</a>
+              <button class="btn" data-toggle="bib-zhang2024jailbreak">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-zhang2024jailbreak">
+<pre>@inproceedings{zhang2024jailbreak,
+  title     = {Jailbreak open-sourced large language models via enforced decoding},
+  author    = {Zhang, Hangfan and Guo, Zhimeng and Zhu, Huaisheng and Cao, Bochuan and Lin, Lu and Jia, Jinyuan and Chen, Jinghui and Wu, Dinghao},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {5475--5493},
+  year      = {2024}
+}</pre>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Addressing Shortcomings in Fair Graph Learning Datasets: Towards a New Benchmark</span><br>
+            Xiaowei Qian*, <u>Zhimeng Guo*</u>, Jialiang Li, Haitao Mao, Bingheng Li, Suhang Wang, Yao Ma. <span class="paper-meta">KDD, 2024.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://arxiv.org/abs/2403.06017">PDF</a>
+              <button class="btn" data-toggle="bib-qian2024addressing">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-qian2024addressing">
+<pre>@inproceedings{qian2024addressing,
+  title     = {Addressing shortcomings in fair graph learning datasets: Towards a new benchmark},
+  author    = {Qian, Xiaowei and Guo, Zhimeng and Li, Jialiang and Mao, Haitao and Li, Bingheng and Wang, Suhang and Ma, Yao},
+  booktitle = {Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+  pages     = {5602--5612},
+  year      = {2024}
+}</pre>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Efficient Contrastive Learning for Fast and Accurate Inference on Graphs</span><br>
+            Teng Xiao, Huaisheng Zhu, Zhiwei Zhang, <u>Zhimeng Guo</u>, Charu C. Aggarwal, Suhang Wang, Vasant G. Honavar. <span class="paper-meta">ICML, 2024.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://dl.acm.org/doi/10.1145/3583780.3615092">PDF</a>
+              <button class="btn" data-toggle="bib-xiao2024efficient">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-xiao2024efficient">
+<pre>@inproceedings{xiao2024efficient,
+  title     = {Efficient contrastive learning for fast and accurate inference on graphs},
+  author    = {Xiao, Teng and Zhu, Huaisheng and Zhang, Zhiwei and Guo, Zhimeng and Aggarwal, Charu C. and Wang, Suhang and Honavar, Vasant G.},
+  booktitle = {Forty-first International Conference on Machine Learning},
+  year      = {2024}
+}</pre>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2023 -->
+    <section class="year-section" id="year-2023">
+      <button class="year-toggle collapsed" data-target="content-2023" aria-expanded="false">
+        <span class="arrow">▼</span><span>2023</span>
+      </button>
+      <div class="year-content" id="content-2023" style="display:none;">
+        <ul>
+          <li>
+            <span class="paper-title">Towards Fair Graph Neural Networks via Graph Counterfactual</span><br>
+            <u>Zhimeng Guo</u>, Jialiang Li, Teng Xiao, Yao Ma, Suhang Wang. <span class="paper-meta">CIKM, 2023.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://dl.acm.org/doi/10.1145/3583780.3615092">PDF</a>
+              <a class="btn" href="https://github.com/TimeLovercc/CAF-GNN">Code</a>
+              <button class="btn" data-toggle="bib-guo2023towards">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-guo2023towards">
+<pre>@article{guo2023towards,
+  title   = {Towards Fair Graph Neural Networks via Graph Counterfactual},
+  author  = {Guo, Zhimeng and Li, Jialiang and Xiao, Teng and Ma, Yao and Wang, Suhang},
+  journal = {arXiv preprint arXiv:2307.04937},
+  year    = {2023}
+}</pre>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Counterfactual Learning on Graphs: A Survey</span><br>
+            <u>Zhimeng Guo</u>, Teng Xiao, Charu Aggarwal, Hui Liu, Suhang Wang. <span class="paper-meta">arXiv, 2023.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://arxiv.org/abs/2304.01391">PDF</a>
+              <a class="btn" href="https://github.com/TimeLovercc/Awesome-Graph-Causal-Learning">Code</a>
+              <button class="btn" data-toggle="bib-guo2023counterfactual">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-guo2023counterfactual">
+<pre>@misc{guo2023counterfactual,
+  title         = {Counterfactual Learning on Graphs: A Survey},
+  author        = {Guo, Zhimeng and Xiao, Teng and Aggarwal, Charu and Liu, Hui and Wang, Suhang},
+  year          = {2023},
+  eprint        = {2304.01391},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG}
+}</pre>
+            </div>
+          </li>
+
+          <li>
+            <span class="paper-title">Fairness-aware Message Passing for Graph Neural Networks</span><br>
+            Huaisheng Zhu, Guoji Fu, <u>Zhimeng Guo</u>, Zhiwei Zhang, Teng Xiao, Suhang Wang. <span class="paper-meta">arXiv, 2023.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://arxiv.org/abs/2306.11132">PDF</a>
+              <button class="btn" data-toggle="bib-zhu2023fairnessaware">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-zhu2023fairnessaware">
+<pre>@article{zhu2023fairnessaware,
+  title   = {Fairness-aware Message Passing for Graph Neural Networks},
+  author  = {Zhu, Huaisheng and Fu, Guoji and Guo, Zhimeng and Zhang, Zhiwei and Xiao, Teng and Wang, Suhang},
+  journal = {arXiv},
+  year    = {2023},
+  volume  = {abs/2306.11132}
+}</pre>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2022 -->
+    <section class="year-section" id="year-2022">
+      <button class="year-toggle collapsed" data-target="content-2022" aria-expanded="false">
+        <span class="arrow">▼</span><span>2022</span>
+      </button>
+      <div class="year-content" id="content-2022" style="display:none;">
+        <ul>
+          <li>
+            <span class="paper-title">Decoupled Self-supervised Learning for Graphs</span><br>
+            Teng Xiao, Zhengyu Chen, <u>Zhimeng Guo</u>, Zeyang Zhuang, Suhang Wang. <span class="paper-meta">NeurIPS, 2022.</span>
+            <div class="paper-actions">
+              <a class="btn" href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/040c816286b3844fd78f2124eec75f2e-Abstract-Conference.html">PDF</a>
+              <button class="btn" data-toggle="bib-xiao2022decoupled">BibTeX</button>
+            </div>
+            <div class="dropdown-panel" id="bib-xiao2022decoupled">
+<pre>@inproceedings{xiao2022decoupled,
+  title     = {Decoupled Self-supervised Learning for Graphs},
+  author    = {Xiao, Teng and Chen, Zhengyu and Guo, Zhimeng and Zhuang, Zeyang and Wang, Suhang},
+  booktitle = {Conference on Neural Information Processing Systems (NeurIPS)},
+  pages     = {620--634},
+  volume    = {35},
+  year      = {2022}
+}</pre>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <hr>
+
+    <h2 id="experience">Experience</h2>
+    <ul>
+      <li><strong>ByteDance Seed</strong>, Research Intern (Jan 2026 — Present). Long context pretraining.</li>
+      <li><strong>Amazon</strong>, Applied Scientist Intern (Jun 2025 — Sep 2025). Long-horizon automatic agent.</li>
+      <li><strong>Penn State</strong>, Ph.D. student in Informatics (2021 — Present). Advised by <a href="https://cmhcbb.github.io/">Prof. Minhao Cheng</a>.</li>
+      <li><strong>UESTC</strong>, B.Sc. in Mathematics, Physics, and Computer Science (Sep 2017 — Jun 2021).</li>
+    </ul>
+
+    <hr>
+
+    <h2 id="services">Awards &amp; Services</h2>
+    <ul>
+      <li>Reviewer / sub-reviewer for AISTATS, NeurIPS, ICLR, ICML.</li>
+      <li>Outstanding Undergraduate Thesis Award.</li>
+      <li>Ranked 46 / 4103 in IEEEXtreme 24-Hour Programming Competition.</li>
+      <li>Meritorious Winner, 2019 MCM/ICM Mathematical Contest in Modeling.</li>
+    </ul>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p class="footer-links">
+      <a href="https://github.com/TimeLovercc">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/zhimengg/">LinkedIn</a> ·
+      <a href="https://scholar.google.com/citations?user=Du6bnGQAAAAJ&hl=en">Google Scholar</a>
+    </p>
+    <p class="footer-meta">Last updated May 9, 2026.</p>
+  </div>
+</footer>
 
 <script>
-  function toggleItem(itemId) {
-      var item = document.getElementById(itemId);
-      if (item.style.display === "none" || item.style.display === "") {
-          item.style.display = "block";
-      } else {
-          item.style.display = "none";
-      }
-  }
+  document.querySelectorAll('.year-toggle, .section-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      var collapsed = btn.classList.toggle('collapsed');
+      target.style.display = collapsed ? 'none' : '';
+      btn.setAttribute('aria-expanded', String(!collapsed));
+    });
+  });
+
+  document.querySelectorAll('.btn[data-toggle]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var panel = document.getElementById(btn.dataset.toggle);
+      if (!panel) return;
+      panel.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  });
 </script>
 
-<ul>
-  <li class="paper"> <strong>How to Build Long-Horizon Web Agents? (Effectively)</strong> <br>
-    <u>Zhimeng Guo</u>, Hangfan Zhang, Teng Xiao, Siyuan Xu, Huaisheng Zhu, Shijie Zhou, Minhao Cheng. <i>Submitted to NeurIPS</i>, 2026. </li>
-
-  <li class="paper"> <strong>ContextAgent: Lightweight Context-Driven Multi-Agent System Design</strong> <br>
-    <u>Zhimeng Guo</u>, Hangfan Zhang, Siyuan Xu, Huaisheng Zhu, Teng Xiao, Jingyi Chen, Minhao Cheng. <i>Technical Report</i>, 2026.
-    [<a href="https://github.com/context-machine-lab/ContextAgent">code</a>] </li>
-
-  <li class="paper"> <strong>Adaptive Code Watermarking Through Reinforcement Learning</strong> <br>
-    <u>Zhimeng Guo</u>, Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, Minhao Cheng. <i>ICML</i>, 2026. <br>
-    [<a href="https://zhimeng.page/" onclick="toggleItem('guo2026adaptive'); return false;">bib</a>]
-    [<a href="https://arxiv.org/abs/2508.11925">paper</a>] </li>
-    <div id="guo2026adaptive" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-    <pre>
-      @inproceedings{guo2026adaptive,
-        title={Adaptive Code Watermarking Through Reinforcement Learning},
-        author={Zhimeng Guo and Huaisheng Zhu and Siyuan Xu and Hangfan Zhang and Teng Xiao and Minhao Cheng},
-        booktitle={Forty-third International Conference on Machine Learning},
-        year={2026}
-      }
-  </pre> </div>
-
-  <li class="paper"> <strong>Simple Denoising Diffusion Language Models</strong> <br>
-    Huaisheng Zhu, Zhengyu Chen, Shijie Zhou, Zhihui Xie, Yige Yuan, Shiqi Chen, <u>Zhimeng Guo</u>, Siyuan Xu, Hangfan Zhang, Vasant Honavar, Teng Xiao. <i>ICML</i>, 2026. </li>
-
-  <li class="paper"> <strong>Self-Aware Reinforcement Learning for Improving LLMs with Minimal Data</strong> <br>
-    Hangfan Zhang, Siyuan Xu, <u>Zhimeng Guo</u>, Huaisheng Zhu, Shicheng Liu, Xinrun Wang, Qiaosheng Zhang, Yang Chen, Peng Ye, Lei Bai, Shuyue Hu. <i>Preprint</i>, 2026. <br>
-    [<a href="https://openreview.net/pdf?id=k3ylkWMJAc">paper</a>] </li>
-
-  <li class="paper"> <strong>Do Audio LLMs Really LISTEN, or Just Transcribe? Measuring Lexical vs. Acoustic Emotion Cues Reliance</strong> <br>
-    Jingyi Chen, <u>Zhimeng Guo</u>, Jiyun Chun, Pichao Wang, Andrew Perrault, Micha Elsner. <i>EACL</i>, 2026. <br>
-    [<a href="https://arxiv.org/pdf/2510.10444">paper</a>] </li>
-
-  <li class="paper"> <strong>Practical and Effective Code Watermarking for Large Language Models</strong> <br>
-    <u>Zhimeng Guo</u>, Minhao Cheng. <i>NeurIPS</i>, 2025. <br>
-    [<a href="https://zhimeng.page/" onclick="toggleItem('guo2025practical'); return false;">bib</a>]
-    [<a href="https://openreview.net/forum?id=RpE4HeuX69">paper</a>]
-    [<a href="https://github.com/TimeLovercc/code-watermark">code</a>] </li>
-    <div id="guo2025practical" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-    <pre>
-      @inproceedings{
-        guo2025practical,
-        title={Practical and Effective Code Watermarking for Large Language Models},
-        author={Zhimeng Guo and Minhao Cheng},
-        booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
-        year={2025},
-        url={https://openreview.net/forum?id=RpE4HeuX69}
-        }
-  </pre> </div>
-
-  <li class="paper"> <strong>Simple Distillation for One-Step Diffusion Models</strong> <br>
-    Huaisheng Zhu, Teng Xiao, Shijie Zhou, <u>Zhimeng Guo</u>, Hangfan Zhang, Siyuan Xu, Vasant G. Honavar. <i>NeurIPS</i>, 2025. </li>
-
-  <li class="paper"> <strong>Reinforcement Learning for Large Language Models via Group Preference Reward Shaping</strong> <br>
-    Huaisheng Zhu, Siyuan Xu, Hangfan Zhang, Teng Xiao, <u>Zhimeng Guo</u>, Shijie Zhou, Shuyue Hu, Vasant G. Honavar. <i>EMNLP</i>, 2025. </li>
-
-  <li class="paper"> <strong>Jailbreak Open-Sourced Large Language Models via Enforced Decoding</strong> <br>
-  Hangfan Zhang, <u>Zhimeng Guo</u>, Huaisheng Zhu, Bochuan Cao, Lu Lin, Jinyuan Jia, Jinghui Chen, Dinghao Wu. <i>ACL</i>, 2024. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('zhang2023safety'); return false;">bib</a>]
-  [<a href="https://arxiv.org/abs/2310.01581">paper</a>] </li>
-  <div id="zhang2023safety" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-    @inproceedings{zhang2024jailbreak,
-      title={Jailbreak open-sourced large language models via enforced decoding},
-      author={Zhang, Hangfan and Guo, Zhimeng and Zhu, Huaisheng and Cao, Bochuan and Lin, Lu and Jia, Jinyuan and Chen, Jinghui and Wu, Dinghao},
-      booktitle={Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
-      pages={5475--5493},
-      year={2024}
-    }
-  </pre> </div>
-
-  <li class="paper"> <strong>Addressing shortcomings in fair graph learning datasets: Towards a new benchmark</strong> <br>
-    Xiaowei Qian*, <u>Zhimeng Guo*</u>, Jialiang Li, Haitao Mao, Bingheng Li, Suhang Wang, Yao Ma. <i>KDD</i>, 2024. <br>
-    [<a href="https://zhimeng.page/" onclick="toggleItem('qian2024addressing'); return false;">bib</a>]
-    [<a href="https://arxiv.org/abs/2403.06017">paper</a>] </li>
-    <div id="qian2024addressing" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-    <pre>
-      @inproceedings{qian2024addressing,
-        title={Addressing shortcomings in fair graph learning datasets: Towards a new benchmark},
-        author={Qian, Xiaowei and Guo, Zhimeng and Li, Jialiang and Mao, Haitao and Li, Bingheng and Wang, Suhang and Ma, Yao},
-        booktitle={Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
-        pages={5602--5612},
-        year={2024}
-      }
-    </pre> </div>
-
-<li class="paper"> <strong>Towards Fair Graph Neural Networks via Graph Counterfactual.</strong> <br>
-<u>Zhimeng Guo</u>, Jialiang Li, Teng Xiao, Yao Ma, and Suhang Wang. <i>CIKM</i>, 2023. <br>
-[<a href="https://zhimeng.page/" onclick="toggleItem('guo2023improving'); return false;">bib</a>]
-[<a href="https://dl.acm.org/doi/10.1145/3583780.3615092">paper</a>]
-[<a href="https://github.com/TimeLovercc/CAF-GNN">code</a>] </li>
-<div id="guo2023improving" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-<pre>
-@article{guo2023towards,
-  title={Towards Fair Graph Neural Networks via Graph Counterfactual},
-  author={Guo, Zhimeng and Li, Jialiang and Xiao, Teng and Ma, Yao and Wang, Suhang},
-  journal={arXiv preprint arXiv:2307.04937},
-  year={2023}
-}
-</pre> </div>
-
-<li class="paper"> <strong>Efficient Contrastive Learning for Fast and Accurate Inference on Graphs.</strong> <br>
-  Teng Xiao, Huaisheng Zhu, Zhiwei Zhang, <u>Zhimeng Guo</u>, Charu C Aggarwal, Suhang Wang, Vasant G Honavar. <i>ICML</i>, 2024. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('xiao2024efficient'); return false;">bib</a>]
-  [<a href="https://dl.acm.org/doi/10.1145/3583780.3615092">paper</a>] </li>
-  <div id="xiao2024efficient" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-    @inproceedings{xiao2024efficient,
-      title={Efficient contrastive learning for fast and accurate inference on graphs},
-      author={Xiao, Teng and Zhu, Huaisheng and Zhang, Zhiwei and Guo, Zhimeng and Aggarwal, Charu C and Wang, Suhang and Honavar, Vasant G},
-      booktitle={Forty-first International Conference on Machine Learning},
-      year={2024}
-    }
-  </pre> </div>
-
-<li class="paper"> <strong>Counterfactual Learning on Graphs: A Survey.</strong> <br>
-  <u>Zhimeng Guo</u>, Teng Xiao, Charu Aggarwal, Hui Liu, and Suhang Wang. <i>arXiv</i>, 2023. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('guo2023counterfactual'); return false;">bib</a>]
-  [<a href="https://arxiv.org/abs/2304.01391">paper</a>]
-  [<a href="https://github.com/TimeLovercc/Awesome-Graph-Causal-Learning">code</a>] </li>
-  <div id="guo2023counterfactual" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-@misc{guo2023counterfactual,
-  title={Counterfactual Learning on Graphs: A Survey}, 
-  author={Zhimeng Guo and Teng Xiao and Charu Aggarwal and Hui Liu and Suhang Wang},
-  year={2023},
-  eprint={2304.01391},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG}
-}    
-</pre> </div>
-
-<li class="paper"> <strong>Fairness-aware Message Passing for Graph Neural Networks.</strong> <br>
-  Huaisheng Zhu, Guoji Fu, <u>Zhimeng Guo</u>, Zhiwei Zhang, Teng Xiao, and Suhang Wang. <i>arXiv</i>, 2023. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('zhu2023fairnessaware'); return false;">bib</a>]
-  [<a href="https://arxiv.org/abs/2306.11132">paper</a>] </li>
-  <div id="zhu2023fairnessaware" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-@article{zhu2023fairnessaware,
-  author = {Zhu, Huaisheng and Fu, Guoji and Guo, Zhimeng and Zhang, Zhiwei and Xiao, Teng and Wang, Suhang},
-  journal = {arXiv},
-  year = {2023},
-  title = {Fairness-aware Message Passing for Graph Neural Networks},
-  volume = {abs/2306.11132},
-} 
-</pre> </div>
-
-<li class="paper"> <strong>Decoupled Self-supervised Learning for Graphs.</strong> <br>
-  Teng Xiao, Zhengyu Chen, <u>Zhimeng Guo</u>, Zeyang Zhuang, and Suhang Wang. <i>NeurIPS</i>, 2022. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('xiao2022decoupled'); return false;">bib</a>]
-  [<a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/040c816286b3844fd78f2124eec75f2e-Abstract-Conference.html">paper</a>] </li>
-  <div id="xiao2022decoupled" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-@inproceedings{xiao2022decoupled,
-  author = {Xiao, Teng and Chen, Zhengyu and Guo, Zhimeng and Zhuang, Zeyang and Wang, Suhang},
-  booktitle = {Conference on Neural Information Processing Systems (NeurIPS)},
-  year = {2022},
-  pages = {620--634},
-  title = {Decoupled Self-supervised Learning for Graphs},
-  volume = {35},
-}
-</pre> </div>
-
-<!-- <li class="paper"> <strong>Label-Wise Graph Convolutional Network for Heterophilic Graphs.</strong> <br>
-  Enyan Dai, Shijie Zhou, <u>Zhimeng Guo</u>, and Suhang Wang. <i>LoG</i>, 2022. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('dai2022comprehensive'); return false;">bib</a>]
-  [<a href="https://proceedings.mlr.press/v198/dai22b.html">paper</a>] 
-  [<a href="https://github.com/EnyanDai/LWGCN">code</a>]</li>
-  <div id="dai2022comprehensive" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-@article{dai2022comprehensive,
-  title={A Comprehensive Survey on Trustworthy Graph Neural Networks: Privacy, Robustness, Fairness, and Explainability},
-  author={Dai, Enyan and Zhao, Tianxiang and Zhu, Huaisheng and Xu, Junjie and Guo, Zhimeng and Liu, Hui and Tang, Jiliang and Wang, Suhang},
-  journal={arXiv preprint arXiv:2204.08570},
-  year={2022}
-}
-</pre> </div> -->
-
-<!-- <li class="paper"> <strong>Link Prediction on Heterophilic Graphs via Disentangled Representation Learning.</strong> <br>
-  Shijie Zhou, <u>Zhimeng Guo</u>, Charu Aggarwal, Xiang Zhang, and Suhang Wang. <i>arXiv</i>, 2022. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('zhou2022link'); return false;">bib</a>]
-  [<a href="https://arxiv.org/abs/2208.01820">paper</a>] 
-  [<a href="https://github.com/sjz5202/DisenLink">code</a>]</li>
-  <div id="zhou2022link" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-@article{zhou2022link,
-  author = {Zhou, Shijie and Guo, Zhimeng and Aggarwal, C. and Zhang, Xiang and Wang, Suhang},
-  journal = {arXiv},
-  year = {2022},
-  title = {Link Prediction on Heterophilic Graphs via Disentangled Representation Learning},
-  volume = {abs/2208.01820},
-}
-</pre> </div> -->
-
-<!-- <li class="paper"> <strong>A Comprehensive Survey on Trustworthy Graph Neural Networks: Privacy, Robustness, Fairness, and Explainability.</strong> <br>
-  Enyan Dai, Tianxiang Zhao, Huaisheng Zhu, Junjie Xu, <u>Zhimeng Guo</u>, Hui Liu, Jiliang Tang, and Suhang Wang. <i>arXiv</i>, 2022. <br>
-  [<a href="https://zhimeng.page/" onclick="toggleItem('dai2022a'); return false;">bib</a>]
-  [<a href="https://arxiv.org/abs/2204.08570">paper</a>]
-  [<a href="https://github.com/EnyanDai/awesome-turstworthy-graph-neural-networks">code</a>] </li>
-  <div id="dai2022a" class="hidden" style="display:none; overflow-x: auto; white-space: nowrap;" >
-  <pre>
-@article{dai2022a,
-  author = {Dai, Enyan and Zhao, Tianxiang and Zhu, Huaisheng and Xu, Junjie and Guo, Zhimeng and Liu, Hui and Tang, Jiliang and Wang, Suhang},
-  journal = {arXiv},
-  year = {2022},
-  title = {A comprehensive survey on trustworthy graph neural networks: Privacy, robustness, fairness, and explainability},
-  volume = {abs/2204.08570},
-}
-</pre> </div> -->
-
-</ul>
-
-<hr>
-<h2 id="teaching">Teaching</h2>
-<ul>
-  <li><a href="https://cmhcbb.github.io/teaching/ist815f25.html">IST 815</a> Foundations of Information Security and Assurance, Fall 2025.</li>
-  <li><a href="https://faculty.ist.psu.edu/vhonavar/Courses/causality/homepage.html">DS 560</a> Principles of Causal Inference, Spring 2025.</li>
-  <li><a href="https://ist.psu.edu/teaching/courses/undergrad/cyber/362">CYBER 362</a> Security Analytics Studio, Fall 2024.</li>
-  <li><a href="https://learning.ist.psu.edu/courses/ds/330">DS 330</a> Visual Analytics, Spring 2024.</li>
-  <li><a href="http://faculty.ist.psu.edu/vhonavar/Courses/dsmethods/homepage.html">IST 597</a> Data Science for Researchers and Scholars, Fall 2023.</li>
-</ul>
-
-<hr>
-<h2 id="services">Awards / Acknowledgements / Services</h2> 
-<ul>
-    <li>Reviewer and subreviewer for AISTATS, NeurIPS, ICLR, ICML.</li>
-    <li>Outstanding Undergraduate Thesis Award.</li>
-    <li>Ranked 46/4103 in IEEEXtreme 24-Hour Programming Competition.</li>
-    <li>Meritorious Winner in 2019 MCM/ICM Mathematical Contest in Modeling.</ul>
-</ul>
-
-<hr>
-Last update on May 9th, 2026.
-<hr>
-
-</div>
-
-
-</body></html>
+</body>
+</html>
